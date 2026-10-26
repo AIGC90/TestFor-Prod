@@ -22,11 +22,14 @@ public class DefaultAccessControlService implements AccessControlService {
     private static final String YOU_DON_T_HAVE_PERMISSION_TO_PERFORM_THIS_OPERATION = "You don't have permission to perform this operation!";
 
     private final Map<Authority, Permissions> authorityPermissions = new HashMap<>();
+    private final VisionSenseRolePermissions rolePermissions;
 
     public DefaultAccessControlService(SysAdminPermissions sysAdminPermissions,
                                        TenantAdminPermissions tenantAdminPermissions,
                                        CustomerUserPermissions customerUserPermissions,
-                                       MfaConfigurationPermissions mfaConfigurationPermissions) {
+                                       MfaConfigurationPermissions mfaConfigurationPermissions,
+                                       VisionSenseRolePermissions rolePermissions) {
+        this.rolePermissions = rolePermissions;
         authorityPermissions.put(Authority.SYS_ADMIN, sysAdminPermissions);
         authorityPermissions.put(Authority.TENANT_ADMIN, tenantAdminPermissions);
         authorityPermissions.put(Authority.CUSTOMER_USER, customerUserPermissions);
@@ -36,7 +39,7 @@ public class DefaultAccessControlService implements AccessControlService {
     @Override
     public void checkPermission(SecurityUser user, Resource resource, Operation operation) throws ThingsboardException {
         PermissionChecker permissionChecker = getPermissionChecker(user.getAuthority(), resource);
-        if (!permissionChecker.hasPermission(user, operation)) {
+        if (!permissionChecker.hasPermission(user, operation) || !rolePermissions.isAllowed(user, resource, operation)) {
             permissionDenied();
         }
     }
@@ -45,7 +48,7 @@ public class DefaultAccessControlService implements AccessControlService {
     @SuppressWarnings("unchecked")
     public boolean hasPermission(SecurityUser user, Resource resource, Operation operation) throws ThingsboardException {
         var permissionChecker = getPermissionChecker(user.getAuthority(), resource);
-        return permissionChecker.hasPermission(user, operation);
+        return permissionChecker.hasPermission(user, operation) && rolePermissions.isAllowed(user, resource, operation);
     }
 
     @Override
@@ -53,7 +56,8 @@ public class DefaultAccessControlService implements AccessControlService {
     public <I extends EntityId, T extends HasTenantId> void checkPermission(SecurityUser user, Resource resource,
                                                                             Operation operation, I entityId, T entity) throws ThingsboardException {
         PermissionChecker permissionChecker = getPermissionChecker(user.getAuthority(), resource);
-        if (!permissionChecker.hasPermission(user, operation, entityId, entity)) {
+        if (!permissionChecker.hasPermission(user, operation, entityId, entity)
+                || !rolePermissions.isAllowed(user, resource, operation, entityId, entity)) {
             permissionDenied();
         }
     }
@@ -62,7 +66,8 @@ public class DefaultAccessControlService implements AccessControlService {
     @SuppressWarnings("unchecked")
     public <I extends EntityId, T extends HasTenantId> boolean hasPermission(SecurityUser user, Resource resource, Operation operation, I entityId, T entity) throws ThingsboardException {
         var permissionChecker = getPermissionChecker(user.getAuthority(), resource);
-        return permissionChecker.hasPermission(user, operation, entityId, entity);
+        return permissionChecker.hasPermission(user, operation, entityId, entity)
+                && rolePermissions.isAllowed(user, resource, operation, entityId, entity);
     }
 
     private PermissionChecker getPermissionChecker(Authority authority, Resource resource) throws ThingsboardException {

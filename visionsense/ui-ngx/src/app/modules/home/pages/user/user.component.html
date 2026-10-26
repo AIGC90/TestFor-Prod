@@ -88,6 +88,27 @@
                       formControlName="phone">
       </tb-phone-input>
       <div formGroupName="additionalInfo" class="flex flex-col">
+        @if (showVsRole()) {
+          <mat-form-field class="mat-block" floatLabel="always" appearance="outline">
+            <mat-label translate>user.vs-role</mat-label>
+            <mat-select formControlName="vsRole" [placeholder]="'user.vs-role-none' | translate">
+              @if (canManageAllRoles) {
+                <mat-option [value]="null">{{ 'user.vs-role-none' | translate }}</mat-option>
+              }
+              @for (role of vsRoles; track role.name) {
+                <mat-option [value]="role.name" [disabled]="!role.assignable || isVsRoleLocked()">
+                  {{ role.title }}
+                </mat-option>
+              }
+            </mat-select>
+            @if (entityForm.get('additionalInfo.vsRole').value; as roleName) {
+              <mat-hint>{{ isVsRoleLocked() ? ('user.vs-role-locked' | translate) : vsRoleDescription(roleName) }}</mat-hint>
+            }
+            <mat-error *ngIf="entityForm.get('additionalInfo.vsRole').hasError('required')">
+              {{ 'user.vs-role-required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        }
         <mat-form-field class="mat-block" floatLabel="always" appearance="outline">
           <mat-label translate>language.language</mat-label>
           <mat-select formControlName="lang"

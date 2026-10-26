@@ -65,6 +65,8 @@ import org.thingsboard.server.service.security.model.UserPrincipal;
 import org.thingsboard.server.service.security.model.token.JwtTokenFactory;
 import org.thingsboard.server.service.security.permission.Operation;
 import org.thingsboard.server.service.security.permission.Resource;
+import org.thingsboard.server.service.security.permission.VisionSenseRole;
+import org.thingsboard.server.service.security.permission.VisionSenseRolePermissions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,6 +118,7 @@ public class UserController extends BaseController {
     private final TbUserService tbUserService;
     private final EntityQueryService entityQueryService;
     private final EntityService entityService;
+    private final VisionSenseRolePermissions rolePermissions;
 
     @ApiOperation(value = "Get User (getUserById)",
             notes = "Fetch the User object based on the provided User Id. " +
@@ -161,6 +164,11 @@ public class UserController extends BaseController {
         UserId userId = new UserId(toUUID(strUserId));
         SecurityUser authUser = getCurrentUser();
         User user = checkUserId(userId, Operation.READ);
+        // Logging in as another user must not let a restricted VisionSense role act as a higher-ranked user.
+        if (!rolePermissions.isAllowed(authUser, Resource.USER, Operation.WRITE, userId, user)) {
+            throw new ThingsboardException(YOU_DON_T_HAVE_PERMISSION_TO_PERFORM_THIS_OPERATION,
+                    ThingsboardErrorCode.PERMISSION_DENIED);
+        }
         UserPrincipal principal = new UserPrincipal(UserPrincipal.Type.USER_NAME, user.getEmail());
         UserCredentials credentials = userService.findUserCredentialsByUserId(authUser.getTenantId(), userId);
         SecurityUser securityUser = new SecurityUser(user, credentials.isEnabled(), principal);
@@ -186,7 +194,14 @@ public class UserController extends BaseController {
             user.setTenantId(getCurrentUser().getTenantId());
         }
         checkEntity(user.getId(), user, Resource.USER);
-        return tbUserService.save(getTenantId(), getCurrentUser().getCustomerId(), user, sendActivationMail, request, getCurrentUser());
+        User existing = user.getId() != null ? userService.findUserById(getTenantId(), user.getId()) : null;
+        rolePermissions.checkCanSaveUser(getCurrentUser(), user, existing);
+        User savedUser = tbUserService.save(getTenantId(), getCurrentUser().getCustomerId(), user, sendActivationMail, request, getCurrentUser());
+        if (existing != null && !VisionSenseRole.fromUser(existing).equals(VisionSenseRole.fromUser(savedUser))) {
+            // Role is carried in the access token, so sign the user out to apply the new role immediately.
+            eventPublisher.publishEvent(new UserCredentialsInvalidationEvent(savedUser.getId()));
+        }
+        return savedUser;
     }
 
     @ApiOperation(value = "Send or re-send the activation email",

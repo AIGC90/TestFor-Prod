@@ -3,6 +3,7 @@
 import { AuthState } from '@core/auth/auth.models';
 import { Authority } from '@shared/models/authority.enum';
 import { deepClone } from '@core/utils';
+import { VisionSenseRole } from '@shared/models/visionsense-role.models';
 
 export declare type MenuSectionType = 'link' | 'toggle';
 
@@ -744,6 +745,10 @@ export const menuSectionMap = new Map<MenuId, MenuSection>([
 
 const menuFilters = new Map<MenuId, MenuFilter>([
   [
+    // White-label: the IoT Hub marketplace is ThingsBoard-hosted content.
+    MenuId.iot_hub, () => false
+  ],
+  [
     MenuId.edges, (authState) => authState.edgesSupportEnabled
   ],
   [
@@ -753,6 +758,40 @@ const menuFilters = new Map<MenuId, MenuFilter>([
     MenuId.rulechain_templates, (authState) => authState.edgesSupportEnabled
   ]
 ]);
+
+// VisionSense construction roles hide the menus their permissions don't cover.
+// Configuration areas only unrestricted administrators work with:
+const adminOnlyMenus: MenuId[] = [
+  MenuId.rule_chains, MenuId.rulechain_templates, MenuId.profiles, MenuId.device_profiles, MenuId.asset_profiles,
+  MenuId.alarm_rules, MenuId.calculated_fields, MenuId.otaUpdates, MenuId.version_control, MenuId.api_usage,
+  MenuId.ai_models, MenuId.trendz_settings, MenuId.iot_hub, MenuId.mobile_center, MenuId.mobile_apps,
+  MenuId.mobile_bundles, MenuId.mobile_qr_code_widget, MenuId.settings, MenuId.general, MenuId.mail_server,
+  MenuId.home_settings, MenuId.notification_settings, MenuId.repository_settings, MenuId.auto_commit_settings,
+  MenuId.queues, MenuId.security_settings, MenuId.security_settings_general, MenuId.two_fa, MenuId.oauth2,
+  MenuId.domains, MenuId.clients, MenuId.resources, MenuId.widget_library, MenuId.widget_types,
+  MenuId.widgets_bundles, MenuId.images, MenuId.scada_symbols, MenuId.resources_library, MenuId.javascript_library
+];
+
+const notificationManagementMenus: MenuId[] = [
+  MenuId.notification_sent, MenuId.notification_recipients, MenuId.notification_templates, MenuId.notification_rules
+];
+
+const hiddenMenusByRole = new Map<VisionSenseRole, Set<MenuId>>([
+  [VisionSenseRole.PROJECT_MANAGER, new Set(adminOnlyMenus)],
+  [VisionSenseRole.SITE_ENGINEER, new Set([...adminOnlyMenus, ...notificationManagementMenus, MenuId.audit_log])],
+  [VisionSenseRole.SAFETY_OFFICER, new Set([...adminOnlyMenus, MenuId.audit_log])],
+  [VisionSenseRole.VIEWER, new Set([...adminOnlyMenus, ...notificationManagementMenus, MenuId.audit_log])]
+]);
+
+const isMenuHiddenForRole = (role: string | undefined, menuId: MenuId): boolean => {
+  if (!role) {
+    return false;
+  }
+  // Unknown roles are treated as Viewer, matching the server.
+  const hidden = hiddenMenusByRole.get(role as VisionSenseRole) ??
+    (role === VisionSenseRole.COMPANY_ADMIN ? undefined : hiddenMenusByRole.get(VisionSenseRole.VIEWER));
+  return !!hidden?.has(menuId);
+};
 
 const defaultUserMenuMap = new Map<Authority, MenuReference[]>([
   [
@@ -1062,6 +1101,9 @@ const referenceToMenuSection = (authState: AuthState, reference: MenuReference):
       if (reference.pages?.length) {
         result.pages = reference.pages.map(page =>
           referenceToMenuSection(authState, page)).filter(page => !!page);
+        if (!result.pages.length) {
+          return undefined;
+        }
       }
       return result;
     } else {
@@ -1073,6 +1115,9 @@ const referenceToMenuSection = (authState: AuthState, reference: MenuReference):
 };
 
 const filterMenuReference = (authState: AuthState, reference: MenuReference): boolean => {
+  if (isMenuHiddenForRole(authState.authUser?.vsRole, reference.id)) {
+    return false;
+  }
   const filter = menuFilters.get(reference.id);
   if (filter) {
     if (filter(authState)) {

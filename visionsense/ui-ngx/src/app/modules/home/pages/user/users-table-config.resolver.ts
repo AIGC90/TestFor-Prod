@@ -37,6 +37,7 @@ import { TenantService } from '@app/core/http/tenant.service';
 import { TenantId } from '@app/shared/models/id/tenant-id';
 import { UserTabsComponent } from '@home/pages/user/user-tabs.component';
 import { isDefinedAndNotNull } from '@core/utils';
+import { VisionSenseRole, visionSenseRoleTitles } from '@shared/models/visionsense-role.models';
 
 export interface UsersTableRouteData {
   authority: Authority;
@@ -70,9 +71,13 @@ export class UsersTableConfigResolver  {
 
     this.config.columns.push(
       new DateEntityTableColumn<User>('createdTime', 'common.created-time', this.datePipe, '150px'),
-      new EntityTableColumn<User>('firstName', 'user.first-name', '33%'),
-      new EntityTableColumn<User>('lastName', 'user.last-name', '33%'),
-      new EntityTableColumn<User>('email', 'user.email', '33%')
+      new EntityTableColumn<User>('firstName', 'user.first-name', '25%'),
+      new EntityTableColumn<User>('lastName', 'user.last-name', '25%'),
+      new EntityTableColumn<User>('email', 'user.email', '25%'),
+      new EntityTableColumn<User>('vsRole', 'user.vs-role', '25%', user => {
+        const role = user.additionalInfo?.vsRole as VisionSenseRole;
+        return role ? (visionSenseRoleTitles.get(role) ?? role) : '';
+      }, () => ({}), false)
     );
 
     this.config.deleteEnabled = user => user && user.id && user.id.id !== this.authUser.id.id;

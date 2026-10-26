@@ -26,7 +26,7 @@ import { MatSort, SortDirection } from '@angular/material/sort';
 import { EntitiesDataSource } from '@home/models/datasource/entity-datasource';
 import { catchError, debounceTime, distinctUntilChanged, map, skip, takeUntil } from 'rxjs/operators';
 import { Direction, SortOrder } from '@shared/models/page/sort-order';
-import { forkJoin, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { combineLatest, forkJoin, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseData, HasId } from '@shared/models/base-data';
 import { ActivatedRoute, QueryParamsHandling, Router } from '@angular/router';
@@ -55,6 +55,7 @@ import { hidePageSizePixelValue } from '@shared/models/constants';
 import { EntitiesTableAction, IEntitiesTableComponent } from '@home/models/entity/entity-table-component.models';
 import { EntityDetailsPanelComponent } from '@home/components/entity/entity-details-panel.component';
 import { FormBuilder } from '@angular/forms';
+import { VisionSenseRoleService } from '@core/http/visionsense-role.service';
 
 @Component({
     selector: 'tb-entities-table',
@@ -115,7 +116,13 @@ export class EntitiesTableComponent extends PageComponent implements IEntitiesTa
   textSearch = this.fb.control('', {nonNullable: true});
 
   private updateDataSubscription: Subscription;
+  private roleSubscription: Subscription;
   private viewInited = false;
+
+  // Narrowed by the user's VisionSense role; the server enforces the same rules.
+  private roleCanCreate = true;
+  private roleCanDelete = true;
+  private deleteGroupAction: GroupActionDescriptor<BaseData<HasId>>;
 
   private widgetResize$: ResizeObserver;
   private destroy$ = new Subject<void>();
@@ -131,7 +138,8 @@ export class EntitiesTableComponent extends PageComponent implements IEntitiesTa
               private elementRef: ElementRef,
               private fb: FormBuilder,
               private zone: NgZone,
-              public viewContainerRef: ViewContainerRef) {
+              public viewContainerRef: ViewContainerRef,
+              private roleService: VisionSenseRoleService) {
     super(store);
   }
 
@@ -195,24 +203,27 @@ export class EntitiesTableComponent extends PageComponent implements IEntitiesTa
     this.groupActionDescriptors = [...this.entitiesTableConfig.groupActionDescriptors];
     this.cellActionDescriptors = [...this.entitiesTableConfig.cellActionDescriptors];
 
+    this.roleCanCreate = true;
+    this.roleCanDelete = true;
+    this.deleteGroupAction = undefined;
     if (this.entitiesTableConfig.entitiesDeleteEnabled) {
       this.cellActionDescriptors.push(
         {
           name: this.translate.instant('action.delete'),
           icon: 'delete',
-          isEnabled: entity => this.entitiesTableConfig.deleteEnabled(entity),
+          isEnabled: entity => this.roleCanDelete && this.entitiesTableConfig.deleteEnabled(entity),
           onAction: ($event, entity) => this.deleteEntity($event, entity)
         }
       );
-      this.groupActionDescriptors.push(
-        {
-          name: this.translate.instant('action.delete'),
-          icon: 'delete',
-          isEnabled: true,
-          onAction: ($event, entities) => this.deleteEntities($event, entities)
-        }
-      );
+      this.deleteGroupAction = {
+        name: this.translate.instant('action.delete'),
+        icon: 'delete',
+        isEnabled: true,
+        onAction: ($event, entities) => this.deleteEntities($event, entities)
+      };
+      this.groupActionDescriptors.push(this.deleteGroupAction);
     }
+    this.applyRolePermissions();
 
     const enabledGroupActionDescriptors =
       this.groupActionDescriptors.filter((descriptor) => descriptor.isEnabled);
@@ -384,7 +395,28 @@ export class EntitiesTableComponent extends PageComponent implements IEntitiesTa
   }
 
   addEnabled() {
-    return this.entitiesTableConfig.addEnabled;
+    return this.entitiesTableConfig.addEnabled && this.roleCanCreate;
+  }
+
+  private applyRolePermissions() {
+    this.roleSubscription?.unsubscribe();
+    const entityType = this.entitiesTableConfig.entityType;
+    if (!entityType) {
+      return;
+    }
+    this.roleSubscription = combineLatest([
+      this.roleService.isAllowed(entityType, 'CREATE'),
+      this.roleService.isAllowed(entityType, 'DELETE')
+    ]).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(([canCreate, canDelete]) => {
+      this.roleCanCreate = canCreate;
+      this.roleCanDelete = canDelete;
+      if (!canDelete) {
+        this.groupActionDescriptors = this.groupActionDescriptors.filter(action => action !== this.deleteGroupAction);
+      }
+      this.cd.markForCheck();
+    });
   }
 
   clearSelection() {
@@ -522,7 +554,7 @@ export class EntitiesTableComponent extends PageComponent implements IEntitiesTa
       if (result) {
         const tasks: Observable<HasUUID>[] = [];
         entities.forEach((entity) => {
-          if (this.entitiesTableConfig.deleteEnabled(entity)) {
+          if (this.roleCanDelete && this.entitiesTableConfig.deleteEnabled(entity)) {
             tasks.push(this.entitiesTableConfig.deleteEntity(entity.id).pipe(
               map(() => entity.id),
               catchError(() => of(null)

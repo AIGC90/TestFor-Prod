@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.thingsboard.common.util.JacksonUtil;
 import org.thingsboard.server.common.data.StringUtils;
 import org.thingsboard.server.common.data.id.CustomerId;
 import org.thingsboard.server.common.data.id.TenantId;
@@ -30,6 +31,7 @@ import org.thingsboard.server.service.security.auth.jwt.settings.JwtSettingsServ
 import org.thingsboard.server.service.security.exception.JwtExpiredTokenException;
 import org.thingsboard.server.service.security.model.SecurityUser;
 import org.thingsboard.server.service.security.model.UserPrincipal;
+import org.thingsboard.server.service.security.permission.VisionSenseRole;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -57,6 +59,7 @@ public class JwtTokenFactory {
     private static final String TENANT_ID = "tenantId";
     private static final String CUSTOMER_ID = "customerId";
     private static final String SESSION_ID = "sessionId";
+    private static final String VS_ROLE = VisionSenseRole.ADDITIONAL_INFO_KEY;
 
     @Lazy
     private final JwtSettingsService jwtSettingsService;
@@ -86,6 +89,7 @@ public class JwtTokenFactory {
         if (securityUser.getCustomerId() != null) {
             jwtBuilder.claim(CUSTOMER_ID, securityUser.getCustomerId().getId().toString());
         }
+        VisionSenseRole.fromUser(securityUser).ifPresent(role -> jwtBuilder.claim(VS_ROLE, role.name()));
 
         String token = jwtBuilder.compact();
 
@@ -128,6 +132,10 @@ public class JwtTokenFactory {
             securityUser.setLastName(claims.get(LAST_NAME, String.class));
             securityUser.setEnabled(claims.get(ENABLED, Boolean.class));
             isPublic = claims.get(IS_PUBLIC, Boolean.class);
+            String vsRole = claims.get(VS_ROLE, String.class);
+            if (vsRole != null) {
+                securityUser.setAdditionalInfo(JacksonUtil.newObjectNode().put(VS_ROLE, VisionSenseRole.parse(vsRole).name()));
+            }
         }
         UserPrincipal principal = new UserPrincipal(isPublic ? UserPrincipal.Type.PUBLIC_ID : UserPrincipal.Type.USER_NAME, subject);
         securityUser.setUserPrincipal(principal);

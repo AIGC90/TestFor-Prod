@@ -60,6 +60,8 @@ export interface AuthUser {
   customerId: string;
   isPublic: boolean;
   authority: Authority;
+  /** VisionSense construction role, absent for unrestricted users. */
+  vsRole?: string;
 }
 
 export interface UserEmailInfo {

@@ -15,6 +15,8 @@ import { ActionNotificationShow } from '@app/core/notification/notification.acti
 import { TranslateService } from '@ngx-translate/core';
 import { environment as env } from '@env/environment';
 import { UnitSystems } from '@shared/models/unit.models';
+import { VisionSenseRoleService } from '@core/http/visionsense-role.service';
+import { VisionSenseRoleInfo } from '@shared/models/visionsense-role.models';
 
 @Component({
     selector: 'tb-user',
@@ -28,6 +30,9 @@ export class UserComponent extends EntityComponent<User>{
   languageList = env.supportedLangs;
   UnitSystems = UnitSystems;
 
+  vsRoles: VisionSenseRoleInfo[] = [];
+  canManageAllRoles = false;
+
   loginAsUserEnabled$ = this.store.pipe(
     select(selectAuth),
     map((auth) => auth.userTokenAccessEnabled)
@@ -38,8 +43,34 @@ export class UserComponent extends EntityComponent<User>{
               @Optional() @Inject('entitiesTableConfig') protected entitiesTableConfigValue: EntityTableConfig<User>,
               public fb: UntypedFormBuilder,
               protected cd: ChangeDetectorRef,
-              protected translate: TranslateService) {
+              protected translate: TranslateService,
+              private roleService: VisionSenseRoleService) {
     super(store, fb, entityValue, entitiesTableConfigValue, cd);
+    this.roleService.getRoles({ignoreLoading: true}).subscribe(roles => {
+      this.vsRoles = roles;
+      this.canManageAllRoles = roles.every(role => role.assignable);
+      const roleControl = this.entityForm.get('additionalInfo.vsRole');
+      roleControl.setValidators(this.canManageAllRoles ? [] : [Validators.required]);
+      roleControl.updateValueAndValidity({emitEvent: false});
+      this.cd.markForCheck();
+    });
+  }
+
+  showVsRole(): boolean {
+    return this.entity?.authority !== Authority.SYS_ADMIN;
+  }
+
+  /** The current user may not change the role of users ranked at or above them. */
+  isVsRoleLocked(): boolean {
+    if (this.canManageAllRoles || !this.entity?.id) {
+      return false;
+    }
+    const current = this.vsRoles.find(role => role.name === this.entity.additionalInfo?.vsRole);
+    return !current?.assignable;
+  }
+
+  vsRoleDescription(name: string): string {
+    return this.vsRoles.find(role => role.name === name)?.description ?? '';
   }
 
   hideDelete() {
@@ -68,6 +99,7 @@ export class UserComponent extends EntityComponent<User>{
         additionalInfo: this.fb.group(
           {
             description: [entity && entity.additionalInfo ? entity.additionalInfo.description : ''],
+            vsRole: [entity?.additionalInfo?.vsRole ?? null],
             lang: [entity && entity.additionalInfo ? entity.additionalInfo.lang : null],
             unitSystem: [entity && entity.additionalInfo ? entity.additionalInfo.unitSystem : null],
             defaultDashboardId: [entity && entity.additionalInfo ? entity.additionalInfo.defaultDashboardId : null],
@@ -87,6 +119,7 @@ export class UserComponent extends EntityComponent<User>{
     this.entityForm.patchValue({lastName: entity.lastName});
     this.entityForm.patchValue({phone: entity.phone});
     this.entityForm.patchValue({additionalInfo: {description: entity.additionalInfo ? entity.additionalInfo.description : ''}});
+    this.entityForm.patchValue({additionalInfo: {vsRole: entity.additionalInfo?.vsRole ?? null}});
     this.entityForm.patchValue({additionalInfo:
         {lang: entity.additionalInfo ? entity.additionalInfo.lang : null}});
     this.entityForm.patchValue({additionalInfo:
