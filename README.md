@@ -1,4 +1,4 @@
-# TestFor-Prod
+# Vision Sense - SCM 
 
 A small Python calculator package with a pytest test suite and GitHub Actions CI.
 It is a sandbox for trying out testing workflows.
