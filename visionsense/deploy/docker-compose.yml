@@ -1,0 +1,70 @@
+# SPDX-FileCopyrightText: Copyright AIGC - Artificial Intelligence Global
+# SPDX-License-Identifier: Apache-2.0
+#
+# AIGC VisionSense with PostgreSQL. From the visionsense/deploy directory:
+#   cp .env.example .env            # then set real passwords
+#   docker compose build
+#   docker compose --profile install run --rm visionsense-install   # first time only
+#   docker compose up -d
+# Open http://<host>:${VS_HTTP_PORT:-8080}
+
+name: visionsense
+
+x-visionsense-env: &visionsense-env
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-visionsense}
+  SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-visionsense}
+  SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+  TB_QUEUE_TYPE: in-memory
+  JAVA_OPTS: ${VS_JAVA_OPTS:--Xms1g -Xmx2g}
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-visionsense}
+      POSTGRES_USER: ${POSTGRES_USER:-visionsense}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # One-off schema installation. LOAD_DEMO=true adds demo tenants, users and devices.
+  visionsense-install:
+    profiles: ["install"]
+    image: ${VS_IMAGE:-aigc/visionsense:4.3.1.7}
+    environment:
+      <<: *visionsense-env
+      INSTALL_TB: "true"
+      LOAD_DEMO: ${LOAD_DEMO:-false}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  visionsense:
+    image: ${VS_IMAGE:-aigc/visionsense:4.3.1.7}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      args:
+        JAR_SOURCE: ${VS_JAR_SOURCE:-build}
+    restart: unless-stopped
+    environment:
+      <<: *visionsense-env
+    ports:
+      - "${VS_HTTP_PORT:-8080}:8080"   # web UI and REST API
+      - "${VS_MQTT_PORT:-1883}:1883"   # MQTT devices
+      - "${VS_COAP_PORT:-5683}:5683/udp"
+    volumes:
+      - visionsense-logs:/var/log/thingsboard
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  visionsense-logs:

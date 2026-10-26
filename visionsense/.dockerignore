@@ -1,0 +1,5 @@
+**/target
+**/node_modules
+**/.git
+ui-ngx/.angular
+deploy/.env

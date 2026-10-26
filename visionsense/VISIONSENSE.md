@@ -16,7 +16,7 @@ New AIGC files carry their own `Copyright AIGC` header.
 | Product name, company name, public link, 2FA issuer | `ui-ngx/src/app/shared/models/branding.constants.ts` |
 | Logos (header, login, mark) | `ui-ngx/src/assets/logo_title_white.svg`, `logo_white.svg`, `assets/aigc/` |
 | Favicon | `ui-ngx/src/favicon.ico`, `assets/aigc/favicon.svg` |
-| Theme colours (purple `#3a2a60`, teal `#40c4cc`) | `ui-ngx/src/scss/constants.scss`, `ui-ngx/src/theme.scss` |
+| Dark theme (background `#110d19`, purple `#8c70d8`, white text) | `ui-ngx/src/scss/constants.scss`, `ui-ngx/src/theme.scss`, `ui-ngx/src/scss/visionsense-dark.scss` |
 | Email wording and header | `application/src/main/resources/templates/*.ftl` |
 | Construction roles (server) | `application/.../service/security/permission/VisionSenseRole*.java` |
 | Construction roles (UI) | `ui-ngx/src/app/shared/models/visionsense-role.models.ts`, `core/http/visionsense-role.service.ts` |
@@ -53,16 +53,45 @@ To scope people to a single construction site, create the site as a
 **Customer**, assign its devices, assets and dashboards to it, and create the
 site's users as customer users with the right role.
 
-## Build
+## Deploy with Docker
 
-Requires Java 17+, Maven 3.9 and access to Maven Central and
-`repo.thingsboard.io` (some ThingsBoard dependencies are only published there).
+Everything for a single-server deployment is in `deploy/`:
+
+| File | Purpose |
+| --- | --- |
+| `deploy/Dockerfile` | Builds the `aigc/visionsense` image: compiles server and UI, then puts the result into the official `thingsboard/tb-node:4.3.1.7` runtime image |
+| `deploy/docker-compose.yml` | VisionSense + PostgreSQL 16, with a one-off install service |
+| `deploy/.env.example` | Passwords, ports and options; copy to `.env` |
+
+```bash
+cd visionsense/deploy
+cp .env.example .env          # set POSTGRES_PASSWORD; LOAD_DEMO=true adds demo data
+docker compose build          # compiles inside Docker (needs internet access, ~15-30 min)
+docker compose --profile install run --rm visionsense-install   # first time only
+docker compose up -d
+```
+
+Then open `http://<server>:8080`. MQTT devices connect on port 1883 and CoAP on 5683/udp.
+
+The image build needs Maven Central, the npm registry, GitHub and
+`repo.thingsboard.io` (some ThingsBoard libraries are only published there).
+If you build the jar elsewhere (`mvn install -pl application -am -DskipTests`), copy
+`application/target/thingsboard-4.3.1.7-boot.jar` to `deploy/thingsboard.jar` and set
+`VS_JAR_SOURCE=prebuilt` in `.env` to package it without compiling.
+
+ThingsBoard's own multi-service setup (Kafka, Valkey, separate transports) remains in
+`docker/` for larger deployments.
+
+Upgrades: rebuild the image, `docker compose up -d`. Database data lives in the
+`postgres-data` volume; back it up with `docker compose exec postgres pg_dump -U visionsense visionsense > backup.sql`.
+
+## Build without Docker
+
+Requires Java 17+, Maven 3.9 and the same network access as above.
 
 ```bash
 cd visionsense
 mvn clean install -DskipTests            # builds the server and the UI
-# Docker images (tb-node, web UI, transports):
-mvn clean install -DskipTests -Ddockerfile.skip=false -pl msa/tb-node -am
 ```
 
 UI only, for development against a running server:
@@ -73,22 +102,5 @@ yarn install
 yarn start                                # http://localhost:4200, proxies /api to localhost:8080
 ```
 
-## Run locally
-
-```bash
-docker network create vsnet
-docker run -d --name vs-postgres --network vsnet \
-  -e POSTGRES_DB=thingsboard -e POSTGRES_PASSWORD=postgres postgres:16
-# first run only: create the schema (LOAD_DEMO=true adds demo users and devices)
-docker run --rm --network vsnet -e INSTALL_TB=true -e LOAD_DEMO=true \
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://vs-postgres:5432/thingsboard \
-  -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres \
-  <visionsense-tb-node-image>
-docker run -d --name visionsense --network vsnet -p 8080:8080 -p 1883:1883 \
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://vs-postgres:5432/thingsboard \
-  -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres \
-  <visionsense-tb-node-image>
-```
-
-Demo logins: `sysadmin@thingsboard.org` / `sysadmin`,
+Demo logins (when installed with `LOAD_DEMO=true`): `sysadmin@thingsboard.org` / `sysadmin`,
 `tenant@thingsboard.org` / `tenant`. Change these before any real use.
