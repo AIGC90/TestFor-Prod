@@ -21,13 +21,20 @@ $mat-md-lg: "screen and (min-width: 960px) and (max-width: 1819px)";
 
 $primary-hue-3: rgb(207, 216, 220) !default;
 
-// AIGC brand colours: deep purple ("Ai") and teal ("GC") from the AIGC logo.
-$tb-primary-color: #3a2a60;
-$tb-secondary-color: #5a4589;
-$tb-hue3-color: #b9abd6;
+// AIGC VisionSense dark scheme: purple accents and white text on a deep purple-black background.
+// The primary purple is light enough to read as text and icons on the dark surfaces.
+$tb-primary-color: #8c70d8;
+$tb-secondary-color: #a58ee3;
+$tb-hue3-color: #3a2a60;
 
 $tb-dark-primary-color: #b4a5d0;
-$tb-primary-color-light: #9681bd;
+$tb-primary-color-light: #b4a5d0;
 
-$aigc-teal: #40c4cc;
-$aigc-teal-dark: #2a80a8;
+$aigc-purple-deep: #3a2a60;
+$vs-background: #110d19;
+$vs-surface: #1c172b;
+$vs-surface-raised: #251e38;
+$vs-nav: #1a1428;
+$vs-header: #2a1f47;
+$vs-border: rgba(255, 255, 255, 0.12);
+

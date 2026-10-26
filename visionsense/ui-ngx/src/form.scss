@@ -34,7 +34,7 @@
     gap: 16px;
     display: flex;
     flex-direction: column;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     letter-spacing: 0.15px;
     position: relative;
     @media #{$mat-xs} {
@@ -65,7 +65,7 @@
     }
     &.stroked {
       box-shadow: none;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 6px;
     }
     &.no-border {
@@ -182,7 +182,7 @@
     line-height: var(--mat-typography-caption-line-height, 20px);
     font-weight: var(--mat-typography-caption-font-weight, 400);
     letter-spacing: var(--mat-typography-caption-letter-spacing, 0.0333333333em);
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.6);
     white-space: normal;
     border-radius: 6px;
   }
@@ -193,7 +193,7 @@
     align-items: center;
     gap: 16px;
     padding: 7px 7px 7px 16px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
     &.column {
       @include form-row-column;
@@ -373,7 +373,7 @@
       height: 40px;
       font-size: 14px;
       letter-spacing: 0.2px;
-      color: rgba(0, 0, 0, 0.38);
+      color: rgba(255, 255, 255, 0.38);
     }
   }
 
@@ -385,7 +385,7 @@
         }
         &:not(.mdc-text-field--invalid) {
           .mdc-line-ripple::before {
-            border-bottom-color: rgba(0, 0, 0, 0.12);
+            border-bottom-color: rgba(255, 255, 255, 0.12);
           }
         }
       }
@@ -411,7 +411,7 @@
       &.mdc-text-field--outlined, &:not(.mdc-text-field--outlined) {
         &:not(.mdc-text-field--focused):not(.mdc-text-field--disabled):not(.mdc-text-field--invalid):not(:hover) {
           .mdc-notched-outline__leading, .mdc-notched-outline__trailing, .mdc-notched-outline__notch {
-            border-color: rgba(0, 0, 0, 0.12);
+            border-color: rgba(255, 255, 255, 0.12);
           }
         }
         .mdc-notched-outline__notch {
@@ -446,7 +446,7 @@
           font-size: 14px;
           line-height: 40px;
           letter-spacing: 0.2px;
-          color: rgba(0, 0, 0, 0.38);
+          color: rgba(255, 255, 255, 0.38);
           > button.mat-mdc-icon-button {
             width: 40px;
             height: 40px;
@@ -593,7 +593,7 @@
   }
 
   .tb-form-table {
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
     display: flex;
     flex-direction: column;
@@ -651,14 +651,14 @@
   .tb-form-table-header {
     height: 48px;
     min-height: 48px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     &-cell {
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
     }
   }
 
   .tb-draggable-form-table-row {
-    background: #fff;
+    background: var(--vs-surface);
     display: flex;
     flex-direction: row;
     place-content: center flex-start;
@@ -671,14 +671,14 @@
   .tb-form-table-row {
 
     &-cell {
-      color: rgba(0, 0, 0, 0.87);
+      color: rgba(255, 255, 255, 0.87);
     }
 
     &-cell-buttons {
       display: flex;
       flex-direction: row;
       button.mat-mdc-icon-button.mat-mdc-button-base {
-        color: rgba(0, 0, 0, 0.38);
+        color: rgba(255, 255, 255, 0.38);
         &.tb-hidden {
           visibility: hidden;
         }
@@ -758,7 +758,7 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     @media #{$mat-md-lg} {
       font-size: 12px;
       line-height: 16px;
@@ -805,10 +805,10 @@
 
   button.mat-mdc-button-base.tb-box-button {
     &:not(:disabled) {
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
     }
     &:disabled {
-      color: rgba(0, 0, 0, 0.12);
+      color: rgba(255, 255, 255, 0.12);
     }
   }
 
@@ -857,9 +857,9 @@
   }
 
   .tb-form-panel.outlined {
-    --mat-form-field-outlined-outline-color: rgba(0,0,0,0.12);
+    --mat-form-field-outlined-outline-color: rgba(255, 255, 255, 0.12);
     --mat-form-field-outlined-container-shape: 6px;
-    --mat-form-field-trailing-icon-color: rgba(0, 0, 0, 0.56);
+    --mat-form-field-trailing-icon-color: rgba(255, 255, 255, 0.56);
 
     box-shadow: none;
     gap: 0;

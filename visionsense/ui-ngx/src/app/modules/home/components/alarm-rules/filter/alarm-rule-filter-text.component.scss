@@ -11,7 +11,7 @@
       padding: 0;
     }
     &.disabled {
-      color: rgba(0,0,0,0.38);
+      color: rgba(255, 255, 255, 0.38);
     }
     &.nowrap {
       white-space: nowrap;
@@ -38,7 +38,7 @@
     }
     .tb-filter-entity-key, .tb-filter-value, .tb-filter-dynamic-source {
       font-weight: bold;
-      border: 1px groove rgba(0, 0, 0, .25);
+      border: 1px groove rgba(255, 255, 255, .25);
       border-radius: 4px;
       padding-left: 4px;
       padding-right: 4px;

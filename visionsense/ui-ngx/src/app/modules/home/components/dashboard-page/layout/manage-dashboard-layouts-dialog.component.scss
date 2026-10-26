@@ -29,11 +29,11 @@ $tb-warn: mat.m2-get-color-from-palette(map-get($tb-theme, warn), text);
 
       button.tb-fixed-layout-button {
         background-color: transparent;
-        color: #000000;
+        color: rgba(255, 255, 255, 0.87);
         cursor: pointer;
 
         .mat-icon {
-          color: rgba(0, 0, 0, 0.38);
+          color: rgba(255, 255, 255, 0.38);
         }
 
         &:hover {
@@ -150,9 +150,9 @@ $tb-warn: mat.m2-get-color-from-palette(map-get($tb-theme, warn), text);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #FFFFFF;
+    background: var(--vs-surface);
     padding: 8px;
-    border: 2px dashed rgba(0, 0, 0, 0.08);
+    border: 2px dashed rgba(255, 255, 255, 0.08);
     border-radius: 10px;
   }
 }
@@ -161,7 +161,7 @@ $tb-warn: mat.m2-get-color-from-palette(map-get($tb-theme, warn), text);
   .mat-button-toggle-group {
     width: 100%;
     min-width: 354px;
-    border: 2px solid rgba(0, 0, 0, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.06);
     .mat-button-toggle-checked  {
       background: rgba(0, 0, 0, 0.06);
     }

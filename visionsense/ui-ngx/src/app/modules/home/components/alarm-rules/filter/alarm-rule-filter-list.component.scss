@@ -17,7 +17,7 @@
     max-height: 300px;
 
     &-divider {
-      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .filters-text {
@@ -29,7 +29,7 @@
     justify-content: center;
     margin-top: -14px;
     &-container {
-      background-color: white;
+      background-color: var(--vs-surface);
     }
     &-label {
       font-size: 15px;

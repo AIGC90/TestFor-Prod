@@ -14,7 +14,7 @@
   }
 
   .key-filter-list-divider {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
   .filters-operation {
     display: flex;
@@ -24,7 +24,7 @@
       position: absolute;
       top: -12px;
       left: 10px;
-      background-color: white;
+      background-color: var(--vs-surface);
     }
     &-label {
       font-size: 15px;

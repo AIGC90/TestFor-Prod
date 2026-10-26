@@ -126,26 +126,26 @@ tb-dashboard-widget-select {
       }
 
       &.focus {
-        background: #fff;
+        background: var(--vs-surface);
         border-color: rgba(255, 255, 255, 0.15);
         caret-color: $tb-primary-color;
 
         mat-icon {
-          color: rgba(0, 0, 0, 0.54);
+          color: rgba(255, 255, 255, 0.54);
         }
 
         input {
-          color: rgba(0, 0, 0, 0.76);
+          color: rgba(255, 255, 255, 0.76);
           opacity: 1;
 
           &::placeholder {
-            color: rgba(0, 0, 0, 0.38);
+            color: rgba(255, 255, 255, 0.38);
           }
         }
 
         button.mat-mdc-icon-button mat-icon,
         mat-icon.close {
-          color: rgba(0, 0, 0, 0.54) !important;
+          color: rgba(255, 255, 255, 0.54) !important;
           opacity: 1;
         }
       }
@@ -173,7 +173,7 @@ tb-dashboard-widget-select {
   .tb-widget-logical-card,
   .tb-widget-category-card {
     .widget-title {
-      color: rgba(0, 0, 0, 0.87);
+      color: rgba(255, 255, 255, 0.87);
       font-weight: 600;
     }
   }
@@ -196,7 +196,7 @@ tb-dashboard-widget-select {
         font-weight: 600;
         line-height: 24px;
         letter-spacing: 0.1px;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(255, 255, 255, 0.87);
         margin: 0;
       }
 
@@ -205,7 +205,7 @@ tb-dashboard-widget-select {
         font-weight: 400;
         line-height: 20px;
         letter-spacing: 0.2px;
-        color: rgba(0, 0, 0, 0.76);
+        color: rgba(255, 255, 255, 0.76);
         margin: 0;
       }
     }
@@ -218,7 +218,7 @@ tb-dashboard-widget-select {
       padding: 16px 20px;
       border: 1px solid $tb-primary-color;
       border-radius: 4px;
-      background: #fff;
+      background: var(--vs-surface);
       cursor: pointer;
       transition: background-color 0.2s;
 
@@ -240,7 +240,7 @@ tb-dashboard-widget-select {
         font-weight: 400;
         line-height: 24px;
         letter-spacing: 0.15px;
-        color: rgba(0, 0, 0, 0.76);
+        color: rgba(255, 255, 255, 0.76);
 
         .tb-widget-select-browse-tip-link {
           font-weight: 500;
@@ -268,7 +268,7 @@ tb-dashboard-widget-select {
 
       .widget-title {
         flex: 1;
-        color: rgba(0, 0, 0, 0.76);
+        color: rgba(255, 255, 255, 0.76);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -311,7 +311,7 @@ tb-dashboard-widget-select {
           padding: 1px 4px;
           border-radius: 4px;
           background: rgba(236, 236, 236, 0.64);
-          color: rgba(0, 0, 0, 0.54);
+          color: rgba(255, 255, 255, 0.54);
           font-size: 11px;
           font-style: normal;
           font-weight: 500;
@@ -389,13 +389,13 @@ tb-dashboard-widget-select {
       font-weight: 400;
       line-height: 16px;
       letter-spacing: 0.25px;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
 
       mat-icon {
         font-size: 16px;
         width: 16px;
         height: 16px;
-        color: rgba(0, 0, 0, 0.54);
+        color: rgba(255, 255, 255, 0.54);
 
         &.tb-iot-hub-verified-icon {
           color: #00695c;
@@ -451,7 +451,7 @@ tb-dashboard-widget-select {
   }
 
   .tb-wsp-clear-all.mat-mdc-outlined-button {
-    --mat-button-outlined-outline-color: rgba(0, 0, 0, 0.12);
+    --mat-button-outlined-outline-color: rgba(255, 255, 255, 0.12);
     height: 40px;
     line-height: 20px;
     font-size: 14px;
@@ -461,7 +461,7 @@ tb-dashboard-widget-select {
   }
 
   .tb-wsp-close.mat-mdc-icon-button {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
   .tb-iot-hub-filter-title {
@@ -469,7 +469,7 @@ tb-dashboard-widget-select {
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
 
   .tb-iot-hub-filter-sections {
@@ -575,7 +575,7 @@ tb-dashboard-widget-select {
   .tb-iot-hub-filter-group-label {
     font-size: 14px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     letter-spacing: 0.5px;
     padding: 12px 0 4px 12px;
   }

@@ -30,7 +30,7 @@ export class DetailsPanelComponent extends PageComponent implements OnDestroy {
   @Input() isReadOnly = false;
   @Input() isAlwaysEdit = false;
   @Input() isShowSearch = false;
-  @Input() backgroundColor = '#FFF';
+  @Input() backgroundColor = 'var(--vs-surface)';
 
   @Input()
   @coerceBoolean()

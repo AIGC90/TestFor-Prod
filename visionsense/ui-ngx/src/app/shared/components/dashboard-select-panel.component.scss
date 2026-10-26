@@ -8,7 +8,7 @@
   max-height: 150px;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #fff;
+  background: var(--vs-surface);
   border-radius: 4px;
   box-shadow:
     0 7px 8px -4px rgba(0, 0, 0, .2),
@@ -20,6 +20,6 @@
   }
 
   .mat-content {
-    background-color: #fff;
+    background-color: var(--vs-surface);
   }
 }

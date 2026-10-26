@@ -9,7 +9,7 @@
   }
 
   .tb-info-icon {
-    color: rgba(0, 0, 0, 0.12);
+    color: rgba(255, 255, 255, 0.12);
     font-size: 16px;
     width: 16px;
     height: 16px;
@@ -32,8 +32,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 12px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--vs-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     @media #{$mat-md-lg} {
@@ -41,14 +41,14 @@
       padding: 0 8px;
     }
     &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 10px rgba(23, 33, 90, 0.08);
     }
     .tb-feature-text {
       font-weight: 400;
       font-size: 14px;
       line-height: 20px;
-      color: rgba(0, 0, 0, 0.87);
+      color: rgba(255, 255, 255, 0.87);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -62,10 +62,10 @@
       font-family: 'Material Icons Round';
       font-size: 20px;
       line-height: 20px;
-      color: rgba(0, 0, 0, 0.12);
+      color: rgba(255, 255, 255, 0.12);
       font-weight: 600;
       position: relative;
-      background: #F4F4F4;
+      background: var(--vs-surface-raised);
       border-radius: 4px;
       width: 24px;
       height: 24px;

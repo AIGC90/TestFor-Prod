@@ -56,7 +56,7 @@
     right: 0;
     z-index: 2;
     padding: 10px;
-    background-color: #fff;
+    background-color: var(--vs-surface);
     transition: 0.3s ease-in-out;
 
     &-hidden {

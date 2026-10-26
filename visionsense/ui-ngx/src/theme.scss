@@ -11,60 +11,60 @@
 @include mat.app-background();
 
 $tb-mat-indigo: (
-  50: #ede9f4,
-  100: #d2c8e3,
-  200: #b4a5d0,
+  50: #f1edfa,
+  100: #ddd3f3,
+  200: #c6b6ec,
   300: $tb-primary-color-light,
-  400: #7f66ae,
+  400: #a58ee3,
   500: $tb-primary-color,
   600: $tb-secondary-color,
-  700: #2f224e,
-  800: #261b40,
-  900: #1c1430,
+  700: #6f53bd,
+  800: #5a4589,
+  900: $aigc-purple-deep,
   A100: $tb-hue3-color,
-  A200: #8f6fd6,
-  A400: #7a52d0,
-  A700: #6a3fc8,
+  A200: #b39dff,
+  A400: #9a7bff,
+  A700: #8a66ff,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
-    300: white,
+    300: rgba(black, 0.87),
     400: white,
     500: white,
     600: white,
     700: white,
     800: white,
     900: white,
-    A100: rgba(black, 0.87),
-    A200: white,
+    A100: white,
+    A200: rgba(black, 0.87),
     A400: white,
     A700: white,
   )
 );
 
-$aigc-mat-teal: (
-  50: #e3f6f8,
-  100: #b9e9ed,
-  200: #8cdbe2,
-  300: #5ecdd6,
-  400: $aigc-teal,
-  500: #33aec0,
-  600: #2e9bb5,
-  700: $aigc-teal-dark,
-  800: #236c90,
-  900: #1a4f6b,
-  A100: #a6f4fa,
-  A200: #5ee8f2,
-  A400: #22d3e0,
-  A700: #0fbfcc,
+$aigc-mat-lavender: (
+  50: #faf8ff,
+  100: #f1edfa,
+  200: #e4dcf6,
+  300: #d3c6f0,
+  400: #c6b6ec,
+  500: #b4a5d0,
+  600: #a58ee3,
+  700: #8c70d8,
+  800: #6f53bd,
+  900: #5a4589,
+  A100: #ffffff,
+  A200: #f1edfa,
+  A400: #e4dcf6,
+  A700: #d3c6f0,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
     300: rgba(black, 0.87),
     400: rgba(black, 0.87),
-    500: white,
+    500: rgba(black, 0.87),
     600: white,
     700: white,
     800: white,
@@ -77,9 +77,9 @@ $aigc-mat-teal: (
 );
 
 $tb-primary: mat.m2-define-palette($tb-mat-indigo);
-$tb-accent: mat.m2-define-palette($aigc-mat-teal, 600);
+$tb-accent: mat.m2-define-palette($aigc-mat-lavender, 500);
 
-$tb-mat-theme: mat.m2-define-light-theme((
+$tb-mat-theme: mat.m2-define-dark-theme((
   color: (
     primary: $tb-primary,
     accent: $tb-accent
@@ -91,7 +91,7 @@ $tb-mat-theme: mat.m2-define-light-theme((
 ));
 
 $tb-theme-system: m2-utils.get-system($tb-mat-theme);
-$tb-theme-system: map_merge($tb-theme-system, ( background: map_get(mat.$m2-grey-palette, 200) ));
+$tb-theme-system: map_merge($tb-theme-system, ( background: $vs-background, surface: $vs-surface ));
 $tb-theme: map_merge($tb-mat-theme, (_mat-system: $tb-theme-system));
 
 $primary: mat.m2-get-color-from-palette($tb-primary);
@@ -142,7 +142,7 @@ $tb-dark-theme: mat.m2-define-dark-theme((
 ));
 
 $tb-dark-theme-system: m2-utils.get-system($tb-dark-theme);
-$tb-dark-theme-system: map_merge($tb-dark-theme-system, ( surface: map_get($tb-dark-mat-indigo, 800) ));
+$tb-dark-theme-system: map_merge($tb-dark-theme-system, ( background: $vs-background, surface: $vs-surface ));
 $tb-dark-theme: map_merge($tb-dark-theme, (_mat-system: $tb-dark-theme-system));
 
 @mixin mat-fab-toolbar-theme($theme) {

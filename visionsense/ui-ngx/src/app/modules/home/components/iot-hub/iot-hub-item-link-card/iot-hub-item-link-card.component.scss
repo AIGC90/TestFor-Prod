@@ -12,9 +12,9 @@
   width: 360px;
   max-width: 100%;
   padding: 8px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  background: #fff;
+  background: var(--vs-surface);
   text-decoration: none;
   color: inherit;
   transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
@@ -43,7 +43,7 @@
   width: 99px;
   height: 56px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(0, 0, 0, 0.04);
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@
     width: 56px;
     height: 56px;
     border: none;
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
@@ -85,7 +85,7 @@
   font-size: 28px;
   width: 28px;
   height: 28px;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .tb-iot-hub-item-link-text {
@@ -109,7 +109,7 @@
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.3;
 
   mat-icon {

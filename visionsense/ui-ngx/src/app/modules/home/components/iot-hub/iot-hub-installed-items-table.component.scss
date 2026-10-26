@@ -12,7 +12,7 @@
 // Table + paginator container — border
 .tb-installed-table-container {
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .tb-installed-table-wrapper {
@@ -26,7 +26,7 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
 
   // Body cells — Design: 14px Regular, rgba(0,0,0,0.76), tracking 0.2
@@ -34,7 +34,7 @@
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.2px;
-    color: rgba(0, 0, 0, 0.76);
+    color: rgba(255, 255, 255, 0.76);
   }
 }
 
@@ -127,9 +127,9 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   background: none;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 4px;
   padding: 6px 12px;
   cursor: pointer;
@@ -187,8 +187,8 @@
     height: 36px;
     padding: 6px;
     --mdc-icon-button-state-layer-size: 36px;
-    --mdc-icon-button-icon-color: rgba(0, 0, 0, 0.54);
-    color: rgba(0, 0, 0, 0.54);
+    --mdc-icon-button-icon-color: rgba(255, 255, 255, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 }
 
@@ -202,13 +202,13 @@
   h3 {
     font-size: 18px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     margin: 16px 0 8px;
   }
 
   p {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     margin: 0 0 24px;
   }
 }

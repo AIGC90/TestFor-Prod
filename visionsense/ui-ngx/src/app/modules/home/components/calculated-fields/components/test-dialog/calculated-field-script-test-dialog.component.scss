@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 .cf-test-dialog-container {
   .gutter {
-    background-color: #eee;
+    background-color: var(--vs-surface-raised);
     background-repeat: no-repeat;
     background-position: 50%;
   }

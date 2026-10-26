@@ -21,13 +21,13 @@
   }
   &.tb-fullscreen {
     height: 100%;
-    background: #fff;
+    background: var(--vs-surface);
     .bottom-panel {
       margin-bottom: 16px;
     }
   }
   .mat-toolbar {
-    background: #fff;
+    background: var(--vs-surface);
     .mat-divider-vertical {
       height: 40px;
       margin-right: 16px;

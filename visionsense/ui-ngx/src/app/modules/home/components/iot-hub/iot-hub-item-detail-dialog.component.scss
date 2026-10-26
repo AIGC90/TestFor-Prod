@@ -6,7 +6,7 @@
 .tb-iot-hub-detail-dialog {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: var(--vs-surface);
   border-radius: 8px;
   overflow: hidden;
   max-height: 80vh;
@@ -78,7 +78,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 // Subtitle row — Design: 13px Regular, rgba(0,0,0,0.54), gap-12 between groups
@@ -89,7 +89,7 @@
   font-size: 13px;
   line-height: 16px;
   letter-spacing: 0.4px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   flex-wrap: wrap;
 }
 
@@ -103,7 +103,7 @@
   font-size: 16px;
   width: 16px;
   height: 16px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 // Dot separator — Design: 3px circle, rgba(0,0,0,0.38)
@@ -157,7 +157,7 @@
     font-size: 48px;
     width: 48px;
     height: 48px;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -180,7 +180,7 @@
     font-size: 16px;
     width: 16px;
     height: 16px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
   span {
@@ -221,7 +221,7 @@
   letter-spacing: 0.2px;
   white-space: nowrap;
   border: 1px solid;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
 
   &.dlg-node-filter { background: rgba(241, 232, 97, 0.16); border-color: rgb(241, 232, 97); }
   &.dlg-node-enrichment { background: rgba(205, 241, 78, 0.16); border-color: rgb(205, 241, 78); }
@@ -230,7 +230,7 @@
   &.dlg-node-analytics { background: rgba(49, 210, 204, 0.16); border-color: rgb(49, 210, 204); }
   &.dlg-node-external { background: rgba(251, 199, 102, 0.16); border-color: rgb(251, 199, 102); }
   &.dlg-node-flow { background: rgba(214, 196, 241, 0.16); border-color: rgb(214, 196, 241); }
-  &.dlg-node-unknown { background: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.12); }
+  &.dlg-node-unknown { background: rgba(0, 0, 0, 0.04); border-color: rgba(255, 255, 255, 0.12); }
 }
 
 // Divider
@@ -243,7 +243,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background: white;
+  background: var(--vs-surface);
 }
 
 // Meta section (categories + use cases) — Design: px-24, py-16, gap-24, grid row
@@ -293,7 +293,7 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
 
   .dlg-details-popover-body {
@@ -337,7 +337,7 @@
     font-size: 32px;
     width: 32px;
     height: 32px;
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
   }
 
   .dlg-meta-creator-verified {
@@ -356,7 +356,7 @@
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   white-space: nowrap;
 }
 
@@ -366,7 +366,7 @@
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -394,11 +394,11 @@
   height: 40px;
   padding: 8px;
   --mdc-icon-button-state-layer-size: 40px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 .dlg-manage-remove-btn {
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 // Chip — Design: 12px Medium, h-24, p-4 px-8, rounded-4
@@ -516,8 +516,8 @@
 .dlg-carousel-nav {
   width: 40px;
   height: 40px;
-  background: white;
-  color: rgba(0, 0, 0, 0.76);
+  background: var(--vs-surface);
+  color: rgba(255, 255, 255, 0.76);
   flex-shrink: 0;
 
   &:hover { background: rgba(245, 245, 245, 1); }
@@ -649,7 +649,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
 

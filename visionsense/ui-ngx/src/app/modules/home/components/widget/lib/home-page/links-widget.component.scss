@@ -11,7 +11,7 @@
   }
 
   .tb-title-icon {
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
     width: 32px;
     height: 32px;
     padding: 4px;
@@ -32,8 +32,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 8px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--vs-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     @media #{$mat-md-lg} {
@@ -41,7 +41,7 @@
       padding: 0 8px;
     }
     &:hover {
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 10px rgba(23, 33, 90, 0.08);
     }
     .tb-link-container {
@@ -63,7 +63,7 @@
         font-size: 14px;
         line-height: 20px;
         letter-spacing: 0.2px;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(255, 255, 255, 0.87);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -82,9 +82,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #FFFFFF;
+    background: var(--vs-surface);
     padding: 8px;
-    border: 2px dashed rgba(0, 0, 0, 0.08);
+    border: 2px dashed rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     @media #{$mat-md-lg} {
       height: 18px;
@@ -96,11 +96,11 @@
       }
     }
     .tb-add-icon {
-      color: rgba(0, 0, 0, 0.12);
+      color: rgba(255, 255, 255, 0.12);
     }
     &:hover {
       .tb-add-icon {
-        color: rgba(0, 0, 0, 0.38);
+        color: rgba(255, 255, 255, 0.38);
       }
     }
   }

@@ -10,7 +10,7 @@
 }
 
 .dlg-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .dlg-title {
@@ -19,7 +19,7 @@
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.1px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 :host-context(.mat-mdc-dialog-container) {
@@ -54,7 +54,7 @@
   }
 
   .mat-mdc-dialog-actions {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     padding: 8px;
   }
 }

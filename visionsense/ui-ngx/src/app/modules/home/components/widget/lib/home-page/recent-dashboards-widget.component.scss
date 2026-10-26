@@ -46,7 +46,7 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
   .tb-starred-dashboard-row {
@@ -135,7 +135,7 @@
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
     @media #{$mat-md-lg} {
       font-size: 11px;
     }
@@ -157,7 +157,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       a {
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(255, 255, 255, 0.87);
         border-bottom: none;
         &:hover, &:focus {
           border-bottom: none;
@@ -166,14 +166,14 @@
     }
     &.last-visited {
       cursor: default;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
     }
     .star {
       cursor: pointer;
       vertical-align: middle;
-      color: rgba(0, 0, 0, 0.12);
+      color: rgba(255, 255, 255, 0.12);
       &:hover {
-        color: rgba(0, 0, 0, 0.18);
+        color: rgba(255, 255, 255, 0.18);
       }
       &.starred {
         color: #FAE205;
@@ -189,7 +189,7 @@
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0.2px;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
       @media #{$mat-md-lg} {
         font-size: 11px;
         line-height: 16px;

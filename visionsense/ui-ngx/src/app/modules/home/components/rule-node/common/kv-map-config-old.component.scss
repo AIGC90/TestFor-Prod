@@ -12,14 +12,14 @@
       .cell {
         padding-left: 5px;
         padding-right: 5px;
-        color: #757575;
+        color: rgba(255, 255, 255, 0.6);
         font-size: 12px;
         font-weight: 700;
         white-space: nowrap;
       }
 
       .tb-required::after {
-        color: #757575;
+        color: rgba(255, 255, 255, 0.6);
         font-size: 12px;
         font-weight: 700;
       }

@@ -10,7 +10,7 @@
 }
 
 .tb-installed-items-page {
-  background: white;
+  background: var(--vs-surface);
   border-radius: 8px;
   padding: 40px 40px 40px;
 }
@@ -32,7 +32,7 @@
   font-size: 36px;
   font-weight: 500;
   line-height: 48px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0;
 }
 
@@ -65,14 +65,14 @@
 
 .tb-installed-filter-chips {
   .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
-    --mat-chip-elevated-container-color: rgba(0, 0, 0, 0.04);
+    --mat-chip-elevated-container-color: rgba(255, 255, 255, 0.04);
   }
 }
 
 .tb-installed-clear-btn {
   font-size: 14px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   cursor: pointer;
   background: none;
   border: none;
@@ -80,7 +80,7 @@
   font-family: inherit;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
 }
 

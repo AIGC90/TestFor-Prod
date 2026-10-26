@@ -16,7 +16,7 @@ tb-dashboard-page {
 div.tb-dashboard-page {
   &.mat-content {
     overflow: hidden;
-    background-color: #eee;
+    background-color: var(--vs-surface-raised);
   }
   section.tb-dashboard-title {
     position: relative;
@@ -135,7 +135,7 @@ div.tb-dashboard-page {
           writing-mode: vertical-rl;
           text-align: center;
           transform: rotate(180deg);
-          color: #616161;
+          color: rgba(255, 255, 255, 0.7);
           letter-spacing: .25px;
         }
       }

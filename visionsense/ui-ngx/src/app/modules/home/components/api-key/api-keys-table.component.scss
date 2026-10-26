@@ -6,7 +6,7 @@
 :host ::ng-deep {
   tb-entities-table {
     .mat-drawer-container {
-      background-color: white;
+      background-color: var(--vs-surface);
 
       mat-cell.mat-column-description {
         white-space: nowrap;

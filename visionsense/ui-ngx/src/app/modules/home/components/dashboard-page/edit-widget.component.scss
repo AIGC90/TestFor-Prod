@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: var(--vs-surface);
     z-index: 100;
   }
   .widget-preview-section {
@@ -16,7 +16,7 @@
     left: 16px;
     right: 16px;
     bottom: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 4px;
   }
 }

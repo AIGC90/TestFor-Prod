@@ -11,7 +11,7 @@
   }
   &.tb-draggable {
     &.cdk-drag-preview {
-      background: #fff;
+      background: var(--vs-surface);
     }
   }
 }

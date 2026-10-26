@@ -9,16 +9,16 @@
     gap: 8px;
     padding: 12px 12px 8px 24px;
     flex-shrink: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   .dlg-title {
     font-size: 24px;
     font-weight: 500;
     line-height: 32px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
   .mat-mdc-dialog-actions {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 }
 

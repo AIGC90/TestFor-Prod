@@ -9,7 +9,7 @@
   height: 100%;
 
   .tb-two-factor-auth-login-content {
-    background-color: #eee;
+    background-color: var(--vs-surface-raised);
     --mat-card-elevated-container-elevation: none;
 
     .progress-bar {

@@ -3,7 +3,7 @@
 :host {
   .tb-edit-link {
     padding: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     &.edit-mode {
@@ -16,8 +16,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 8px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--vs-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     .tb-link-container {
@@ -36,13 +36,13 @@
         font-size: 14px;
         line-height: 20px;
         letter-spacing: 0.2px;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(255, 255, 255, 0.87);
       }
     }
   }
   .tb-edit-buttons {
     .mat-icon {
-      color: rgba(0, 0, 0, 0.38);
+      color: rgba(255, 255, 255, 0.38);
     }
   }
 }

@@ -111,7 +111,7 @@
         padding: 3px;
         vertical-align: sub;
         border-radius: 6px;
-        background: #fff;
+        background: var(--vs-surface);
         .mat-icon {
           margin: 0;
         }
@@ -149,10 +149,10 @@
   flex-direction: row;
   align-items: center;
   padding: 12px 12px 12px 0;
-  background: #fff;
+  background: var(--vs-surface);
   gap: 0;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.04);
   .tb-mobile-item-label {
     position: absolute;
@@ -160,12 +160,12 @@
     top: -8px;
     padding-left: 8px;
     padding-right: 8px;
-    background: #fff;
+    background: var(--vs-surface);
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0.4px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
 }

@@ -171,7 +171,7 @@ $gallery-border-hover-color: #2a7dec;
         }
 
         div {
-          background-color: #fff;
+          background-color: var(--vs-surface);
           position: absolute;
           width: $copy-icon-width;
           height: 28px;
@@ -417,7 +417,7 @@ $gallery-border-hover-color: #2a7dec;
         overflow: hidden;
         margin: 0;
         padding: 0;
-        background: #fff;
+        background: var(--vs-surface);
         transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
         display: block;
         &:hover {
@@ -434,7 +434,7 @@ $gallery-border-hover-color: #2a7dec;
           display: block;
           height: 115px;
           overflow: hidden;
-          background: #fff;
+          background: var(--vs-surface);
           img {
             width: 100%;
             max-width: 100%;

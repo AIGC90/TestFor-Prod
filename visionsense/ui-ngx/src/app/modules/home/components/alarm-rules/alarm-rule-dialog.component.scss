@@ -5,12 +5,12 @@
   max-width: 100%;
 
   .tb-disabled {
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
   }
 }
 
 .clear-alarm-rule {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-left-width: 4px;
   border-left-color: green;
   border-radius: 4px;
@@ -19,6 +19,6 @@
 }
 
 .button-icon {
-  color: rgba(0, 0, 0, 0.38);
+  color: rgba(255, 255, 255, 0.38);
   min-width: 40px;
 }

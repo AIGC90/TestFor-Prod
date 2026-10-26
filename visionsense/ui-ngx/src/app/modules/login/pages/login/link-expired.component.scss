@@ -6,7 +6,7 @@
   display: flex;
   flex: 1 1 0;
   .tb-expired-link-content {
-    background-color: #eee;
+    background-color: var(--vs-surface-raised);
     --mat-card-elevated-container-elevation: none;
     .tb-expired-link-card {
       letter-spacing: 0.15px;

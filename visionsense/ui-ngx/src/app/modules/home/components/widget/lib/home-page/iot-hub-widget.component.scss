@@ -16,7 +16,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 20px;
-      color: rgba(0, 0, 0, 0.76);
+      color: rgba(255, 255, 255, 0.76);
       @media #{$mat-md-lg} {
         font-size: 12px;
         line-height: 16px;
@@ -99,7 +99,7 @@
 
     &:hover .tb-iot-hub-widget-card-image,
     &:focus-visible .tb-iot-hub-widget-card-image {
-      border-color: rgba(0, 0, 0, 0.12);
+      border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 10px 0 rgba(23, 33, 90, 0.08);
     }
 
@@ -116,7 +116,7 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     background: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px) 0 0 / 16px 16px rgba(0, 0, 0, 0.04);
     overflow: hidden;
@@ -141,7 +141,7 @@
     font-size: 20px;
     line-height: 20px;
     color: #2e7d32;
-    background: white;
+    background: var(--vs-surface);
     border-radius: 50%;
   }
 
@@ -159,7 +159,7 @@
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
-    color: rgba(0, 0, 0, 0.76);
+    color: rgba(255, 255, 255, 0.76);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -177,14 +177,14 @@
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0.4px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
 
     mat-icon {
       width: 12px;
       height: 12px;
       font-size: 12px;
       line-height: 12px;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
     }
   }
 }

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 :host {
   .create-alarm-rule {
-    border: 1px solid rgba(0, 0, 0, .12);
+    border: 1px solid rgba(255, 255, 255, .12);
     border-left-width: 4px;
     border-radius: 4px;
     padding: 8px;
@@ -17,7 +17,7 @@
     }
   }
   .button-icon {
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
     min-width: 40px;
   }
 }

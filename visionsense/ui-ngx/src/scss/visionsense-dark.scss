@@ -1,0 +1,73 @@
+// SPDX-FileCopyrightText: Copyright AIGC - Artificial Intelligence Global
+// SPDX-License-Identifier: Apache-2.0
+
+// AIGC VisionSense dark scheme. The Material theme in theme.scss is dark; these rules cover
+// application chrome and component styles that hard-code light colours.
+@import './constants';
+
+:root {
+  --vs-background: #{$vs-background};
+  --vs-surface: #{$vs-surface};
+  --vs-surface-raised: #{$vs-surface-raised};
+  --vs-border: #{$vs-border};
+  --vs-text: rgba(255, 255, 255, 0.87);
+  --vs-text-secondary: rgba(255, 255, 255, 0.6);
+  --vs-primary: #{$tb-primary-color};
+  // Row hover / selected entity colours used by entity tables
+  --tb-hover-color: rgba(255, 255, 255, 0.04);
+  --tb-current-entity-color: rgba(140, 112, 216, 0.18);
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: $vs-background;
+  color: var(--vs-text);
+}
+
+.tb-default {
+  color: var(--vs-text);
+
+  // Primary toolbars (header, details panels, dashboard toolbar, selection bars) use deep purple
+  // instead of the bright accent purple.
+  mat-toolbar.mat-primary,
+  mat-toolbar.mat-primary.tb-primary-toolbar {
+    background: $vs-header;
+    color: #fff;
+  }
+  .tb-site-sidenav,
+  mat-toolbar.mat-primary.tb-nav-header-toolbar,
+  mat-toolbar.mat-primary.tb-side-menu-toolbar {
+    background: $vs-nav;
+    color: #fff;
+  }
+  .tb-site-sidenav {
+    border-right: 1px solid $vs-border;
+  }
+  mat-fab-toolbar.mat-primary .mat-fab-toolbar-background {
+    background: $vs-header;
+    color: #fff;
+  }
+
+  // Generic surfaces
+  .mat-drawer-container,
+  .mat-sidenav-content,
+  .mat-app-background {
+    background-color: $vs-background;
+    color: var(--vs-text);
+  }
+
+  .mat-mdc-form-field .mat-mdc-form-field-hint-wrapper {
+    color: var(--vs-text-secondary);
+  }
+
+  a {
+    color: $tb-secondary-color;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    &:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+  }
+}

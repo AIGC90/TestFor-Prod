@@ -26,7 +26,7 @@
     top: 10px;
     right: 10px;
     background: #ccc;
-    color: #666;
+    color: rgba(255, 255, 255, 0.7);
     opacity: .85;
     margin: 0 6px;
     z-index: 2;
@@ -154,7 +154,7 @@
         padding: 0;
       }
       .fc-canvas {
-        background: #f9f9f9;
+        background: var(--vs-surface-raised);
       }
     }
   }
@@ -269,7 +269,7 @@
         font-weight: 600 !important;
 
         span {
-          background-color: #fff !important;
+          background-color: var(--vs-surface) !important;
           color: #003a79 !important;
           border: solid 2px #003a79 !important;
         }
@@ -280,7 +280,7 @@
 
 .tb-rule-node-tooltip,
 .tb-rule-node-help {
-  color: #333;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .tb-rule-node-tooltip {
@@ -311,7 +311,7 @@
 
     .tb-node-description {
       font-style: italic;
-      color: #555;
+      color: rgba(255, 255, 255, 0.72);
     }
 
     .tb-node-details {

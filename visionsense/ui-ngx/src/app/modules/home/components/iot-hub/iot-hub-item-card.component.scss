@@ -10,12 +10,12 @@
 
 // Card — Design: white bg, border rgba(0,0,0,0.12), rounded-8, overflow-clip, flex-col, gap-16, pb-16
 .tb-iot-hub-item-card {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
-  background: white;
+  background: var(--vs-surface);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
     font-size: 36px;
     width: 36px;
     height: 36px;
-    color: rgba(0, 0, 0, 0.38);
+    color: rgba(255, 255, 255, 0.38);
   }
 }
 
@@ -81,8 +81,8 @@
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--vs-surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   cursor: pointer;
   height: 100%;
@@ -127,7 +127,7 @@
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -142,7 +142,7 @@
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 .tb-iot-hub-compact-author-icon {
@@ -195,7 +195,7 @@
   line-height: 16px;
   letter-spacing: 0.25px;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 // Name — Design: 16px Medium, line-height 24, tracking 0.25, ellipsis
@@ -208,7 +208,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 
@@ -219,7 +219,7 @@
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -269,7 +269,7 @@
     gap: 2px;
     font-size: 12px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     text-transform: uppercase;
     margin-right: 8px;
 
@@ -286,7 +286,7 @@
 .tb-iot-hub-card-install-btn {
   padding: 6px 16px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: transparent;
   color: $tb-primary-color;
   font-size: 14px;
@@ -353,7 +353,7 @@
     font-size: 20px;
     width: 20px;
     height: 20px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 }
 
@@ -365,7 +365,7 @@
     font-size: 24px;
     width: 24px;
     height: 24px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 }
 

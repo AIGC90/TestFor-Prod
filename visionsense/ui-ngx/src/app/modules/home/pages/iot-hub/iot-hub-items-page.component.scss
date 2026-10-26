@@ -8,7 +8,7 @@
 }
 
 .tb-iot-hub-items-page {
-  background: white;
+  background: var(--vs-surface);
   border-radius: 8px;
   padding: 40px 40px 48px;
 }
@@ -21,7 +21,7 @@
   font-size: 36px;
   font-weight: 500;
   line-height: 48px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0 0 12px;
 }
 
@@ -31,7 +31,7 @@
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   margin: 0 0 24px;
   max-width: 800px;
 }
@@ -83,14 +83,14 @@ tb-iot-hub-browse {
     font-size: 24px;
     font-weight: 500;
     line-height: 32px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     margin: 0 0 8px;
   }
 
   p {
     font-size: 14px;
     line-height: 20px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     margin: 0 0 32px;
   }
 }

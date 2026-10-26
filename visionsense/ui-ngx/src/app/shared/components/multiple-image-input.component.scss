@@ -11,7 +11,7 @@ $previewSize: 64px !default;
   &.image-dnd-placeholder {
     height: 82px;
     width: 146px;
-    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
   }
@@ -25,13 +25,13 @@ $previewSize: 64px !default;
   font-size: 11px;
   font-weight: 400;
   line-height: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   padding-bottom: 4px;
 }
 
 .image-content-container {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--vs-surface);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   height: $previewSize;
 }
@@ -49,7 +49,7 @@ $previewSize: 64px !default;
   height: $previewSize;
   margin-top: -1px;
   margin-bottom: -1px;
-  border: 1px solid rgba(0, 0, 0, 0.54);
+  border: 1px solid rgba(255, 255, 255, 0.54);
 
   .tb-image-preview {
     position: absolute;
@@ -99,7 +99,7 @@ $previewSize: 64px !default;
 
   .no-images-prompt {
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
   .file-input {
@@ -110,7 +110,7 @@ $previewSize: 64px !default;
     position: relative;
     height: $containerHeight;
     overflow: hidden;
-    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     box-sizing: border-box;
 
@@ -127,7 +127,7 @@ $previewSize: 64px !default;
       justify-content: center;
       align-items: center;
       font-size: 16px;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
       text-align: center;
       .mat-icon {
         margin-right: 17px;

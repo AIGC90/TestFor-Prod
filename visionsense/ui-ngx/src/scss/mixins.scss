@@ -35,7 +35,7 @@
 }
 
 @mixin tb-checkered-bg() {
-  background-color: #fff;
+  background-color: var(--vs-surface);
   background-image:
     linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd),
     linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd);

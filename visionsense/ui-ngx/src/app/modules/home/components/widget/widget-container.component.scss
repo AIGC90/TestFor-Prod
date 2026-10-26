@@ -163,15 +163,15 @@ gridster-item:hover {
   position: absolute !important;
   .tooltipster-box {
     user-select: none;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.38);
+    background: var(--vs-surface);
+    border: 1px solid rgba(255, 255, 255, 0.38);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     .tooltipster-content {
       padding: 4px 8px;
       font-size: 12px;
       line-height: 12px;
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.76);
+      color: rgba(255, 255, 255, 0.76);
       .tb-widget-action-container {
         display: flex;
         flex-direction: column;
@@ -211,7 +211,7 @@ gridster-item:hover {
       bottom: -1px;
       .tooltipster-arrow-uncropped {
         .tooltipster-arrow-border {
-          border-top-color: rgba(0, 0, 0, 0.38);
+          border-top-color: rgba(255, 255, 255, 0.38);
         }
         .tooltipster-arrow-background {
           border-top-color: #fff;

@@ -28,7 +28,7 @@
   align-items: flex-start;
 
   .tb-primary-fill {
-    background: #fff;
+    background: var(--vs-surface);
     border-radius: 50%;
     &:before {
       opacity: 0.1;
@@ -46,7 +46,7 @@
     display: flex;
     flex-direction: column;
     z-index: 101;
-    background: #fff;
+    background: var(--vs-surface);
     border-radius: 24px;
     &.tb-primary-fill {
       border-radius: 24px;
@@ -86,11 +86,11 @@
   }
   &.tb-active {
     .tooltipster-box {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.38);
+      background: var(--vs-surface);
+      border: 1px solid rgba(255, 255, 255, 0.38);
       box-shadow: 0 0 10px 6px rgba(0, 0, 0, .2);
       .tooltipster-content {
-        color: rgba(0, 0, 0, 0.76);
+        color: rgba(255, 255, 255, 0.76);
       }
     }
     .tooltipster-arrow {
@@ -105,7 +105,7 @@
         bottom: -1px;
         .tooltipster-arrow-uncropped {
           .tooltipster-arrow-border {
-            border-top-color: rgba(0, 0, 0, 0.38);
+            border-top-color: rgba(255, 255, 255, 0.38);
           }
           .tooltipster-arrow-background {
             border-top-color: #fff;
@@ -119,7 +119,7 @@
         top: -1px;
         .tooltipster-arrow-uncropped {
           .tooltipster-arrow-border {
-            border-bottom-color: rgba(0, 0, 0, 0.38);
+            border-bottom-color: rgba(255, 255, 255, 0.38);
           }
           .tooltipster-arrow-background {
             border-bottom-color: #fff;
@@ -134,7 +134,7 @@
         right: -1px;
         .tooltipster-arrow-uncropped {
           .tooltipster-arrow-border {
-            border-left-color: rgba(0, 0, 0, 0.38);
+            border-left-color: rgba(255, 255, 255, 0.38);
           }
           .tooltipster-arrow-background {
             border-left-color: #fff;
@@ -148,7 +148,7 @@
         left: -1px;
         .tooltipster-arrow-uncropped {
           .tooltipster-arrow-border {
-            border-right-color: rgba(0, 0, 0, 0.38);
+            border-right-color: rgba(255, 255, 255, 0.38);
           }
           .tooltipster-arrow-background {
             border-right-color: #fff;
@@ -169,7 +169,7 @@
       bottom: -2px;
       .tooltipster-arrow-uncropped {
         .tooltipster-arrow-border {
-          border-top-color: rgba(0, 0, 0, 0.54);
+          border-top-color: rgba(255, 255, 255, 0.54);
         }
         .tooltipster-arrow-background {
           border-top-color: transparent;
@@ -182,7 +182,7 @@
       top: -2px;
       .tooltipster-arrow-uncropped {
         .tooltipster-arrow-border {
-          border-bottom-color: rgba(0, 0, 0, 0.54);
+          border-bottom-color: rgba(255, 255, 255, 0.54);
         }
         .tooltipster-arrow-background {
           border-bottom-color: transparent;
@@ -195,7 +195,7 @@
       right: -2px;
       .tooltipster-arrow-uncropped {
         .tooltipster-arrow-border {
-          border-left-color: rgba(0, 0, 0, 0.54);
+          border-left-color: rgba(255, 255, 255, 0.54);
         }
         .tooltipster-arrow-background {
           border-left-color: transparent;
@@ -208,7 +208,7 @@
       left: -2px;
       .tooltipster-arrow-uncropped {
         .tooltipster-arrow-border {
-          border-right-color: rgba(0, 0, 0, 0.54);
+          border-right-color: rgba(255, 255, 255, 0.54);
         }
         .tooltipster-arrow-background {
           border-right-color: transparent;

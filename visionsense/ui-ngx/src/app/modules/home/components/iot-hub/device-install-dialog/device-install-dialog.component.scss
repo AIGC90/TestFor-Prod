@@ -63,7 +63,7 @@
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0.1px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     margin: 0;
     flex: 1;
     overflow: hidden;
@@ -74,7 +74,7 @@
 
 .tb-device-install-connectivity {
   p {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     font-size: 16px;
     line-height: 24px;
     margin: 0;
@@ -125,7 +125,7 @@
       }
 
       .tb-connectivity-card-icon-mask {
-        background-color: white;
+        background-color: var(--vs-surface);
       }
     }
   }
@@ -136,7 +136,7 @@
     width: 48px;
     height: 48px;
     border-radius: 4px;
-    background: white;
+    background: var(--vs-surface);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +165,7 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.15px;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
   }
 
   // PE-Only pill — primary 1px border + primary text on white background.
@@ -177,7 +177,7 @@
     padding: 0 8px;
     border: 1px solid $tb-primary-color;
     border-radius: 4px;
-    background: white;
+    background: var(--vs-surface);
     color: $tb-primary-color;
     font-size: 12px;
     font-weight: 500;
@@ -193,7 +193,7 @@
   }
 
   .tb-form-field-help {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     font-size: 12px;
     line-height: 16px;
     margin-top: -4px;
@@ -205,7 +205,7 @@
     margin-top: 4px;
     margin-bottom: 8px;
     border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 }
 
@@ -268,7 +268,7 @@
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.4px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   position: relative;
 
   &::after {
@@ -276,7 +276,7 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    border: 1px dashed rgba(0, 0, 0, 0.12);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
     border-radius: 999px;
     top: 50%;
     left: 50%;
@@ -290,7 +290,7 @@
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -302,7 +302,7 @@
   }
 
   &.tb-progress-label-pending {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 }
 
@@ -320,7 +320,7 @@
 }
 
 .tb-progress-status-progress {
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 
@@ -345,8 +345,8 @@
   justify-content: center;
   padding: 6px 12px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--vs-surface);
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;

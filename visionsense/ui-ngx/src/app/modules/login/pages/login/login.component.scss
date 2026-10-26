@@ -9,7 +9,7 @@
   .tb-login-content {
     margin-top: 36px;
     margin-bottom: 76px;
-    background-color: #eee;
+    background-color: var(--vs-background);
     --mat-card-elevated-container-elevation: none;
     .tb-login-form {
       @media #{$mat-gt-xs} {
@@ -62,7 +62,7 @@
 
       a.login-with-button {
         color: rgba(black, 0.87);
-        background-color: #ffffff;
+        background-color: var(--vs-surface);
       }
 
       .login-button-container {

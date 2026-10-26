@@ -83,7 +83,7 @@
     }
     .mat-button-toggle.mat-button-toggle-appearance-standard {
       flex: 1;
-      color: rgba(0, 0, 0, 0.38);
+      color: rgba(255, 255, 255, 0.38);
       background: transparent;
 
       .mat-button-toggle-focus-overlay, .mat-button-toggle-ripple {
@@ -129,7 +129,7 @@
           color: rgba(255, 255, 255, 0.8);
           &.mat-button-toggle-checked {
             .mat-button-toggle-button {
-              background: #FFFFFF;
+              background: var(--vs-surface);
               color: $tb-primary-color;
             }
           }
@@ -141,13 +141,13 @@
       background: rgba(0, 0, 0, 0.03);
 
       .mat-button-toggle.mat-button-toggle-appearance-standard {
-        color: rgba(0, 0, 0, 0.28);
+        color: rgba(255, 255, 255, 0.28);
 
         &.mat-button-toggle-checked {
           .mat-button-toggle-button {
             background: transparent;
-            color: rgba(0, 0, 0, 0.38);
-            border-color: rgba(0, 0, 0, 0.38);
+            color: rgba(255, 255, 255, 0.38);
+            border-color: rgba(255, 255, 255, 0.38);
           }
         }
 
@@ -160,7 +160,7 @@
           &.mat-button-toggle-checked {
             .mat-button-toggle-button {
               background: rgba(0, 0, 0, 0.12);
-              color: rgba(0, 0, 0, 0.38);
+              color: rgba(255, 255, 255, 0.38);
               border: transparent;
             }
           }
@@ -243,7 +243,7 @@
         left: -6px;
         right: 0;
         bottom: 0;
-        color: rgba(0, 0, 0, 0.38);
+        color: rgba(255, 255, 255, 0.38);
       }
     }
   }

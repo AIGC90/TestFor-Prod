@@ -16,7 +16,7 @@
   text-align: center;
   gap: 20px;
   padding: 40px;
-  background: white;
+  background: var(--vs-surface);
   border-radius: 8px;
 }
 
@@ -36,7 +36,7 @@
   font-weight: 500;
   line-height: 32px;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0;
 }
 

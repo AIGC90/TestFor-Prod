@@ -10,7 +10,7 @@
     .tb-entity-table-content {
       width: 100%;
       height: 100%;
-      background: #fff;
+      background: var(--vs-surface);
       overflow: hidden;
 
       &.tb-outlined-border {

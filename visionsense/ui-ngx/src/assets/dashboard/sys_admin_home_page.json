@@ -13,8 +13,8 @@
         "config": {
           "datasources": [],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -73,8 +73,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#ffffff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "0px",
           "settings": {
             "useMarkdownTextFunction": true,
@@ -114,15 +114,15 @@
         "config": {
           "datasources": [],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
             "markdownTextPattern": "<div style=\"height: 100%;\" class=\"flex flex-col\">\n    <div class=\"tb-card-header\">\n        <div class=\"tb-card-title\">\n            <div class=\"tb-home-widget-title\" translate>widgets.functions.title</div>\n        </div>\n        <a mat-stroked-button color=\"primary\" class=\"tb-switch-to-pe\"\n        href=\"https://thingsboard.io/pricing/?product=thingsboard-pe&solution=pe-pay-as-you-go\" target=\"_blank\">{{ 'widgets.functions.switch-to-pe' | translate }}</a>\n    </div>\n    <div class=\"tb-card-content flex-1\">\n        <div class=\"tb-card-column\">\n            <div class=\"feature\" translate>widgets.functions.alarms</div>\n            <div class=\"feature\" translate>widgets.functions.dashboards</div>\n            <div class=\"feature\" translate>widgets.functions.entities-and-relations</div>\n            <div class=\"feature\" translate>widgets.functions.profiles</div>\n            <div class=\"feature\" translate>widgets.functions.advanced-features</div>\n        </div>\n        <div class=\"tb-card-column\">\n            <div class=\"feature\" translate>widgets.functions.notification-center</div>\n            <div class=\"feature\" translate>widgets.functions.api-usage</div>\n            <div class=\"feature\" translate>widgets.functions.customers</div>\n            <div class=\"feature\" translate>widgets.functions.solution-templates</div>\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.customers-hierarchy</div>\n        </div>\n        <div class=\"tb-card-column\">\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.roles-and-permissions</div>\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.groups</div>\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.integrations</div>\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.scheduler</div>\n            <div matTooltip=\"{{ 'widgets.functions.pe-feature-tooltip' | translate }}\" matTooltipPosition=\"above\" class=\"feature pe\" translate>widgets.functions.white-labeling</div>\n        </div>\n    </div>\n</div>",
             "markdownTextFunction": "return '# Some title\\\\n - Entity name: ' + data[0]['entityName'];",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-header {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    margin-top: 4px;\n    overflow: auto;\n}\n\n.tb-card-column {\n    min-width: 0px;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n\n.feature {\n    position: relative;\n    cursor: default;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 28px;\n    letter-spacing: 0.2px;\n    color: rgba(0, 0, 0, 0.76);\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.feature:before {\n    content: \"check\";\n    font-family: 'Material Icons Round';\n    display: inline-block;\n    font-size: 20px;\n    line-height: 20px;\n    color: #198038;\n    font-weight: 600;\n    position: relative;\n    background: #F3F6FA;\n    border-radius: 4px;\n    width: 20px;\n    height: 20px;\n    padding: 2px;\n    vertical-align: sub;\n    margin-right: 8px;\n}\n\n.feature.pe:before {\n    content: \"close\";\n    background: #F4F4F4;\n    color: rgba(0, 0, 0, 0.12);\n}\n\n.feature.pe:after {\n    position: relative;\n    display: inline-block;\n    margin-left: 4px;\n    vertical-align: baseline;\n    top: -0.5em;\n    content: \"PE\";\n    color: #305680;\n    font-weight: 700;\n    font-size: 12px;\n    line-height: 12px;\n    letter-spacing: 0.0015em;\n}\n\n.feature+.feature {\n    margin-top: 4px;\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-switch-to-pe {\n        height: 24px;\n        font-size: 12px;\n        padding: 0 4px;\n    }\n    \n    .feature+.feature {\n        margin-top: 2px;\n    }\n    \n    .feature {\n        font-size: 11px;\n        line-height: 18px;\n    }\n\n    .feature:before {\n      font-size: 14px;\n      line-height: 14px;\n      width: 14px;\n      height: 14px;\n      margin-right: 4px;\n    }\n    .feature.pe:after {\n        margin-left: 2px;\n        top: -0.5em;\n        content: \"PE\";\n        font-size: 8px;\n        line-height: 8px;\n    }\n    \n}\n\n"
+            "markdownCss": ".tb-card-header {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    margin-top: 4px;\n    overflow: auto;\n}\n\n.tb-card-column {\n    min-width: 0px;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n\n.feature {\n    position: relative;\n    cursor: default;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 28px;\n    letter-spacing: 0.2px;\n    color: rgba(255, 255, 255, 0.76);\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.feature:before {\n    content: \"check\";\n    font-family: 'Material Icons Round';\n    display: inline-block;\n    font-size: 20px;\n    line-height: 20px;\n    color: #198038;\n    font-weight: 600;\n    position: relative;\n    background: #F3F6FA;\n    border-radius: 4px;\n    width: 20px;\n    height: 20px;\n    padding: 2px;\n    vertical-align: sub;\n    margin-right: 8px;\n}\n\n.feature.pe:before {\n    content: \"close\";\n    background: #F4F4F4;\n    color: rgba(255, 255, 255, 0.12);\n}\n\n.feature.pe:after {\n    position: relative;\n    display: inline-block;\n    margin-left: 4px;\n    vertical-align: baseline;\n    top: -0.5em;\n    content: \"PE\";\n    color: #305680;\n    font-weight: 700;\n    font-size: 12px;\n    line-height: 12px;\n    letter-spacing: 0.0015em;\n}\n\n.feature+.feature {\n    margin-top: 4px;\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-switch-to-pe {\n        height: 24px;\n        font-size: 12px;\n        padding: 0 4px;\n    }\n    \n    .feature+.feature {\n        margin-top: 2px;\n    }\n    \n    .feature {\n        font-size: 11px;\n        line-height: 18px;\n    }\n\n    .feature:before {\n      font-size: 14px;\n      line-height: 14px;\n      width: 14px;\n      height: 14px;\n      margin-right: 4px;\n    }\n    .feature.pe:after {\n        margin-left: 2px;\n        top: -0.5em;\n        content: \"PE\";\n        font-size: 8px;\n        line-height: 8px;\n    }\n    \n}\n\n"
           },
           "title": "Functions",
           "showTitleIcon": false,
@@ -153,8 +153,8 @@
         "config": {
           "datasources": [],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -190,8 +190,8 @@
         "config": {
           "datasources": [],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -227,8 +227,8 @@
         "config": {
           "datasources": [],
           "showTitle": false,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "columns": 3
@@ -303,14 +303,14 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
             "markdownTextPattern": "<div class=\"tb-card-content\">\n    <div class=\"tb-card-title\">\n        <div class=\"tb-home-widget-title\" translate>widgets.system-info.cpu</div>\n        <div matTooltip=\"${statusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${status}\"></div>\n    </div>\n    <div class=\"tb-value-container\" matTooltip=\"${cpuUsage:0} / 100 %\" matTooltipPosition=\"above\">\n        <span class=\"tb-count\">${cpuUsage:0}%</span>\n        <span class=\"tb-total\">| ${cpuCount:0} cores</span>\n    </div>\n</div>",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(0, 0, 0, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
+            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(255, 255, 255, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
           },
           "title": "CPU",
           "showTitleIcon": false,
@@ -402,14 +402,14 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextFunction": "const memoryUsage = data[0]['memoryUsage'];\nconst totalMemory = data[0]['totalMemory'];\nconst usedMemory = (totalMemory * (memoryUsage / 100)).toFixed(0);\n\n\nreturn '<div class=\"tb-card-content\">' +\n            '<div class=\"tb-card-title\">' +\n                '<div class=\"tb-home-widget-title\" translate>widgets.system-info.ram</div>' +\n                '<div matTooltip=\"${statusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${status}\"></div>' +\n            '</div>' +\n            '<div class=\"tb-value-container\" matTooltip=\"' + usedMemory +' / ${totalMemory:0} Gb\" matTooltipPosition=\"above\">' +\n                '<span class=\"tb-count\">${memoryUsage:0}%</span>' +\n                '<span class=\"tb-total\">| ${totalMemory:0} Gb</span>' +\n            '</div>' +\n        '</div>';",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(0, 0, 0, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
+            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(255, 255, 255, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
           },
           "title": "RAM",
           "showTitleIcon": false,
@@ -501,14 +501,14 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextFunction": "const discUsage = data[0]['discUsage'];\nconst totalDiscSpace = data[0]['totalDiscSpace'];\nconst usedDisc = (totalDiscSpace * (discUsage / 100)).toFixed(0);\n\n\nreturn '<div class=\"tb-card-content\">' +\n            '<div class=\"tb-card-title\">' +\n                '<div class=\"tb-home-widget-title\" translate>widgets.system-info.disk</div>' +\n                '<div matTooltip=\"${statusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${status}\"></div>' +\n            '</div>' +\n            '<div class=\"tb-value-container\" matTooltip=\"' + usedDisc +' / ${totalDiscSpace:0} Gb\" matTooltipPosition=\"above\">' +\n                '<span class=\"tb-count\">${discUsage:0}%</span>' +\n                '<span class=\"tb-total\">| ${totalDiscSpace:0} Gb</span>' +\n            '</div>' +\n        '</div>';",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(0, 0, 0, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
+            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 26px;\n    line-height: 36px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(255, 255, 255, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-status {\n        width: 18px;\n        height: 18px;\n    }\n    .tb-status:after {\n        font-size: 14px;\n    }\n    .tb-count {\n        font-size: 16px;\n        line-height: 24px;\n    }\n    .tb-total {\n        font-size: 11px;\n        line-height: 16px;\n    }\n}"
           },
           "title": "Disk",
           "showTitleIcon": false,
@@ -680,14 +680,14 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": true,
             "markdownTextFunction": "const memoryUsage = data[0]['memoryUsage'];\nconst totalMemory = data[0]['totalMemory'];\nconst usedMemory = (totalMemory * (memoryUsage / 100)).toFixed(0);\n\nconst discUsage = data[0]['discUsage'];\nconst totalDiscSpace = data[0]['totalDiscSpace'];\nconst usedDisc = (totalDiscSpace * (discUsage / 100)).toFixed(0);\n\n\nreturn '<div class=\"tb-card-content\">' +\n            '<div class=\"tb-card-section left\">' +\n                '<div class=\"tb-card-title\">' +\n                    '<div class=\"tb-home-widget-title\" translate>widgets.system-info.cpu</div>' +\n                    '<div matTooltip=\"${cpuStatusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${cpuStatus}\"></div>' +\n                '</div>' +\n                '<div class=\"tb-value-container\" matTooltip=\"${cpuUsage:0} / 100 %\" matTooltipPosition=\"above\">' +\n                    '<span class=\"tb-count\">${cpuUsage:0}%</span>' +\n                    '<span class=\"tb-total\">| ${cpuCount:0} cores</span>' +\n                '</div>' +\n            '</div>' +\n            '<div class=\"tb-card-section center\">' +\n                '<div class=\"tb-card-title\">' +\n                    '<div class=\"tb-home-widget-title\" translate>widgets.system-info.ram</div>' +\n                    '<div matTooltip=\"${memoryStatusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${memoryStatus}\"></div>' +\n                '</div>' +\n                '<div class=\"tb-value-container\" matTooltip=\"' + usedMemory +' / ${totalMemory:0} Gb\" matTooltipPosition=\"above\">' +\n                    '<span class=\"tb-count\">${memoryUsage:0}%</span>' +\n                    '<span class=\"tb-total\">| ${totalMemory:0} Gb</span>' +\n                '</div>' +\n            '</div>' +\n            '<div class=\"tb-card-section right\">' +\n                '<div class=\"tb-card-title\">' +\n                    '<div class=\"tb-home-widget-title\" translate>widgets.system-info.disk</div>' +\n                    '<div matTooltip=\"${discStatusTooltip}\" matTooltipPosition=\"above\" class=\"tb-status ${discStatus}\"></div>' +\n                '</div>' +\n                '<div class=\"tb-value-container\" matTooltip=\"' + usedDisc +' / ${totalDiscSpace:0} Gb\" matTooltipPosition=\"above\">' +\n                    '<span class=\"tb-count\">${discUsage:0}%</span>' +\n                    '<span class=\"tb-total\">| ${totalDiscSpace:0} Gb</span>' +\n                '</div>' +\n            '</div>' +\n        '</div>';",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: stretch;\n}\n\n.tb-card-section {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-section.left {\n    padding-right: 12px;\n    border-right: solid 1px rgba(0, 0, 0, 0.12);\n}\n\n.tb-card-section.center {\n    padding-left: 12px;\n    padding-right: 12px;\n}\n\n.tb-card-section.right {\n    padding-left: 12px;\n    border-left: solid 1px rgba(0, 0, 0, 0.12);\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 400;\n    font-size: 12px;\n    line-height: 16px;\n    color: rgba(0, 0, 0, 0.54);\n}\n"
+            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: stretch;\n}\n\n.tb-card-section {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: flex-start;\n}\n\n.tb-card-section.left {\n    padding-right: 12px;\n    border-right: solid 1px rgba(255, 255, 255, 0.12);\n}\n\n.tb-card-section.center {\n    padding-left: 12px;\n    padding-right: 12px;\n}\n\n.tb-card-section.right {\n    padding-left: 12px;\n    border-left: solid 1px rgba(255, 255, 255, 0.12);\n}\n\n.tb-card-title {\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n.tb-status {\n    width: 24px;\n    height: 24px;\n    position: relative;\n}\n\n.tb-status.status-ok {\n    background: #F3F6FA;\n    border-radius: 4px;\n}\n\n.tb-status:after {\n    position: absolute;\n    top: 2px;\n    left: 2px;\n    font-family: 'Material Icons Round';\n    font-size: 20px;\n    line-height: 1;\n}\n\n.tb-status.status-ok:after {\n    content: \"check\";\n    color: #198038;\n    font-weight: 600;\n}\n\n.tb-status.status-warn:after {\n    content: \"warning\";\n    color: #FAA405;\n}\n\n.tb-status.status-critical:after {\n    content: \"warning\";\n    color: #D12730;\n}\n\n.tb-value-container {\n    user-select: none;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n}\n\n.tb-total {\n    padding-left: 4px;\n    font-weight: 400;\n    font-size: 12px;\n    line-height: 16px;\n    color: rgba(255, 255, 255, 0.54);\n}\n"
           },
           "title": "System info mobile card",
           "showTitleIcon": false,
@@ -719,7 +719,7 @@
           "datasources": [],
           "showTitle": false,
           "backgroundColor": "rgba(0,0,0,0)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "0px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -781,8 +781,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -841,8 +841,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -901,8 +901,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -961,8 +961,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -1021,8 +1021,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -1081,8 +1081,8 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -1246,14 +1246,14 @@
             }
           ],
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useMarkdownTextFunction": false,
             "markdownTextPattern": "<div class=\"tb-card-content\">\n    <div class=\"tb-card-section left\">\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${tenantsCount:0}</div>\n            <a class=\"tb-entity-title tb-home-widget-link\" routerLink=\"/tenants\">{{ 'tenant.tenants' | translate }}</a>\n        </div>\n        <div class=\"tb-button-section\">\n            <a mat-flat-button color=\"primary\" routerLink=\"/tenants\" [queryParams]=\"{action: 'add'}\">{{ 'tenant.add' | translate }}</a>\n        </div>\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${tenantProfilesCount:0}</div>\n            <a class=\"tb-entity-title tb-home-widget-link\" routerLink=\"/tenantProfiles\">{{ 'tenant-profile.tenant-profiles' | translate }}</a>\n        </div>\n        <div class=\"tb-button-section\">\n            <a mat-stroked-button color=\"primary\" routerLink=\"/tenantProfiles\" [queryParams]=\"{action: 'add'}\">{{ 'tenant-profile.add-profile' | translate }}</a>\n        </div>\n    </div>\n    <div class=\"tb-card-section right\">\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${devicesCount:0}</div>\n            <div class=\"tb-entity-title\">{{ 'device.devices' | translate }}</div>\n        </div>\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${assetsCount:0}</div>\n            <div class=\"tb-entity-title\">{{ 'asset.assets' | translate }}</div>\n        </div>\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${usersCount:0}</div>\n            <div class=\"tb-entity-title\">{{ 'user.users' | translate }}</div>\n        </div>\n        <div class=\"tb-entity-section\">\n            <div class=\"tb-count\">${customersCount:0}</div>\n            <div class=\"tb-entity-title\">{{ 'customer.customers' | translate }}</div>\n        </div>\n    </div>\n</div>\n",
             "applyDefaultMarkdownStyle": false,
-            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: stretch;\n}\n\n.tb-card-section {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-evenly;\n    align-items: stretch;\n}\n\n.tb-card-section.left {\n    border-right: solid 1px rgba(0, 0, 0, 0.12);\n}\n\n.tb-card-section.right .tb-entity-section {\n    padding-left: 40px;\n}\n\n.tb-card-section.right .tb-count {\n    min-width: 24px;\n    text-align: right;\n}\n\n.tb-button-section {\n    display: flex;\n    padding-right: 40px;\n    flex-direction: row;\n    justify-content: flex-end;\n    align-items: center;\n}\n\n.tb-entity-section {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n    margin-right: 12px;\n}\n\n.tb-entity-title {\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(0, 0, 0, 0.54);\n}\n\n"
+            "markdownCss": ".tb-card-content {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: stretch;\n}\n\n.tb-card-section {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-evenly;\n    align-items: stretch;\n}\n\n.tb-card-section.left {\n    border-right: solid 1px rgba(255, 255, 255, 0.12);\n}\n\n.tb-card-section.right .tb-entity-section {\n    padding-left: 40px;\n}\n\n.tb-card-section.right .tb-count {\n    min-width: 24px;\n    text-align: right;\n}\n\n.tb-button-section {\n    display: flex;\n    padding-right: 40px;\n    flex-direction: row;\n    justify-content: flex-end;\n    align-items: center;\n}\n\n.tb-entity-section {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n.tb-count {\n    font-style: normal;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n    margin-right: 12px;\n}\n\n.tb-entity-title {\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    color: rgba(255, 255, 255, 0.54);\n}\n\n"
           },
           "title": "Entities info mobile card",
           "showTitleIcon": false,
@@ -1285,7 +1285,7 @@
           "datasources": [],
           "showTitle": false,
           "backgroundColor": "rgba(0,0,0,0)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "0px",
           "settings": {
             "useMarkdownTextFunction": false,
@@ -1431,7 +1431,7 @@
           },
           "showTitle": false,
           "backgroundColor": "rgba(0, 0, 0, 0)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "0px",
           "settings": {
             "yAxes": {
@@ -1583,7 +1583,7 @@
             },
             "background": {
               "type": "color",
-              "color": "#fff",
+              "color": "#1c172b",
               "overlay": {
                 "enabled": false,
                 "color": "rgba(255,255,255,0.72)",
@@ -1611,7 +1611,7 @@
             "style": "normal",
             "lineHeight": "24px"
           },
-          "titleColor": "rgba(0, 0, 0, 0.87)",
+          "titleColor": "rgba(255, 255, 255, 0.87)",
           "titleTooltip": "",
           "widgetStyle": {},
           "widgetCss": ".tb-widget-container > .tb-widget {\n    border: none !important;\n    border-radius: 0 !important;\n    box-shadow: none !important;\n}\n\n.tb-time-series-chart-panel div.tb-widget-title {\n    padding-top: 5px;\n    padding-left: 5px;\n}",
@@ -1632,7 +1632,7 @@
               "style": "normal",
               "lineHeight": "16px"
             },
-            "color": "rgba(0, 0, 0, 0.54)",
+            "color": "rgba(255, 255, 255, 0.54)",
             "displayTypePrefix": true
           },
           "margin": "0px",
@@ -1901,8 +1901,8 @@
             "timezone": null
           },
           "showTitle": false,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "8px",
           "settings": {
             "yAxes": {
@@ -2054,7 +2054,7 @@
             },
             "background": {
               "type": "color",
-              "color": "#fff",
+              "color": "#1c172b",
               "overlay": {
                 "enabled": false,
                 "color": "rgba(255,255,255,0.72)",
@@ -2082,7 +2082,7 @@
             "style": "normal",
             "lineHeight": "24px"
           },
-          "titleColor": "rgba(0, 0, 0, 0.87)",
+          "titleColor": "rgba(255, 255, 255, 0.87)",
           "titleTooltip": "",
           "widgetStyle": {},
           "widgetCss": ".tb-time-series-chart-panel div.tb-widget-title {\n    padding-top: 5px;\n    padding-left: 5px;\n}",
@@ -2103,7 +2103,7 @@
               "style": "normal",
               "lineHeight": "16px"
             },
-            "color": "rgba(0, 0, 0, 0.54)",
+            "color": "rgba(255, 255, 255, 0.54)",
             "displayTypePrefix": true
           },
           "margin": "0px",
@@ -2120,8 +2120,8 @@
         "sizeY": 6.5,
         "config": {
           "showTitle": false,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "columns": 3
@@ -2146,8 +2146,8 @@
         "sizeY": 3,
         "config": {
           "showTitle": true,
-          "backgroundColor": "rgb(255, 255, 255)",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "16px",
           "settings": {
             "useSystemSettings": true,
@@ -2159,7 +2159,7 @@
             },
             "background": {
               "type": "color",
-              "color": "#fff",
+              "color": "#1c172b",
               "overlay": {
                 "enabled": false,
                 "color": "rgba(255,255,255,0.72)",
@@ -2171,7 +2171,7 @@
           "dropShadow": false,
           "enableFullscreen": false,
           "widgetStyle": {},
-          "widgetCss": " .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n    padding: 0;\n}\n\n .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n    padding-bottom: 8px;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n    letter-spacing: 0.1px;\n    color: rgba(0, 0, 0, 0.76);\n}\n\n.tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel {\n    padding: 0;\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n        padding-bottom: 0;\n        font-weight: 500;\n        font-size: 14px;\n        line-height: 20px;\n        letter-spacing: 0.25px;\n  }\n}\n\n@media screen and (min-width: 960px) and (max-width: 1190px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel {\n        gap: 0;\n    }\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        min-width: 150px;\n    }\n}\n\n@media screen and (max-width: 960px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        max-width: 110px;\n    }\n    \n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-badges {\n        max-width: 140px;\n    }\n}\n\n@media screen and (min-width: 1819px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        max-width: 125px;\n    }\n    \n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-badges {\n        max-width: 160px;\n    }\n}\n\n@media screen and (min-width: 960px) and (max-height: 960px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode-label {\n        display: none;\n    }\n}",
+          "widgetCss": " .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n    padding: 0;\n}\n\n .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n    padding-bottom: 8px;\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 24px;\n    letter-spacing: 0.1px;\n    color: rgba(255, 255, 255, 0.76);\n}\n\n.tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel {\n    padding: 0;\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content .tb-widget-title > .title-row > .title {\n        padding-bottom: 0;\n        font-weight: 500;\n        font-size: 14px;\n        line-height: 20px;\n        letter-spacing: 0.25px;\n  }\n}\n\n@media screen and (min-width: 960px) and (max-width: 1190px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel {\n        gap: 0;\n    }\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        min-width: 150px;\n    }\n}\n\n@media screen and (max-width: 960px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        max-width: 110px;\n    }\n    \n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-badges {\n        max-width: 140px;\n    }\n}\n\n@media screen and (min-width: 1819px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode {\n        max-width: 125px;\n    }\n    \n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-badges {\n        max-width: 160px;\n    }\n}\n\n@media screen and (min-width: 960px) and (max-height: 960px) {\n    .tb-widget-container > .tb-widget > .tb-widget-content > .tb-widget .tb-mobile-app-qrcode-panel .tb-qrcode-label {\n        display: none;\n    }\n}",
           "showTitleIcon": false,
           "titleTooltip": "",
           "titleStyle": null,
@@ -2189,8 +2189,8 @@
         "sizeY": 3.5,
         "config": {
           "showTitle": false,
-          "backgroundColor": "#fff",
-          "color": "rgba(0, 0, 0, 0.87)",
+          "backgroundColor": "#1c172b",
+          "color": "rgba(255, 255, 255, 0.87)",
           "padding": "0px",
           "settings": {
             "useMarkdownTextFunction": true,
@@ -2295,7 +2295,7 @@
               }
             },
             "gridSettings": {
-              "backgroundColor": "#eeeeee",
+              "backgroundColor": "#110d19",
               "columns": 120,
               "margin": 12,
               "backgroundSizeMode": "100%",
@@ -2323,7 +2323,7 @@
               }
             },
             "gridSettings": {
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#1c172b",
               "columns": 24,
               "margin": 0,
               "backgroundSizeMode": "100%",
@@ -2548,7 +2548,7 @@
               }
             },
             "gridSettings": {
-              "backgroundColor": "#eeeeee",
+              "backgroundColor": "#110d19",
               "columns": 120,
               "margin": 12,
               "outerMargin": false,
@@ -2647,13 +2647,13 @@
       "showDashboardTimewindow": true,
       "showDashboardExport": true,
       "toolbarAlwaysOpen": true,
-      "titleColor": "rgba(0,0,0,0.870588)",
+      "titleColor": "rgba(255, 255, 255, 0.870588)",
       "showDashboardLogo": false,
       "dashboardLogoUrl": null,
       "hideToolbar": true,
       "showFilters": true,
       "showUpdateDashboardImage": true,
-      "dashboardCss": ".tb-widget-container > .tb-widget {\n    border: 1px solid rgba(0, 0, 0, 0.05);\n    box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.04);\n    border-radius: 12px;\n}\n\n.tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n    padding: 16px !important;\n}\n\n.tb-card-title {\n    display: grid;\n}\n\n.tb-home-widget-title {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.25px;\n    color: rgba(0, 0, 0, 0.54);\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.tb-home-widget-link {\n    position: relative;\n    border-bottom: none;\n}\n\n.tb-home-widget-link:hover {\n    border-bottom: none;\n}\n\n.tb-home-widget-link:focus {\n    border-bottom: none;\n}\n\n.tb-home-widget-link::after {\n    content: 'arrow_forward';\n    display: inline-block;\n    transform: rotate(315deg);\n    font-family: 'Material Icons';\n    font-weight: normal;\n    font-style: normal;\n    font-size: 18px;\n    color: rgba(0, 0, 0, 0.12);\n    vertical-align: bottom;\n    margin-left: 6px;    \n}\n\n.tb-home-widget-link:hover::after {\n    color: inherit;\n}\n\n.tb-home-widget-info-icon {\n    color: rgba(0, 0, 0, 0.12);\n    font-size: 16px;\n    width: 16px;\n    height: 16px;\n    line-height: 15px;\n    vertical-align: middle;\n}\n\n.tb-widget-container > .tb-widget .tb-timewindow {\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.25px;\n    color: rgba(0, 0, 0, 0.54);\n    padding: 0;\n}\n\n.tb-widget-container > .tb-widget .tb-legend-keys .tb-legend-label {\n    cursor: pointer;\n    user-select: none;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.2px;\n    color: rgba(0, 0, 0, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1279px) {\n    .tb-widget-container > .tb-widget {\n        border-radius: 4px;\n    }\n    .tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n        padding: 2px !important;\n    }\n    .tb-hide-md {\n        display: none;\n    }\n}\n\n@media screen and (min-width: 1280px) and (max-width: 1819px) {\n    .tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n        padding: 8px !important;\n    }\n    .tb-hide-lg {\n        display: none;\n    }\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-hide-md-lg {\n        display: none;\n    }\n\n    .tb-home-widget-title {\n        font-size: 12px;\n        line-height: 16px;\n    }\n    \n    .tb-widget-container > .tb-widget .tb-widget-title {\n        padding: 0;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow {\n        font-size: 12px;\n        line-height: 16px;\n        min-height: 24px;\n        padding: 0;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow .mat-mdc-icon-button.tb-mat-32 {\n        width: 24px;\n        height: 24px;\n        line-height: 24px;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow .mat-mdc-icon-button.tb-mat-32 .mat-icon {\n        width: 18px;\n        height: 18px;\n        font-size: 18px;\n    }\n    \n    .tb-widget-container > .tb-widget tb-legend {\n        padding-bottom: 0 !important;\n    }\n    \n    .tb-widget-container > .tb-widget .tb-legend-keys .tb-legend-label {\n        font-size: 11px;\n        line-height: 16px;\n        letter-spacing: 0.25px;\n    }\n}\n\n@media screen and (max-width: 959px), screen and (min-width: 1820px) {\n    .tb-hide-not-md-lg {\n        display: none;\n    }\n}\n"
+      "dashboardCss": ".tb-widget-container > .tb-widget {\n    border: 1px solid rgba(255, 255, 255, 0.05);\n    box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.04);\n    border-radius: 12px;\n}\n\n.tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n    padding: 16px !important;\n}\n\n.tb-card-title {\n    display: grid;\n}\n\n.tb-home-widget-title {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.25px;\n    color: rgba(255, 255, 255, 0.54);\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.tb-home-widget-link {\n    position: relative;\n    border-bottom: none;\n}\n\n.tb-home-widget-link:hover {\n    border-bottom: none;\n}\n\n.tb-home-widget-link:focus {\n    border-bottom: none;\n}\n\n.tb-home-widget-link::after {\n    content: 'arrow_forward';\n    display: inline-block;\n    transform: rotate(315deg);\n    font-family: 'Material Icons';\n    font-weight: normal;\n    font-style: normal;\n    font-size: 18px;\n    color: rgba(255, 255, 255, 0.12);\n    vertical-align: bottom;\n    margin-left: 6px;    \n}\n\n.tb-home-widget-link:hover::after {\n    color: inherit;\n}\n\n.tb-home-widget-info-icon {\n    color: rgba(255, 255, 255, 0.12);\n    font-size: 16px;\n    width: 16px;\n    height: 16px;\n    line-height: 15px;\n    vertical-align: middle;\n}\n\n.tb-widget-container > .tb-widget .tb-timewindow {\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.25px;\n    color: rgba(255, 255, 255, 0.54);\n    padding: 0;\n}\n\n.tb-widget-container > .tb-widget .tb-legend-keys .tb-legend-label {\n    cursor: pointer;\n    user-select: none;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 20px;\n    letter-spacing: 0.2px;\n    color: rgba(255, 255, 255, 0.54);\n}\n\n@media screen and (min-width: 960px) and (max-width: 1279px) {\n    .tb-widget-container > .tb-widget {\n        border-radius: 4px;\n    }\n    .tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n        padding: 2px !important;\n    }\n    .tb-hide-md {\n        display: none;\n    }\n}\n\n@media screen and (min-width: 1280px) and (max-width: 1819px) {\n    .tb-widget-container > .tb-widget:not([style*=\"padding: 0\"]) {\n        padding: 8px !important;\n    }\n    .tb-hide-lg {\n        display: none;\n    }\n}\n\n@media screen and (min-width: 960px) and (max-width: 1819px) {\n    .tb-hide-md-lg {\n        display: none;\n    }\n\n    .tb-home-widget-title {\n        font-size: 12px;\n        line-height: 16px;\n    }\n    \n    .tb-widget-container > .tb-widget .tb-widget-title {\n        padding: 0;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow {\n        font-size: 12px;\n        line-height: 16px;\n        min-height: 24px;\n        padding: 0;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow .mat-mdc-icon-button.tb-mat-32 {\n        width: 24px;\n        height: 24px;\n        line-height: 24px;\n    }\n\n    .tb-widget-container > .tb-widget .tb-timewindow .mat-mdc-icon-button.tb-mat-32 .mat-icon {\n        width: 18px;\n        height: 18px;\n        font-size: 18px;\n    }\n    \n    .tb-widget-container > .tb-widget tb-legend {\n        padding-bottom: 0 !important;\n    }\n    \n    .tb-widget-container > .tb-widget .tb-legend-keys .tb-legend-label {\n        font-size: 11px;\n        line-height: 16px;\n        letter-spacing: 0.25px;\n    }\n}\n\n@media screen and (max-width: 959px), screen and (min-width: 1820px) {\n    .tb-hide-not-md-lg {\n        display: none;\n    }\n}\n"
     }
   },
   "name": "System Administrator Home Page"

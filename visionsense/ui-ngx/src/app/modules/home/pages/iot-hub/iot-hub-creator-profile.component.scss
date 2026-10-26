@@ -9,7 +9,7 @@
 }
 
 .tb-creator-page {
-  background: white;
+  background: var(--vs-surface);
   border-radius: 8px;
   padding-left: 123px;
   overflow: hidden;
@@ -28,13 +28,13 @@
   h3 {
     font-size: 18px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     margin: 16px 0 8px;
   }
 
   p {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
     margin: 0 0 24px;
   }
 }
@@ -72,7 +72,7 @@
     font-size: 48px;
     width: 48px;
     height: 48px;
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.3);
   }
 }
 
@@ -81,7 +81,7 @@
   font-weight: 500;
   line-height: 36px;
   letter-spacing: 0.07px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0;
 }
 
@@ -112,7 +112,7 @@
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   margin: 0;
   max-width: 800px;
 }
@@ -127,7 +127,7 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.54);
   text-decoration: none;
   border-bottom: none;
   white-space: nowrap;
@@ -143,7 +143,7 @@
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.54);
   }
 
   &.tb-creator-link-primary {
@@ -205,7 +205,7 @@ a.tb-creator-link:hover span {
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.1px;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
   margin: 0 0 24px;
 }
 

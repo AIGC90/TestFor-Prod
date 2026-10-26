@@ -62,7 +62,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
       z-index: 1;
       position: sticky;
       top: -24px;
-      background-color: white;
+      background-color: var(--vs-surface);
 
       &.activity-only {
         top: 0;
@@ -89,13 +89,13 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
         }
 
         .header-title {
-          color: rgba(0, 0, 0, 0.76);
+          color: rgba(255, 255, 255, 0.76);
           letter-spacing: 0.25px;
           font-weight: 500;
         }
 
         .mat-icon {
-          color: rgba(0, 0, 0, 0.38);
+          color: rgba(255, 255, 255, 0.38);
         }
       }
     }
@@ -124,7 +124,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
 
       .mat-icon {
         align-self: start;
-        color: rgba(0, 0, 0, 0.38);
+        color: rgba(255, 255, 255, 0.38);
       }
     }
 
@@ -141,7 +141,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
 
     .user-name {
       font-size: 16px;
-      color: rgba(0, 0, 0, 0.76);
+      color: rgba(255, 255, 255, 0.76);
       font-weight: 500;
       letter-spacing: 0.25px;
     }
@@ -149,7 +149,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
     .time {
       font-size: 14px;
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.38);
+      color: rgba(255, 255, 255, 0.38);
       letter-spacing: 0.2px;
       border-radius: 16px;
       padding: 0 3px;
@@ -169,7 +169,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
       font-weight: 500;
       font-size: 14px;
       letter-spacing: 0.25px;
-      color: rgba(0, 0, 0, 0.38);
+      color: rgba(255, 255, 255, 0.38);
     }
 
     .text {
@@ -177,13 +177,13 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
       word-break: break-word;
       font-size: 16px;
       letter-spacing: 0.15px;
-      color: rgba(0, 0, 0, 0.54);
+      color: rgba(255, 255, 255, 0.54);
     }
 
     .action-buttons {
       visibility: hidden;
       .mat-icon {
-        color: rgba(0, 0, 0, 0.38);
+        color: rgba(255, 255, 255, 0.38);
       }
     }
 
@@ -202,7 +202,7 @@ $border: 1px solid mat.m2-get-color-from-palette($tb-primary);
     .mat-form-field {
       font-size: 16px;
       letter-spacing: 0.15px;
-      color: rgba(0, 0, 0, 0.76);
+      color: rgba(255, 255, 255, 0.76);
     }
 
     textarea {
