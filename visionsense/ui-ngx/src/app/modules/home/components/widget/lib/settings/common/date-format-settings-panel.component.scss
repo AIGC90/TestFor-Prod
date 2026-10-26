@@ -1,0 +1,55 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../../../scss/constants';
+
+.tb-date-format-settings-panel {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media #{$mat-xs} {
+    width: 90vw;
+  }
+  .tb-date-format-settings-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .tb-form-row {
+    .fixed-title-width {
+      min-width: 120px;
+    }
+    &.date-format-preview {
+      align-items: flex-start;
+      .preview-text {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.2px;
+        color: rgba(0, 0, 0, 0.38);
+      }
+    }
+    .mat-mdc-form-field.tb-date-format-input {
+      .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        .mat-mdc-form-field-flex {
+          .mat-mdc-form-field-icon-suffix {
+            display: flex;
+            align-items: center;
+            line-height: normal;
+          }
+        }
+      }
+    }
+  }
+  .tb-date-format-settings-panel-buttons {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}

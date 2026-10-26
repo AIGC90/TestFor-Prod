@@ -1,0 +1,15 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-power-button-panel" [style.padding]="padding" [style]="backgroundStyle$ | async">
+  <div class="tb-power-button-overlay" [style]="overlayStyle"></div>
+  <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  <div class="tb-power-button-content">
+    <div #powerButtonShape class="tb-power-button-shape" [class.tb-power-button-pointer]="!disabled && (loading$ | async) === false">
+    </div>
+  </div>
+  <mat-progress-bar class="tb-action-widget-progress" style="height: 4px;" color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+</div>

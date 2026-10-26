@@ -1,0 +1,42 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.tb-font-settings-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .tb-font-settings-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .tb-font-settings-auto {
+    padding: 8px 12px;
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .tb-form-row {
+    .fixed-title-width {
+      min-width: 120px;
+    }
+    &.font-preview {
+      align-items: flex-start;
+      .preview-text {
+        max-height: 300px;
+        max-width: 400px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .tb-font-settings-panel-buttons {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}

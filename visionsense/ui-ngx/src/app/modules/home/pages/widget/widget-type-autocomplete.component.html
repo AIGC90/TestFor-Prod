@@ -1,0 +1,55 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [formGroup]="selectWidgetTypeFormGroup" class="mat-block" [floatLabel]="floatLabel"
+                [appearance]="appearance" [subscriptSizing]="subscriptSizing">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <input matInput type="text"
+         #widgetTypeInput
+         placeholder="{{ placeholder }}"
+         formControlName="widgetType"
+         (focusin)="onFocus()"
+         [required]="required"
+         [matAutocomplete]="widgetTypeAutocomplete">
+  <button *ngIf="selectWidgetTypeFormGroup.get('widgetType').value && !disabled"
+          type="button"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="clear()">
+    <mat-icon class="material-icons">close</mat-icon>
+  </button>
+  <mat-autocomplete
+    class="tb-autocomplete tb-widget-type-autocomplete"
+    #widgetTypeAutocomplete
+    [displayWith]="displayWidgetTypeFn">
+    <mat-option *ngFor="let widgetType of filteredWidgetTypes | async" [value]="widgetType">
+      <div class="tb-widget-type-option-container">
+        <img class="tb-widget-type-option-image-preview" [src]="widgetType.image | image: {preview: true, emptyUrl: '/assets/widget-preview-empty.svg'} | async" alt="{{ widgetType.name }}">
+        <div class="tb-widget-type-option-details">
+          <div class="tb-widget-type-option-text" [innerHTML]="widgetType.name | highlight:searchText:true"></div>
+          <div *ngIf="widgetType.deprecated" class="tb-widget-type-option-deprecated">{{ 'widget.deprecated' | translate }}</div>
+        </div>
+      </div>
+    </mat-option>
+    <mat-option *ngIf="!(filteredWidgetTypes | async)?.length" [value]="null">
+      <div (click)="$event.stopPropagation()">
+        <div *ngIf="!textIsNotEmpty(searchText); else searchNotEmpty">
+          <span>{{ 'widget.no-widgets-text' | translate }}</span>
+        </div>
+        <ng-template #searchNotEmpty>
+          <span>
+          {{ translate.get('widget.no-widgets-matching', {entity: searchText}) | async }}
+          </span>
+        </ng-template>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error>
+    <ng-content select="[tb-error]"></ng-content>
+  </mat-error>
+  <mat-hint>
+    <ng-content select="[tb-hint]"></ng-content>
+  </mat-hint>
+</mat-form-field>

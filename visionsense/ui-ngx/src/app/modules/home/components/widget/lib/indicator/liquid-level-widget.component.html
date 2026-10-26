@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-liquid-level-panel" [style.padding]="padding" [style]="backgroundStyle$ | async"
+     [class.tb-liquid-level-pointer]="hasCardClickAction" (click)="cardClick($event)">
+  <div class="tb-liquid-level-overlay" [style]="overlayStyle"></div>
+  <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  <div #liquidLevelContent class="tb-liquid-level-content"></div>
+  <div *ngIf="errorsMsg.length" class="tb-liquid-level-error">
+    <div class="tb-liquid-level-error-container">
+      <div *ngFor="let error of errorsMsg">
+        {{ error }}
+      </div>
+    </div>
+  </div>
+</div>

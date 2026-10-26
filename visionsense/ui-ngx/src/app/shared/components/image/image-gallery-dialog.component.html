@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-image-gallery-dialog">
+  <button class="tb-image-gallery-close tb-mat-20"
+          mat-icon-button
+          (click)="cancel()"
+          type="button">
+    <mat-icon>close</mat-icon>
+  </button>
+  <tb-image-gallery
+    pageMode="false"
+    [imageSubType]="data.imageSubType"
+    dialogMode
+    mode="grid"
+    selectionMode
+    (imageSelected)="imageSelected($event)">
+  </tb-image-gallery>
+</div>

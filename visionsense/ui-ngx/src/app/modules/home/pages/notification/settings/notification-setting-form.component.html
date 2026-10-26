@@ -1,0 +1,30 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<form [formGroup]="notificationSettingsFormGroup" class="flex flex-col">
+  <div class="flex flex-row" style="height: 48px;">
+    <div class="flex max-w-50% flex-full items-center justify-start">
+      <mat-checkbox color="primary"
+                    (click)="$event.stopPropagation()"
+                    (change)="changeInstanceTypeCheckBox($event.checked)"
+                    [checked]="getChecked()"
+                    [indeterminate]="getIndeterminate()">
+        <span class="notification-type"
+              [class.notification-type-disabled]="!notificationSettingsFormGroup.get('enabled').value">
+          {{notificationTemplateTypeTranslateMap.get(notificationSettingsFormGroup.get('name').value)?.name | translate}}
+        </span>
+      </mat-checkbox>
+    </div>
+    <div class="flex flex-1 flex-row" *ngFor="let deliveryMethod of deliveryMethods">
+      <div class="flex flex-1 items-center justify-start">
+        <mat-checkbox color="primary"
+                      [checked]="getChecked(deliveryMethod)"
+                      (click)="toggleDeliviryMethod(deliveryMethod)"
+        ></mat-checkbox>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section class="tb-widget-settings flex flex-col" [formGroup]="rpcButtonStyleFormGroup">
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.rpc.button-style</legend>
+    <mat-slide-toggle formControlName="isRaised" class="slide-block">
+      {{ 'widgets.rpc.button-raised' | translate }}
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="isPrimary" class="slide-block">
+      {{ 'widgets.rpc.button-primary' | translate }}
+    </mat-slide-toggle>
+    <section class="flex flex-row xs:flex-col gt-xs:gap-2">
+      <tb-color-input class="flex-1"
+                      formControlName="textColor"
+                      icon="format_color_fill"
+                      label="{{ 'widgets.rpc.button-text-color' | translate }}" openOnInput colorClearButton>
+      </tb-color-input>
+      <tb-color-input class="flex-1"
+                      formControlName="bgColor"
+                      icon="format_color_fill"
+                      label="{{ 'widgets.rpc.button-background-color' | translate }}" openOnInput colorClearButton>
+      </tb-color-input>
+    </section>
+  </fieldset>
+</section>

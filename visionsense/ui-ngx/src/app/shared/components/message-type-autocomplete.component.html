@@ -1,0 +1,32 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [formGroup]="messageTypeFormGroup" class="mat-block">
+  <mat-label>{{ 'rulenode.message-type' | translate }}</mat-label>
+  <input matInput type="text" placeholder="{{ 'rulenode.select-message-type' | translate }}"
+         #messageTypeInput
+         formControlName="messageType"
+         (focusin)="onFocus()"
+         [required]="required"
+         [matAutocomplete]="messageTypeAutocomplete">
+  <button *ngIf="messageTypeFormGroup.get('messageType').value && !disabled"
+          type="button"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="clear()">
+    <mat-icon class="material-icons">close</mat-icon>
+  </button>
+  <mat-autocomplete
+    class="tb-autocomplete"
+    #messageTypeAutocomplete="matAutocomplete"
+    [displayWith]="displayMessageTypeFn">
+    <mat-option *ngFor="let messageType of filteredMessageTypes | async" [value]="messageType">
+      <span [innerHTML]="displayMessageTypeFn(messageType) | highlight:searchText"></span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="messageTypeFormGroup.get('messageType').hasError('required')">
+    {{ 'rulenode.message-type-required' | translate }}
+  </mat-error>
+</mat-form-field>

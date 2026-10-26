@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div #statusWidgetPanel class="tb-status-widget-panel" [style]="backgroundStyle$ | async">
+  <div class="tb-status-widget-overlay" [style]="overlayStyle" [style.inset]="overlayInset"></div>
+  <div class="tb-status-widget-title-panel">
+    <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  </div>
+  <div #statusWidgetContent class="tb-status-widget-content" [class]="layout" [style.padding]="padding">
+    <div class="tb-status-widget-icon-container">
+      <tb-icon [style]="iconStyle">{{ icon }}</tb-icon>
+    </div>
+    <div class="tb-status-widget-labels-container">
+      <div *ngIf="showLabel" class="tb-status-widget-label" [style]="labelStyle">{{ label$ | async }}</div>
+      <div *ngIf="showStatus" class="tb-status-widget-status" [style]="statusStyle">{{ status$ | async }}</div>
+    </div>
+  </div>
+  <mat-progress-bar class="tb-action-widget-progress" style="height: 4px;" color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+</div>

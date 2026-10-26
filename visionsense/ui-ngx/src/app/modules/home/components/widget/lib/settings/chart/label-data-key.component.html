@@ -1,0 +1,52 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-expansion-panel class="label-data-key flex=1" [formGroup]="labelDataKeyFormGroup" [(expanded)]="expanded">
+  <mat-expansion-panel-header>
+    <div class="flex flex-1 flex-row items-center justify-start">
+      <mat-panel-title>
+        <div class="flex flex-1 flex-row items-center justify-start">
+          {{ labelDataKeyText() }}
+        </div>
+      </mat-panel-title>
+      <span class="flex-1"></span>
+      <button *ngIf="!disabled" mat-icon-button style="min-width: 40px;"
+              type="button"
+              (click)="removeLabelDataKey.emit()"
+              matTooltip="{{ 'action.remove' | translate }}"
+              matTooltipPosition="above">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <div class="flex flex-col gap-2">
+      <mat-divider></mat-divider>
+      <section class="tb-widget-settings flex flex-col">
+        <section class="flex flex-col gt-xs:flex-row gt-xs:gap-2">
+          <mat-form-field class="mat-block flex-1">
+            <mat-label translate>widgets.chart.key-name</mat-label>
+            <input required matInput formControlName="name">
+            <mat-error *ngIf="labelDataKeyFormGroup.get('name').hasError('required')">
+              {{ 'widgets.chart.key-name-required' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="mat-block flex-1">
+            <mat-label translate>widgets.chart.key-type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option [value]="'attribute'">
+                {{ 'widgets.chart.key-type-attribute' | translate }}
+              </mat-option>
+              <mat-option [value]="'timeseries'">
+                {{ 'widgets.chart.key-type-timeseries' | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+      </section>
+    </div>
+  </ng-template>
+</mat-expansion-panel>

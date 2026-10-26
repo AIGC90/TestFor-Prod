@@ -1,0 +1,13 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-form-panel" [formGroup]="gatewayServiceRPCSettingForm">
+  <div class="tb-form-row column-xs">
+    <mat-slide-toggle class="mat-slide margin" formControlName="isConnector">
+      {{ "widgets.gateway.show-connector" | translate }}
+    </mat-slide-toggle>
+  </div>
+</div>

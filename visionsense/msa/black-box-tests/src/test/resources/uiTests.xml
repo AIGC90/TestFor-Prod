@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="UI smoke tests">
+    <listeners>
+        <listener class-name="org.thingsboard.server.msa.ui.listeners.RetryTestListener"/>
+    </listeners>
+    <test name="Smoke rule chains tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.rulechainssmoke"/>
+        </packages>
+    </test>
+    <test name="Smoke customers tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.customerSmoke"/>
+        </packages>
+    </test>
+    <test name="Smoke device profile tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.deviceProfileSmoke"/>
+        </packages>
+    </test>
+    <test name="Smoke asset profile tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.assetProfileSmoke"/>
+        </packages>
+    </test>
+    <test name="Smoke devices tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.devicessmoke"/>
+        </packages>
+    </test>
+    <test name="Alarm assignee tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.alarmassignee.*"/>
+        </packages>
+    </test>
+</suite>

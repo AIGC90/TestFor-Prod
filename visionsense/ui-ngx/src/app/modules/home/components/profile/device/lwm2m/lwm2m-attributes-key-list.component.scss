@@ -1,0 +1,27 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .name-value-map {
+    span.no-data-found {
+      position: relative;
+      display: flex;
+      height: 40px;
+
+      &.disabled {
+        color: rgba(0, 0, 0, .38);
+      }
+    }
+
+    .map-list{
+      height: 80px;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .button-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}

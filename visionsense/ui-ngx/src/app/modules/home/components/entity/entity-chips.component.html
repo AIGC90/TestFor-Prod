@@ -1,0 +1,10 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<a *ngFor="let subEntity of subEntities" class="tb-entity-chip"
+   routerLink="{{entityDetailsPrefixUrl}}/{{subEntity.id.id}}" (click)="$event.stopPropagation();">
+  {{ subEntity.name | customTranslate }}
+</a>

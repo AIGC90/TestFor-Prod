@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Profiles Smoke Tests">
+    <listeners>
+        <listener class-name="org.thingsboard.server.msa.ui.listeners.RetryTestListener"/>
+    </listeners>
+    <test name="Profiles ui smoke tests">
+        <groups>
+            <run>
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="org.thingsboard.server.msa.ui.tests.deviceProfileSmoke"/>
+            <package name="org.thingsboard.server.msa.ui.tests.assetProfileSmoke"/>
+        </packages>
+    </test>
+</suite>

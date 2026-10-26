@@ -1,0 +1,33 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.tb-scada-symbol-metadata-tags {
+  flex: 1;
+  margin: 12px;
+  .tb-form-table-header-cell {
+    &.tb-tag-header {
+      flex: 1 1 70%;
+    }
+    &.tb-state-render-function-header {
+      flex: 1 1 15%;
+    }
+    &.tb-on-click-action-header {
+      flex: 1 1 15%;
+    }
+    &.tb-state-render-function-header, &.tb-on-click-action-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  .tb-form-table {
+    overflow: hidden;
+  }
+  .tb-form-table-body {
+    overflow: auto;
+    tb-scada-symbol-metadata-tag  {
+      overflow: hidden;
+    }
+    .mat-divider {
+      margin-top: 8px;
+    }
+  }
+}

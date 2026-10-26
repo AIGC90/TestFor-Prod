@@ -1,0 +1,23 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-toggle-button-panel" [class.no-pointer-events]="ctx.isEdit" [style.padding]="padding" [style]="backgroundStyle$ | async">
+  <div class="tb-toggle-button-overlay" [style]="overlayStyle"></div>
+  <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  <div class="tb-toggle-button-container"
+       [class.auto-scale]="autoScale"
+       [class.horizontal-fill]="horizontalFill"
+       [class.vertical-fill]="verticalFill">
+    <tb-widget-button
+        [appearance]="appearance"
+        [autoScale]="autoScale"
+        [disabled]="disabled || (loading$ | async)"
+        [ctx]="ctx"
+        (clicked)="onClick($event)">
+    </tb-widget-button>
+  </div>
+  <mat-progress-bar class="tb-action-widget-progress" style="height: 4px;" color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+</div>

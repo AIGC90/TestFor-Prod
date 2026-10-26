@@ -1,0 +1,48 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<ng-container [formGroup]="commandButtonWidgetConfigForm">
+  <tb-target-device formControlName="targetDevice"></tb-target-device>
+  <div class="tb-form-panel">
+    <div class="tb-form-panel-title" translate>widgets.command-button.behavior</div>
+    <div class="tb-form-row space-between">
+      <div class="fixed-title-width" tb-hint-tooltip-icon="{{'widgets.command-button.on-click-hint' | translate}}" translate>widgets.command-button.on-click</div>
+      <tb-set-value-action-settings class="flex-1"
+                                    panelTitle="{{ 'widgets.command-button.on-click' | translate }}"
+                                    [aliasController]="aliasController"
+                                    [targetDevice]="targetDevice"
+                                    [widgetType]="widgetType"
+                                    formControlName="onClickState"></tb-set-value-action-settings>
+    </div>
+    <div class="tb-form-row">
+      <div class="fixed-title-width" tb-hint-tooltip-icon="{{'widgets.button-state.disabled-state-hint' | translate}}" translate>widgets.button-state.disabled-state</div>
+      <tb-get-value-action-settings class="flex-1"
+                                    panelTitle="{{ 'widgets.button-state.disabled-state' | translate }}"
+                                    [valueType]="valueType.BOOLEAN"
+                                    stateLabel="{{ 'widgets.button-state.disabled' | translate }}"
+                                    [aliasController]="aliasController"
+                                    [targetDevice]="targetDevice"
+                                    [widgetType]="widgetType"
+                                    formControlName="disabledState"></tb-get-value-action-settings>
+    </div>
+  </div>
+  <div class="tb-form-panel">
+    <div class="tb-form-panel-title" translate>widget-config.appearance</div>
+    <tb-widget-button-appearance
+      [borderRadius]="commandButtonWidgetConfigForm.get('borderRadius').value"
+      formControlName="appearance">
+    </tb-widget-button-appearance>
+  </div>
+  <div class="tb-form-panel">
+    <div class="tb-form-panel-title" translate>widget-config.card-appearance</div>
+    <div class="tb-form-row space-between">
+      <div>{{ 'widget-config.card-border-radius' | translate }}</div>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input matInput formControlName="borderRadius" placeholder="{{ 'widget-config.set' | translate }}">
+      </mat-form-field>
+    </div>
+  </div>
+</ng-container>

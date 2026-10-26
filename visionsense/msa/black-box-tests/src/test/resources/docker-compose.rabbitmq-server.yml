@@ -1,0 +1,56 @@
+#
+# SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+
+services:
+  rabbitmq:
+    restart: always
+    image: rabbitmq:3
+    ports:
+      - '5672:5672'
+    environment:
+      RABBITMQ_DEFAULT_USER: YOUR_USERNAME
+      RABBITMQ_DEFAULT_PASS: YOUR_PASSWORD
+  tb-js-executor:
+    depends_on:
+      - rabbitmq
+  tb-core1:
+    depends_on:
+      - rabbitmq
+  tb-core2:
+    depends_on:
+      - rabbitmq
+  tb-rule-engine1:
+    depends_on:
+      - rabbitmq
+  tb-rule-engine2:
+    depends_on:
+      - rabbitmq
+  tb-mqtt-transport1:
+    depends_on:
+      - rabbitmq
+  tb-mqtt-transport2:
+    depends_on:
+      - rabbitmq
+  tb-http-transport1:
+    depends_on:
+      - rabbitmq
+  tb-http-transport2:
+    depends_on:
+      - rabbitmq
+  tb-coap-transport:
+    depends_on:
+      - rabbitmq
+  tb-lwm2m-transport:
+    depends_on:
+      - rabbitmq
+  tb-snmp-transport:
+    depends_on:
+      - rabbitmq
+  tb-vc-executor1:
+    depends_on:
+      - rabbitmq
+  tb-vc-executor2:
+    depends_on:
+      - rabbitmq

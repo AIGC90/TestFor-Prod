@@ -1,0 +1,73 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.tb-help-popup-button-container {
+  width: initial;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.tb-help-popup-button-loading {
+  background: #fff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.tb-toggle-help-popup-button {
+  border-radius: 50%;
+  line-height: normal;
+}
+
+.tb-help-popup-button {
+  position: relative;
+  .mat-mdc-progress-spinner {
+    .mdc-circular-progress__indeterminate-container {
+      width: 20px;
+      height: 20px;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.tb-help-popup-text-button.mat-mdc-button.mat-mdc-button-base {
+  position: relative;
+  padding: 0 2px 0 8px;
+  line-height: 28px;
+  height: auto;
+  transition: border 0s;
+  &.mat-mdc-outlined-button {
+    padding: 0 1px 0 7px;
+    line-height: 26px;
+  }
+  .mdc-button__label > span {
+    .mat-icon {
+      vertical-align: middle;
+      padding-left: 4px;
+      box-sizing: initial;
+    }
+    .mat-mdc-progress-spinner {
+      display: inline-block;
+      margin-left: 4px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+  &.hint-button {
+    padding: 2px 3px;
+    line-height: 1;
+    &.mat-mdc-outlined-button {
+      padding: 1px 2px;
+    }
+    .mdc-button__label > span {
+      .mat-icon {
+        margin-right: 0;
+      }
+      .mat-mdc-progress-spinner {
+        margin-right: 0;
+      }
+    }
+  }
+}

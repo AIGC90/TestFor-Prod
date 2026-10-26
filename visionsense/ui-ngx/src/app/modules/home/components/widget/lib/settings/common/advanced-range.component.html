@@ -1,0 +1,45 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-form-row no-padding no-border" style="gap: 0; width: 100%;" [formGroup]="advancedRangeLevelFormGroup">
+  <div class="range-container">
+    <div class="range-input range-input-fields">
+      <div class="flex flex-1 flex-row items-center justify-start">
+        <div class="range-text" translate>widgets.color.from</div>
+        <tb-value-source-data-key class="flex-1"
+                                  formControlName="from"
+                                  [aliasController]="aliasController"
+                                  [dataKeyCallbacks]="dataKeyCallbacks"
+                                  [datasource]="datasource">
+        </tb-value-source-data-key>
+      </div>
+      <div class="flex flex-1 flex-row items-center justify-start">
+        <div class="range-text" translate>widgets.color.to</div>
+        <tb-value-source-data-key class="flex-1"
+                                  formControlName="to"
+                                  [aliasController]="aliasController"
+                                  [dataKeyCallbacks]="dataKeyCallbacks"
+                                  [datasource]="datasource">
+        </tb-value-source-data-key>
+      </div>
+    </div>
+    <tb-color-input asBoxInput
+                    class="range-input"
+                    required
+                    colorClearButton
+                    noBorder
+                    formControlName="color">
+    </tb-color-input>
+  </div>
+  <button *ngIf="!disabled" mat-icon-button style="min-width: 40px;"
+          type="button"
+          class="tb-box-button"
+          (click)="removeAdvancedRange.emit()"
+          matTooltip="{{ 'action.remove' | translate }}"
+          matTooltipPosition="above">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

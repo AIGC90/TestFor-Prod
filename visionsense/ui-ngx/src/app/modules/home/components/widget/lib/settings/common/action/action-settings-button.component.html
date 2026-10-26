@@ -1,0 +1,16 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<button #matButton [disabled]="disabled"
+        type="button"
+        class="tb-action-settings-button"
+        mat-stroked-button color="primary"
+        (click)="openActionSettingsPopup($event, matButton)">
+  <div>
+    <span>{{ displayValue }}</span>
+    <mat-icon class="tb-mat-20">edit</mat-icon>
+  </div>
+</button>

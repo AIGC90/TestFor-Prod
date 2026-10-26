@@ -1,0 +1,12 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section [formGroup]="flotLineKeySettingsForm" class="flex flex-col">
+  <tb-flot-key-settings formControlName="flotKeySettings"
+                        [aliasController]="aliasController"
+                        [chartType]="'graph'">
+  </tb-flot-key-settings>
+</section>

@@ -1,0 +1,25 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .resource-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .name {
+      font-weight: 500;
+    }
+  }
+
+  .checkbox-column-title {
+    text-align: center;
+  }
+
+  .mat-divider {
+    margin-bottom: 4px;
+  }
+
+  .resource-list {
+    padding-bottom: 8px;
+  }
+}

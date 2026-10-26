@@ -1,0 +1,40 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  section.tb-footer-fab-buttons {
+    &:not(.relative-buttons) {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .fab-container {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      > div {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+
+        button {
+          margin-bottom: 17px;
+        }
+      }
+    }
+
+    .tb-btn-footer {
+      &.fab-toggler {
+        margin-top: 0;
+      }
+      position: relative !important;
+      animation: tbMoveFromBottomFade .3s ease both;
+
+      &.tb-hide {
+        animation: tbMoveToBottomFade .3s ease both;
+      }
+    }
+  }
+}

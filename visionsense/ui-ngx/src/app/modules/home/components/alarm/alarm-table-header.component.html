@@ -1,0 +1,11 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-alarm-filter-config [ngModel]="alarmTableConfig.alarmFilterConfig"
+                        (ngModelChange)="alarmFilterChanged($event)"
+                        propagatedFilter="false"
+                        userMode>
+</tb-alarm-filter-config>

@@ -1,0 +1,21 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  display: flex;
+  a.mat-mdc-button {
+    &:hover, &:focus {
+      border-bottom: none;
+    }
+  }
+  .tb-alarm-rule-schedule {
+    padding: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &.title {
+      opacity: 0.7;
+      overflow: visible;
+    }
+  }
+}

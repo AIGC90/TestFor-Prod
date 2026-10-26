@@ -1,0 +1,47 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<fieldset class="tb-help-popup-button-container" *ngIf="!textMode">
+  <div #toggleHelpButton
+       class="tb-toggle-help-popup-button"
+       matTooltip="{{ helpIconTooltip }}"
+       matTooltipPosition="above"
+       (click)="toggleHelp()">
+    <button mat-icon-button
+            [disabled]="disabled()"
+            color="primary"
+            class="tb-help-popup-button"
+            [class]="helpIconButtonClass"
+            type="button">
+      <tb-icon matButtonIcon>{{popoverVisible ? helpOpenedIcon : helpIcon}}</tb-icon>
+      <div *ngIf="popoverVisible && !popoverReady" class="tb-help-popup-button-loading absolute inset-0 flex items-center justify-center">
+        <mat-spinner mode="indeterminate" diameter="20" strokeWidth="2"></mat-spinner>
+      </div>
+    </button>
+  </div>
+</fieldset>
+<fieldset class="tb-help-popup-button-container" *ngIf="textMode">
+  <div #toggleHelpTextButton
+       class="tb-toggle-help-popup-text-button"
+       (click)="toggleHelp()">
+    <button mat-button
+            [disabled]="disabled()"
+            type="button"
+            color="primary"
+            class="tb-help-popup-text-button"
+            [class]="{'mat-mdc-outlined-button mdc-button--outlined': popoverVisible && popoverReady,
+                      'hint-button': hintMode}">
+      <span>
+        <ng-container *ngIf="triggerSafeHtml">
+          <span [style]="triggerStyle" [innerHTML]="triggerSafeHtml"></span>
+        </ng-container>
+        <mat-icon *ngIf="(!popoverVisible || popoverReady)"
+                  [class]="hintMode ? 'tb-mat-12' : 'tb-mat-16'">open_in_new</mat-icon>
+        <mat-spinner *ngIf="popoverVisible && !popoverReady" mode="indeterminate" [diameter]="hintMode ? 12 : 16" strokeWidth="2"></mat-spinner>
+      </span>
+    </button>
+  </div>
+</fieldset>

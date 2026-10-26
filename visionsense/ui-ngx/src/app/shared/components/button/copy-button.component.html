@@ -1,0 +1,21 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<button mat-icon-button
+        type="button"
+        [class.mini-button]="miniButton"
+        [color]="color"
+        [disabled]="disabled"
+        [matTooltip]="matTooltipText"
+        [matTooltipPosition]="matTooltipPosition"
+        (click)="copy($event)">
+  <tb-icon [style]="style" *ngIf="!copied; else copiedTemplate">
+    {{  icon || mdiIcon }}
+  </tb-icon>
+  <ng-template #copiedTemplate>
+    <mat-icon [style]="style" class="copied">done</mat-icon>
+  </ng-template>
+</button>

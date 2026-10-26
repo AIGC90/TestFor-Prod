@@ -1,0 +1,27 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import './../scss/constants';
+
+:host {
+  form {
+    overflow-x: hidden !important;
+  }
+  .title-row {
+    display: flex;
+    flex-direction: column;
+
+    @media #{$mat-gt-sm} {
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+
+      .node-setting {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .description-block {
+    margin-top: 22px;
+  }
+}

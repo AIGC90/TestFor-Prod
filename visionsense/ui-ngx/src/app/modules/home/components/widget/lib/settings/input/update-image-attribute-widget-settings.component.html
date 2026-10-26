@@ -1,0 +1,40 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section class="tb-widget-settings" [formGroup]="updateImageAttributeWidgetSettingsForm">
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.input-widgets.general-settings</legend>
+    <tb-string-pattern-autocomplete class="mat-block flex-1" 
+                                              brackets="curly" 
+                                              subscriptSizing="fixed"
+                                              predefinedValuesButton="true"
+                                              label="{{ 'widgets.input-widgets.widget-title' | translate }}"
+                                              [predefinedValues]="predefinedValues"
+                                              placeholderText="{{ 'widget-config.set' | translate }}"
+                                              formControlName="widgetTitle"
+    ></tb-string-pattern-autocomplete>
+    <mat-slide-toggle formControlName="showResultMessage" class="slide-block">
+      {{ 'widgets.input-widgets.show-result-message' | translate }}
+    </mat-slide-toggle>
+  </fieldset>
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.input-widgets.image-input-settings</legend>
+    <section class="flex flex-col">
+      <mat-slide-toggle formControlName="displayPreview" class="slide-block">
+        {{ 'widgets.input-widgets.display-preview' | translate }}
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="displayClearButton" class="slide-block">
+        {{ 'widgets.input-widgets.display-clear-button' | translate }}
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="displayApplyButton" class="slide-block">
+        {{ 'widgets.input-widgets.display-apply-button' | translate }}
+      </mat-slide-toggle>
+      <mat-slide-toggle formControlName="displayDiscardButton" class="slide-block">
+        {{ 'widgets.input-widgets.display-discard-button' | translate }}
+      </mat-slide-toggle>
+    </section>
+  </fieldset>
+</section>

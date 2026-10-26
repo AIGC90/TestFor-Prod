@@ -1,0 +1,24 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-select class="lt-lg:!hidden"
+            [required]="required"
+            [disabled]="disabled"
+            [(ngModel)]="dashboardId"
+            (ngModelChange)="dashboardIdChanged()">
+  <mat-option *ngFor="let dashboard of dashboards$ | async" [value]="dashboard.id.id">
+    {{dashboard.title}}
+  </mat-option>
+</mat-select>
+<section class="tb-dashboard-select gt-md:!hidden">
+  <button mat-icon-button
+          cdkOverlayOrigin #dashboardSelectPanelOrigin="cdkOverlayOrigin"
+          (click)="openDashboardSelectPanel()"
+          matTooltip="{{ 'dashboard.select-dashboard' | translate }}"
+          [matTooltipPosition]="tooltipPosition">
+    <mat-icon>dashboards</mat-icon>
+  </button>
+</section>

@@ -1,0 +1,22 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  pointer-events: all;
+  width: min-content; //for Safari
+
+  .hidden {
+    display: none;
+  }
+}
+
+:host ::ng-deep {
+  .mat-mdc-select.select-dashboard-breakpoint {
+    .mat-mdc-select-value {
+      max-width: 200px;
+      font-size: 14px;
+    }
+    .mat-mdc-select-arrow {
+      width: 24px;
+    }
+  }
+}

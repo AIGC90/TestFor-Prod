@@ -1,0 +1,25 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-details-panel class="flex-1"
+                   [headerTitle]="entitiesTableConfig.entityTitle(entity)"
+                   headerSubtitle="{{ translations.details | translate }}"
+                   [isReadOnly]="entitiesTableConfig.detailsReadonly(entity)"
+                   [isEdit]="isEditValue"
+                   (closeDetails)="onCloseEntityDetails()"
+                   (toggleDetailsEditMode)="onToggleEditMode($event)"
+                   (applyDetails)="saveEntity()"
+                   [theForm]="detailsForm">
+  <div class="details-buttons">
+    <div [tb-help]="helpLinkId()"></div>
+  </div>
+  <mat-tab-group mat-stretch-tabs="false" class="tb-absolute-fill flex-1" [class.tb-headless]="hideDetailsTabs()" [(selectedIndex)]="selectedTab">
+    <mat-tab label="{{ 'details.details' | translate }}">
+      <tb-anchor #entityDetailsForm></tb-anchor>
+    </mat-tab>
+    <tb-anchor #entityTabs></tb-anchor>
+  </mat-tab-group>
+</tb-details-panel>

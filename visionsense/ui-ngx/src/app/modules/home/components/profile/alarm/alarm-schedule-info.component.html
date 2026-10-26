@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="flex flex-row items-center justify-start" style="min-width: 0;">
+  <span class="tb-alarm-rule-schedule title" (click)="openScheduleDialog($event)">{{('device-profile.schedule' | translate) + ': '}}</span>
+  <span class="tb-alarm-rule-schedule" (click)="openScheduleDialog($event)"
+       [innerHTML]="scheduleText">
+  </span>
+  <button mat-icon-button color="primary"
+     type="button"
+     (click)="openScheduleDialog($event)"
+     matTooltip="{{ (disabled ? 'action.view' : 'action.edit') | translate }}"
+     matTooltipPosition="above">
+    <mat-icon>{{ disabled ? 'visibility' : 'edit' }}</mat-icon>
+  </button>
+</div>

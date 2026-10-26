@@ -1,0 +1,43 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section class="tb-widget-settings flex flex-col" [formGroup]="updateDeviceAttributeWidgetSettingsForm">
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.rpc.common-settings</legend>
+    <tb-string-pattern-autocomplete class="mat-block flex-1" 
+                                    brackets="curly" 
+                                    predefinedValuesButton="true"
+                                    label="{{'widgets.rpc.widget-title' | translate }}"
+                                    [predefinedValues]="predefinedValues"
+                                    placeholderText="{{ 'widget-config.set' | translate }}"
+                                    formControlName="title"
+    ></tb-string-pattern-autocomplete>
+    <mat-form-field class="mat-block flex-1">
+      <mat-label translate>widgets.rpc.button-label</mat-label>
+      <input matInput formControlName="buttonText">
+    </mat-form-field>
+    <mat-form-field class="mat-block flex-1">
+      <mat-label translate>widgets.rpc.device-attribute-scope</mat-label>
+      <mat-select formControlName="entityAttributeType">
+        <mat-option [value]="'SERVER_SCOPE'">
+          {{ 'widgets.rpc.server-attribute' | translate }}
+        </mat-option>
+        <mat-option [value]="'SHARED_SCOPE'">
+          {{ 'widgets.rpc.shared-attribute' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <tb-json-content
+      label="{{ 'widgets.rpc.device-attribute-parameters' | translate }}"
+      [contentType]="contentTypes.JSON"
+      validateOnChange
+      formControlName="entityParameters">
+    </tb-json-content>
+  </fieldset>
+  <tb-rpc-button-style
+    formControlName="styleButton">
+  </tb-rpc-button-style>
+</section>

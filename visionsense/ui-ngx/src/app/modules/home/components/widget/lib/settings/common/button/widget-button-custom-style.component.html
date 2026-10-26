@@ -1,0 +1,34 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-widget-button-custom-style">
+  <div class="tb-widget-button-preview-panel tb-primary-fill">
+    <tb-widget-button
+      [appearance]="previewAppearance"
+      [borderRadius]="borderRadius"
+      [autoScale]="autoScale"
+      disableEvents
+      [hovered]="state === widgetButtonState.hovered"
+      [pressed]="state === widgetButtonState.pressed"
+      [activated]="state === widgetButtonState.activated"
+      [disabled]="state === widgetButtonState.disabled">
+    </tb-widget-button>
+    <button *ngIf="modelValue"
+            mat-icon-button
+            [matTooltip]="'widgets.button.clear-style' | translate"
+            matTooltipPosition="above"
+            class="tb-mat-32"
+            (click)="clearStyle()">
+      <tb-icon>mdi:broom</tb-icon>
+    </button>
+  </div>
+  <button mat-icon-button
+          class="tb-mat-32"
+          #matIconButton
+          (click)="openButtonCustomStylePopup($event, matIconButton)">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

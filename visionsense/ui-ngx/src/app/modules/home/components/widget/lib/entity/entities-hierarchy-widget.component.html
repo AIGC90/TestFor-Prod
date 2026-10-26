@@ -1,0 +1,40 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-entities-hierarchy tb-absolute-fill" tb-toast toastTarget="{{ toastTargetId }}">
+  <div class="tb-absolute-fill flex flex-1 flex-col">
+    <mat-toolbar class="mat-mdc-table-toolbar" [class.!hidden]="!textSearchMode">
+      <div class="mat-toolbar-tools">
+        <button mat-icon-button
+                matTooltip="{{ 'action.search' | translate }}"
+                matTooltipPosition="above">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field class="flex-1">
+          <mat-label>&nbsp;</mat-label>
+          <input #searchInput matInput
+                 [formControl]="textSearch"
+                 placeholder="{{ 'entity.search' | translate }}"/>
+        </mat-form-field>
+        <button mat-icon-button (click)="exitFilterMode()"
+                matTooltip="{{ 'action.close' | translate }}"
+                matTooltipPosition="above">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div class="tb-entities-nav-tree-panel flex-1">
+      <tb-nav-tree
+        [loadNodes]="loadNodes"
+        [onNodeSelected]="onNodeSelected"
+        [onNodesInserted]="onNodesInserted"
+        [editCallbacks]="nodeEditCallbacks"
+        enableSearch="true"
+        [searchCallback]="searchCallback"
+      ></tb-nav-tree>
+    </div>
+  </div>
+</div>

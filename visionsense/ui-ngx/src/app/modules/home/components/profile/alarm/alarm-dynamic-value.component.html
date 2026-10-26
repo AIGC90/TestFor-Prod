@@ -1,0 +1,42 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-expansion-panel [formGroup] = "dynamicValue" class="device-profile-alarm flex-1" style = "margin-bottom: 26px;">
+  <mat-expansion-panel-header>
+    <div class="flex flex-1 flex-row items-center justify-start">
+      <mat-panel-title>
+        <div class="flex flex-1 flex-row items-center justify-start">
+          {{'filter.dynamic-value' | translate}}
+        </div>
+      </mat-panel-title>
+      <span class="flex-1"></span>
+    </div>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <div class="flex flex-1 flex-col">
+      <div class="flex flex-row items-center justify-start gap-2">
+        <div class="flex max-w-40% flex-full flex-col">
+          <mat-form-field class="mat-block">
+            <mat-select formControlName="sourceType" placeholder="{{'filter.dynamic-source-type' | translate}}">
+              <mat-option [value]="null">
+                {{'filter.no-dynamic-value' | translate}}
+              </mat-option>
+              <mat-option *ngFor="let sourceType of dynamicValueSourceTypes" [value]="sourceType">
+                {{dynamicValueSourceTypeTranslations.get(sourceType) | translate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-1 flex-col">
+          <mat-form-field class="mat-block source-attribute">
+            <input matInput formControlName="sourceAttribute" placeholder="{{'filter.source-attribute' | translate}}">
+          </mat-form-field>
+        </div>
+        <div [tb-help-popup]="helpId"></div>
+      </div>
+    </div>
+  </ng-template>
+</mat-expansion-panel>

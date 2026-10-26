@@ -1,0 +1,31 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../../../scss/constants';
+
+.range-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  margin-right: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+}
+.tb-add-color-range {
+  button {
+    width: 100%;
+  }
+}
+.tb-value-range-text {
+  width: 64px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.38);
+  @media #{$mat-xs} {
+    width: auto;
+  }
+  &.tb-value-range-text-to {
+    text-align: center;
+  }
+}

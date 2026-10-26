@@ -1,0 +1,33 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [formGroup]="selectEntityInfoFormGroup" class="mat-block">
+  <mat-label>{{ alias }}</mat-label>
+  <input matInput type="text"
+         #entityInfoInput
+         formControlName="entityInfo"
+         [required]="required"
+         [matAutocomplete]="entityInfoAutocomplete">
+  <button *ngIf="selectEntityInfoFormGroup.get('entityInfo').value && !disabled"
+          type="button"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="clear()">
+    <mat-icon class="material-icons">close</mat-icon>
+  </button>
+  <mat-autocomplete
+    class="tb-autocomplete"
+    #entityInfoAutocomplete="matAutocomplete"
+    [displayWith]="displayEntityInfoFn">
+    <mat-option *ngFor="let entityInfo of filteredEntityInfos | async" [value]="entityInfo">
+      <span [innerHTML]="entityInfo.name | highlight:searchText"></span>
+    </mat-option>
+    <mat-option *ngIf="!(filteredEntityInfos | async)?.length" [value]="null">
+      <span>
+          {{ translate.get('entity.no-entities-matching', {entity: searchText}) | async }}
+      </span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

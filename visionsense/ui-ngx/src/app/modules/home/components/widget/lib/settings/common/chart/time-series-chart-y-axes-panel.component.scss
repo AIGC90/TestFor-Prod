@@ -1,0 +1,74 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../../../../scss/constants';
+
+.tb-y-axes-panel {
+  .tb-form-table-header-cell {
+    &.tb-axis-id-header {
+      width: 60px;
+      min-width: 60px;
+    }
+
+    &.tb-label-header {
+      flex: 1 1 60%;
+      min-width: 100px;
+    }
+
+    &.tb-position-header {
+      flex: 1;
+      min-width: 60px;
+      @media #{$mat-gt-md} {
+        flex: 1 1 40%;
+      }
+    }
+
+    &.tb-units-header {
+      width: 80px;
+      min-width: 80px;
+    }
+
+    &.tb-decimals-header {
+      width: 60px;
+      min-width: 60px;
+    }
+
+    &.tb-min-header, &.tb-max-header {
+      width: 80px;
+      min-width: 80px;
+    }
+
+    &.tb-show-header {
+      width: 40px;
+      min-width: 40px;
+    }
+
+    &.tb-actions-header {
+      width: 80px;
+      min-width: 80px;
+      @media #{$mat-gt-md} {
+        width: 120px;
+        min-width: 120px;
+      }
+    }
+
+    &.tb-label-header, &.tb-units-header, &.tb-decimals-header {
+      display: none;
+      @media #{$mat-gt-md} {
+        display: block;
+      }
+    }
+
+    &.tb-min-header, &.tb-max-header {
+      display: none;
+      @media #{$mat-gt-xs} {
+        display: block;
+      }
+    }
+  }
+
+  .tb-form-table-body {
+    tb-time-series-chart-y-axis-row {
+      overflow: hidden;
+    }
+  }
+}

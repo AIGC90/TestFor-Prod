@@ -1,0 +1,21 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.tb-scroll-grid-viewport {
+  height: 100%;
+  .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .cdk-virtual-scroll-spacer {
+    height: auto !important;
+  }
+  .tb-scroll-grid-items-row {
+    display: flex;
+    flex-direction: row;
+  }
+  .tb-scroll-grid-item-container {
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,87 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../../../../scss/constants';
+
+.tb-form-table-row.tb-time-series-threshold-row {
+  @media #{$mat-lt-md} {
+    align-items: flex-start;
+  }
+  .tb-threshold-source-field {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    @media #{$mat-gt-sm} {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    @media #{$mat-gt-md} {
+      min-width: 200px;
+    }
+  }
+
+  .tb-threshold-type-field {
+    flex: 1;
+  }
+
+  .tb-entity-alias-input {
+    flex: 1;
+  }
+
+  .tb-threshold-key-value-field {
+    flex: 1;
+    min-width: 100px;
+    .tb-inline-field {
+      width: 100%;
+    }
+    @media #{$mat-gt-md} {
+      min-width: 150px;
+    }
+  }
+
+  .tb-y-axis-field {
+    width: 100px;
+    min-width: 100px;
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+  }
+
+  .tb-color-field, .tb-units-field, .tb-decimals-field {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    align-items: center;
+  }
+
+  .tb-units-field {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  .tb-color-field {
+    width: 40px;
+    min-width: 40px;
+  }
+
+  .tb-decimals-field {
+    width: 60px;
+    min-width: 60px;
+  }
+
+  .tb-y-axis-field {
+    @media #{$mat-xs} {
+      display: none;
+    }
+  }
+
+  .tb-units-field, .tb-color-field, .tb-decimals-field {
+    display: none;
+    @media #{$mat-gt-md} {
+      display: flex;
+    }
+  }
+
+}

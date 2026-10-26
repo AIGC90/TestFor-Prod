@@ -1,0 +1,17 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.template-option {
+  .mdc-list-item__primary-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .template-option-name {
+    margin-right: 8px;
+  }
+
+  .mat-mdc-standard-chip.mdc-evolution-chip--disabled {
+    opacity: 1;
+  }
+}

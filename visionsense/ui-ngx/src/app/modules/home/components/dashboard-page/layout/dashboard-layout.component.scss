@@ -1,0 +1,17 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  display: block;
+  height: 100%;
+  button.tb-add-new-widget {
+    height: auto;
+    padding-right: 12px;
+    font-size: 20px;
+    border-style: dashed;
+    border-width: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}

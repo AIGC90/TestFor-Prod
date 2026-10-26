@@ -1,0 +1,62 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [class]="fieldClass"
+                [formGroup]="stringItemsForm" class="tb-string-items-list mat-block flex-1"
+                [floatLabel]="floatLabel"
+                [appearance]="appearance"
+                [subscriptSizing]="subscriptSizing">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <mat-chip-grid #itemsChipList formControlName="items" [required]="required">
+    <mat-chip-row *ngFor="let item of itemList"
+                  class="tb-chip-row-ellipsis"
+                  [removable]="!disabled"
+                  [contentEditable]="editable && !disabled"
+                  (removed)="removeItems(item)">
+      {{ item.name }}
+      <mat-icon matChipRemove *ngIf="!disabled">close</mat-icon>
+    </mat-chip-row>
+    <input matInput type="text"
+           placeholder="{{ placeholder }}"
+           style="max-width: 300px;min-width: 250px"
+           #stringItemInput
+           (focusin)="onFocus()"
+           formControlName="item"
+           #origin="matAutocompleteOrigin"
+           [matChipInputFor]="itemsChipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           matAutocompleteOrigin
+           (matChipInputTokenEnd)="addOnEnd($event)"
+           [matAutocompleteConnectedTo]="origin"
+           [matAutocomplete]="stringItemAutocomplete"
+           [matAutocompleteDisabled]="!predefinedValues?.length && !fetchOptionsFn">
+  </mat-chip-grid>
+  <mat-autocomplete #stringItemAutocomplete="matAutocomplete"
+                    [displayWith]="displayValueFn"
+                    (optionSelected)="onOptionSelected($event)"
+                    class="tb-autocomplete">
+    @for (value of filteredValues | async; track value.value) {
+      <mat-option [value]="value" (mousedown)="$event.preventDefault()"><span [innerHTML]="value.name | highlight:searchText:true"></span></mat-option>
+    } @empty {
+      @if (!allowUserValue) {
+        <mat-option [value]="null" (mousedown)="$event.preventDefault()">{{ 'common.not-found' | translate }}</mat-option>
+      }
+    }
+  </mat-autocomplete>
+  <mat-hint [hidden]="!hint">
+    {{ hint }}
+  </mat-hint>
+  <mat-hint align="end" [hidden]="!matHintEnd.children.length" #matHintEnd>
+    <ng-content select="[matHintEnd]"></ng-content>
+  </mat-hint>
+  <div matSuffix>
+    <ng-content select="[matSuffix]"></ng-content>
+  </div>
+  <mat-error *ngIf="stringItemsForm.get('items').hasError('required')">
+    {{ requiredText }}
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,40 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-form-panel tb-aggregated-data-keys-panel">
+  <div class="tb-form-panel-title">{{ 'widgets.aggregated-value-card.values' | translate }}</div>
+  <div class="tb-form-table">
+    <div class="tb-form-table-header">
+      <div class="tb-form-table-header-cell tb-position-header" translate>widgets.aggregated-value-card.position</div>
+      <div class="tb-form-table-header-cell tb-aggregation-header" translate>widgets.aggregated-value-card.aggregation</div>
+      <div class="tb-form-table-header-cell tb-units-header" translate>widget-config.units-short</div>
+      <div class="tb-form-table-header-cell tb-decimals-header" translate>widget-config.decimals-short</div>
+      <div class="tb-form-table-header-cell tb-font-header" translate>widgets.aggregated-value-card.font</div>
+      <div class="tb-form-table-header-cell tb-color-header" translate>widgets.aggregated-value-card.color</div>
+      <div class="tb-form-table-header-cell tb-arrow-header" translate>widgets.aggregated-value-card.arrow</div>
+      <div class="tb-form-table-header-cell tb-actions-header"></div>
+    </div>
+    <div *ngIf="keysFormArray().controls.length; else noKeys" class="tb-form-table-body">
+      <div *ngFor="let keyControl of keysFormArray().controls; trackBy: trackByKey; let $index = index;">
+        <tb-aggregated-data-key-row class="flex-1"
+                         [formControl]="keyControl"
+                         [index]="$index"
+                         [datasourceType]="datasourceType"
+                         [keyName]="keyName"
+                         (keyRemoved)="removeKey($index)">
+        </tb-aggregated-data-key-row>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button type="button" mat-stroked-button color="primary" (click)="addKey()">
+      {{ 'widgets.aggregated-value-card.add-value' | translate }}
+    </button>
+  </div>
+</div>
+<ng-template #noKeys>
+  <span class="tb-prompt flex items-center justify-center">{{ 'widgets.aggregated-value-card.no-values' | translate }}</span>
+</ng-template>

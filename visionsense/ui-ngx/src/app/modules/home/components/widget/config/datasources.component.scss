@@ -1,0 +1,102 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import "../../../../../../scss/constants";
+
+.tb-datasource-list-item {
+  &.mat-mdc-list-item {
+    height: auto;
+    display: block;
+    padding: 0;
+    overflow: visible;
+  }
+  &.tb-draggable {
+    &.cdk-drag-preview {
+      background: #fff;
+    }
+  }
+}
+
+.tb-datasource-list-item + .tb-datasource-list-item {
+  margin-top: 24px;
+}
+
+.tb-datasource-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  place-content: flex-start;
+  align-items: flex-start;
+}
+
+.tb-datasource-index-container {
+  width: 36px;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  place-content: flex-start;
+  align-items: center;
+}
+
+.tb-datasource-index {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: $tb-primary-color;
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $tb-primary-color;
+    opacity: 0.06;
+    border-radius: 100%;
+  }
+}
+
+.tb-datasource-params {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  .tb-datasource-item {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    tb-datasource {
+      flex: 1;
+      min-width: 0;
+    }
+    .tb-datasource-buttons {
+      height: 56px;
+      display: flex;
+      flex-direction: row;
+      place-content: center;
+      align-items: center;
+    }
+  }
+  tb-error.tb-datasource-error {
+    position: absolute;
+    bottom: 4px;
+    left: 8px;
+  }
+}
+
+:host {
+  .tb-datasources {
+
+    .handle {
+      cursor: move;
+    }
+
+    .mat-mdc-list {
+      min-height: 68px;
+      padding-left: 0;
+    }
+  }
+}

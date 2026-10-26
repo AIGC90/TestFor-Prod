@@ -1,0 +1,13 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-checkbox [(ngModel)]="innerValue"
+              (ngModelChange)="modelChange($event)"
+              [checked]="innerValue"
+              [disabled]="disabled"
+              (change)="onHostChange($event)">
+  <ng-content></ng-content>
+</mat-checkbox>

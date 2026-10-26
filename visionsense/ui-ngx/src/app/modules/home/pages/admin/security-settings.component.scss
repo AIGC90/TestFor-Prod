@@ -1,0 +1,22 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .mat-headline-5 {
+    margin-bottom: 8px;
+  }
+
+  .mat-mdc-card-title {
+    margin: 0;
+  }
+
+  .fields-group {
+    padding: 8px 16px 0;
+    margin: 10px 0;
+    border: 1px groove rgba(0, 0, 0, .25);
+    border-radius: 4px;
+
+    legend {
+      color: rgba(0, 0, 0, .7);
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-round-switch flex flex-col" [style.pointer-events]="ctx.isEdit ? 'none' : 'all'">
+  <div #switchTitleContainer class="title-container flex max-h-20% flex-full flex-row items-center justify-center" [class.!hidden]="!showTitle">
+    <span #switchTitle class="switch-title">{{title}}</span>
+  </div>
+  <div #switchContainer class="flex flex-full flex-col items-center justify-center"
+       [class]="{
+          'max-h-80%': showTitle,
+          'max-h-100%': !showTitle
+       }"
+       [style.padding-top]="showTitle ? '5px': '10px'" id="switch-container">
+    <div #switch class="switch">
+      <input #onoff type="checkbox" id="{{checkboxId}}" name="onoff" />
+      <div class="back">
+        <label class="but" for="{{checkboxId}}">
+          <span class="on">I</span>
+          <span class="off">0</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div #switchErrorContainer class="error-container flex flex-row items-center justify-center" [style.background]="error?.length ? 'rgba(255,255,255,0.25)' : 'none'">
+    <span #switchError class="switch-error">{{ error }}</span>
+  </div>
+  <div #textMeasure id="text-measure"></div>
+</div>

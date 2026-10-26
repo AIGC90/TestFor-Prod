@@ -1,0 +1,29 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<form class="mat-elevation-z1"
+      [formGroup]="attributeFormGroup" (ngSubmit)="update()" style="padding: 5px; width: 375px;">
+  <fieldset [disabled]="isLoading$ | async">
+    <tb-value-input
+      formControlName="value"
+      requiredText="attribute.value-required">
+    </tb-value-input>
+  </fieldset>
+  <div class="tb-panel-actions flex flex-row">
+    <span class="flex-1"></span>
+    <button mat-button color="primary"
+            type="button"
+            [disabled]="(isLoading$ | async)"
+            (click)="cancel()" cdkFocusInitial>
+      {{ 'action.cancel' | translate }}
+    </button>
+    <button mat-button mat-raised-button color="primary"
+            type="submit"
+            [disabled]="(isLoading$ | async) || invalid() || !attributeFormGroup.dirty">
+      {{ 'action.update' | translate }}
+    </button>
+  </div>
+</form>

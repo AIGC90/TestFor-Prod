@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .tb-tenant-profile-queues {
+    .mat-expansion-panel-body {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .tb-prompt{
+    margin: 30px 0;
+  }
+}

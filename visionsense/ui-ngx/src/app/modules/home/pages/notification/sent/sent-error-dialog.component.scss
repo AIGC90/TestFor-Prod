@@ -1,0 +1,36 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host{
+  display: block;
+  width: 600px;
+  max-width: 100%;
+  color: rgba(0, 0, 0, 0.87);
+
+  h6 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 0;
+  }
+
+  .tb-table-list {
+    table-layout: fixed;
+    width: 100%;
+    border: hidden;
+    border-collapse: collapse;
+
+    td {
+      border: 8px solid transparent;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .tb-row-error {
+      word-wrap: break-word;
+    }
+  }
+
+  .mat-divider {
+    margin: 24px 0;
+  }
+}

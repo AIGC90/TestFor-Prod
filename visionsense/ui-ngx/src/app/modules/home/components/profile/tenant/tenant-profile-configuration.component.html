@@ -1,0 +1,16 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div [formGroup]="tenantProfileConfigurationFormGroup">
+  <div [ngSwitch]="type">
+    <ng-template [ngSwitchCase]="tenantProfileType.DEFAULT">
+      <tb-default-tenant-profile-configuration
+        [required]="required"
+        formControlName="configuration">
+      </tb-default-tenant-profile-configuration>
+    </ng-template>
+  </div>
+</div>

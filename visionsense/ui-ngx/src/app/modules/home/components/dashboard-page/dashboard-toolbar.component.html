@@ -1,0 +1,23 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-fab-toolbar [isOpen]="toolbarOpened" color="primary" direction="left"
+                 [class.is-fullscreen]="forceFullscreen"
+                 [class.mat-elevation-z1]="forceFullscreen && toolbarOpened">
+  <mat-fab-trigger>
+    <button mat-fab color="primary"
+            [matTooltip]="!toolbarOpened ? ('dashboard.open-toolbar' | translate) : ''"
+            matTooltipPosition="below"
+            (click)="onTriggerClick()">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </mat-fab-trigger>
+  <mat-toolbar color="primary">
+    <mat-fab-actions class="mat-toolbar-tools">
+      <ng-content></ng-content>
+    </mat-fab-actions>
+  </mat-toolbar>
+</mat-fab-toolbar>

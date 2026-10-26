@@ -1,0 +1,17 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="mat-padding flex flex-col">
+  <form [formGroup]="ruleNodeLinkFormGroup">
+    <tb-link-labels
+      required
+      formControlName="labels"
+      [allowedLabels]="allowedLabels"
+      [allowCustom]="allowCustom"
+      [sourceRuleChainId]="sourceRuleChainId"
+    ></tb-link-labels>
+  </form>
+</div>

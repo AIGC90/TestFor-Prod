@@ -1,0 +1,14 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="flex flex-full flex-row items-center justify-start">
+  <tb-toggle-select class="w-44" appearance="fill"
+                    [ngModel]="entitiesTableConfig.componentsData.unreadOnly"
+                    (ngModelChange)="changeUnreadOnly($event)">
+    <tb-toggle-option [value]=true>{{ 'notification.unread' | translate }}</tb-toggle-option>
+    <tb-toggle-option [value]=false>{{ 'notification.all' | translate }}</tb-toggle-option>
+  </tb-toggle-select>
+</div>

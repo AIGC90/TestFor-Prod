@@ -1,0 +1,34 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-action-settings-panel" [formGroup]="widgetActionFormGroup">
+  <div class="tb-action-settings-title">{{ panelTitle }}</div>
+  <div class="tb-action-settings-panel-content">
+    <tb-widget-action
+      formControlName="widgetAction"
+      [callbacks]="callbacks"
+      [widgetType]="widgetType"
+      [withName]="withName"
+      [actionNames]="actionNames"
+      [additionalWidgetActionTypes]="additionalWidgetActionTypes">
+    </tb-widget-action>
+  </div>
+  <div class="tb-action-settings-panel-buttons">
+    <button mat-button
+            color="primary"
+            type="button"
+            (click)="cancel()">
+      {{ 'action.cancel' | translate }}
+    </button>
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="applyWidgetAction()"
+            [disabled]="widgetActionFormGroup.invalid || !widgetActionFormGroup.dirty">
+      {{ applyTitle }}
+    </button>
+  </div>
+</div>

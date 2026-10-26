@@ -1,0 +1,30 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div #knobContainer class="tb-knob flex flex-col" [style.pointer-events]="ctx.isEdit ? 'none' : 'all'">
+  <div class="flex flex-1 flex-col items-center justify-center">
+    <div #knob class="knob">
+      <div #knobValueContainer class="value-container flex flex-row items-center justify-center">
+        <span #knobValue class="knob-value">{{ value }}</span>
+      </div>
+      <div class="canvas-background"></div>
+      <canvas #canvasBar id="canvasBar"></canvas>
+      <div #knobTopPointerContainer class="top-pointer-container">
+        <div #knobTopPointer class="top-pointer"></div>
+      </div>
+      <div class="top"></div>
+      <div #knobTitleContainer class="title-container flex flex-row items-center justify-center">
+        <span #knobTitle class="knob-title">{{ title }}</span>
+      </div>
+      <div #knobMinmaxContainer class="minmax-container flex flex-row items-center justify-start">
+        <span class="minmax-label">min</span>
+        <span class="flex-1"></span>
+        <span class="minmax-label">max</span>
+      </div>
+      <div #textMeasure id="text-measure"></div>
+    </div>
+  </div>
+</div>

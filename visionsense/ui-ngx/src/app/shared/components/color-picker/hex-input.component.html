@@ -1,0 +1,25 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="hex-input-container">
+  <mat-form-field class="hex-input" subscriptSizing="dynamic">
+    <span matPrefix>{{prefixValue}}</span>
+    <input matInput #elRef type="text" [value]="value" (keyup)="onInputChange($event, elRef.value)">
+    <tb-copy-button
+      class="copy-button"
+      matSuffix
+      miniButton="false"
+      [copyText]="copyColor"
+      tooltipText="{{ 'action.copy' | translate }}"
+      tooltipPosition="above"
+      icon="content_copy">
+    </tb-copy-button>
+  </mat-form-field>
+  <mat-form-field class="alpha-input" subscriptSizing="dynamic">
+    <input matInput #hue type="number" min="0" max="100" [value]="hueValue" (keyup)="onHueInputChange($event, hue.value)">
+    <span matSuffix>%</span>
+  </mat-form-field>
+</div>

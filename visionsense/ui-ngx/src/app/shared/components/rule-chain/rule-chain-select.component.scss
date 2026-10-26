@@ -1,0 +1,24 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  min-width: 52px;
+  width: 100%;
+  padding: 0;
+  .tb-rule-select {
+    width: 100%;
+
+    input {
+      color: #fff;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      pointer-events: none;
+
+      &:disabled {
+        cursor: unset;
+      }
+    }
+  }
+  .disabled {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="flex flex-1 flex-row gap-2">
+  <fieldset class="fieldset-element">
+    <legend class="legend-element">{{ label | translate }}</legend>
+    <div [formGroup]="rateLimitsFormGroup" class="flex flex-1 flex-row gap-2"
+         (click)="onClick($event)"
+         [matTooltip]="'tenant-profile.rate-limits.edit-limit' | translate" matTooltipPosition="above">
+      <tb-rate-limits-text [rateLimitsArray]="rateLimitsArray" [disabled]="disabled"></tb-rate-limits-text>
+    </div>
+  </fieldset>
+  <button mat-icon-button color="primary" type="button" *ngIf="!disabled"
+          class="tb-rate-limits-button"
+          (click)="onClick($event)"
+          [matTooltip]="'tenant-profile.rate-limits.add-limit' | translate" matTooltipPosition="above">
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+</div>

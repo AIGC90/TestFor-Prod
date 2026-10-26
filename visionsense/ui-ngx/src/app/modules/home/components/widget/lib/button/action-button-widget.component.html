@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-action-button-widget" [style.pointer-events]="ctx.isEdit ? 'none' : 'all'">
+  <div class="tb-action-button-widget-title-panel">
+    <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  </div>
+  <tb-widget-button
+    [appearance]="appearance"
+    [borderRadius]="borderRadius"
+    [disabled]="disabled"
+    [activated]="activated"
+    [ctx]="ctx"
+    (clicked)="onClick($event)">
+  </tb-widget-button>
+</div>

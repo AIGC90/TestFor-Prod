@@ -1,0 +1,23 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import "../../../../../scss/constants";
+
+:host {
+  .settings-card {
+    .toggle-group {
+      max-width: 670px;
+      width: 100%;
+      margin: 0 auto;
+
+      .tb-form-hint {
+        text-align: center;
+      }
+    }
+
+    @media #{$mat-xs} {
+      .tb-form-row {
+        gap: 0;
+      }
+    }
+  }
+}

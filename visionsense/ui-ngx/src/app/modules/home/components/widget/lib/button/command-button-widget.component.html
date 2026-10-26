@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-command-button-widget" [style.pointer-events]="ctx.isEdit ? 'none' : 'all'">
+  <div class="tb-command-button-widget-title-panel">
+    <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  </div>
+  <tb-widget-button
+    [appearance]="appearance"
+    [borderRadius]="borderRadius"
+    [disabled]="disabled || (loading$ | async)"
+    [ctx]="ctx"
+    (clicked)="onClick($event)">
+  </tb-widget-button>
+  <mat-progress-bar class="tb-action-widget-progress" style="height: 4px;" color="accent" mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+</div>

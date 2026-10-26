@@ -1,0 +1,22 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import "../../../../../scss/constants";
+
+:host {
+  .tb-default-dashboard {
+    tb-dashboard-autocomplete {
+      @media #{$mat-gt-sm} {
+        padding-right: 12px;
+      }
+
+      @media #{$mat-lt-md} {
+        padding-bottom: 12px;
+      }
+    }
+    .mat-mdc-checkbox {
+      @media #{$mat-gt-sm} {
+        margin-top: 16px;
+      }
+    }
+  }
+}

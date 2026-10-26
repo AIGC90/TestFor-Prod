@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<form class="tb-add-doc-link-dialog" [formGroup]="addDocLinkFormGroup">
+  <mat-toolbar style="background: transparent;">
+    <h2 translate>widgets.documentation.add-link-title</h2>
+    <span class="flex-1"></span>
+    <button mat-icon-button
+            (click)="cancel()"
+            type="button">
+      <tb-icon>close</tb-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <tb-doc-link formControlName="docLink" [addOnly]="true"
+                      (docLinkAdded)="add($event)">
+    </tb-doc-link>
+  </div>
+</form>

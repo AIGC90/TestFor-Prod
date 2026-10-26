@@ -1,0 +1,34 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  width: 450px;
+
+  .tb-timewindow-form {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+
+    &-header {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &-content {
+      .tb-flex {
+        gap: 16px;
+      }
+    }
+
+    &-type-options {
+      flex: 1;
+    }
+
+    &-settings-btn {
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    &-checkbox {
+      --mat-checkbox-state-layer-size: 24px;
+    }
+  }
+}

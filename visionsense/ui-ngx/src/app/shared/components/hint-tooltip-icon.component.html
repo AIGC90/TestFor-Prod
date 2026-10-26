@@ -1,0 +1,11 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<ng-content class="tb-hint-tooltip-content"></ng-content>
+<tb-icon class="tb-hint-tooltip-icon tb-mat-18"
+         *ngIf="tooltipText"
+         matTooltip="{{ tooltipText }}"
+         [matTooltipPosition]="tooltipPosition">{{ hintIcon }}</tb-icon>

@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div [formGroup]="simpleCardWidgetSettingsForm" class="tb-form-panel">
+  <div class="tb-form-panel-title" translate>widgets.simple-card.label</div>
+  <div class="tb-form-row space-between">
+    <div translate>widgets.simple-card.label-position</div>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-select formControlName="labelPosition">
+        <mat-option [value]="'left'">
+          {{ 'widgets.simple-card.label-position-left' | translate }}
+        </mat-option>
+        <mat-option [value]="'top'">
+          {{ 'widgets.simple-card.label-position-top' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

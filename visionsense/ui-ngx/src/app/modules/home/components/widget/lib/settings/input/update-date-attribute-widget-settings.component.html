@@ -1,0 +1,18 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section class="tb-widget-settings flex flex-col" [formGroup]="updateDateAttributeWidgetSettingsForm">
+  <tb-update-attribute-general-settings
+    [hasLabelValue]="false"
+    formControlName="updateAttributeGeneralSettings">
+  </tb-update-attribute-general-settings>
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.input-widgets.datetime-field-settings</legend>
+    <mat-slide-toggle formControlName="showTimeInput" class="slide-block">
+      {{ 'widgets.input-widgets.display-time-input' | translate }}
+    </mat-slide-toggle>
+  </fieldset>
+</section>

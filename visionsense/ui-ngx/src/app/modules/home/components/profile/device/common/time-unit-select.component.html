@@ -1,0 +1,29 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section [formGroup]="timeUnitSelectFormGroup" class="flex flex-row xs:flex-col gt-xs:gap-2">
+  <mat-form-field class="mat-block flex-1">
+    <mat-label>{{ labelText | translate }}</mat-label>
+    <input matInput type="number" min="0" formControlName="time" required>
+    <mat-error *ngIf="timeUnitSelectFormGroup.get('time').hasError('required')">
+      {{ requiredText | translate }}
+    </mat-error>
+    <mat-error *ngIf="timeUnitSelectFormGroup.get('time').hasError('pattern')">
+      {{ patternText | translate }}
+    </mat-error>
+    <mat-error *ngIf="timeUnitSelectFormGroup.get('time').hasError('min')">
+      {{ (minText || patternText) | translate : {min: minTime/1000} }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mat-block flex-1">
+    <mat-label translate>device-profile.condition-duration-time-unit</mat-label>
+    <mat-select formControlName="unit">
+      <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
+        {{ timeUnitTranslations.get(timeUnit) | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>

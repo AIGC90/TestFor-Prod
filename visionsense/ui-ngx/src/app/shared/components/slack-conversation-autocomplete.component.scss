@@ -1,0 +1,12 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+::ng-deep {
+  .slack-option {
+    .mat-option-text {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+  }
+}

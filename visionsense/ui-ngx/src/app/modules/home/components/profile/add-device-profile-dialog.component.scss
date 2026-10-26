@@ -1,0 +1,48 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import "../../../../../scss/constants";
+
+:host {
+  height: 100%;
+  display: grid;
+
+  .dialog-actions-row {
+    padding: 8px;
+  }
+}
+
+:host-context(.tb-fullscreen-dialog .mat-mdc-dialog-container) {
+  @media #{$mat-lt-sm} {
+    .mat-mdc-dialog-content {
+      max-height: 75vh;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .mat-mdc-dialog-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 !important;
+
+    .mat-stepper-horizontal {
+      overflow: hidden;
+
+      .mat-horizontal-stepper-wrapper {
+        max-height: 100%;
+      }
+
+      .mat-horizontal-content-container {
+        height: 680px;
+        max-height: 100%;
+        width: 100%;;
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+        @media #{$mat-gt-sm} {
+          min-width: 500px;
+        }
+      }
+    }
+  }
+}

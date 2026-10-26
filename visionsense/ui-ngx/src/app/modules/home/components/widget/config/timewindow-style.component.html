@@ -1,0 +1,14 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<button type="button"
+        mat-stroked-button
+        class="tb-box-button"
+        [disabled]="disabled"
+        #matButton
+        (click)="openTimewindowStylePopup($event, matButton)">
+  <tb-icon matButtonIcon>format_paint</tb-icon>
+</button>

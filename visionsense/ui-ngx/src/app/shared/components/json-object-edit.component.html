@@ -1,0 +1,35 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-json-object flex flex-col" style="background: #fff;" [class.fill-height]="fillHeight"
+     tb-fullscreen
+     [fullscreen]="fullscreen" (fullscreenChanged)="onFullscreen()">
+  <div class="tb-json-object-toolbar flex flex-row items-center justify-start">
+    <label class="tb-title no-padding"
+           [class]="{'tb-required': jsonRequired,
+                     'tb-readonly': readonly,
+                     'tb-error': !objectValid}">{{ label }}</label>
+    <span class="flex-1"></span>
+    <button type="button"
+            mat-button *ngIf="!readonly && !disabled" class="tidy" (click)="beautifyJSON()">
+      {{'js-func.tidy' | translate }}
+    </button>
+    <button type="button"
+            mat-button *ngIf="!readonly && !disabled" class="tidy" (click)="minifyJSON()">
+      {{'js-func.mini' | translate }}
+    </button>
+    <ng-content select="[toolbarSuffixButton]"></ng-content>
+    <button mat-icon-button class="tb-mat-32" (click)="fullscreen = !fullscreen"
+            matTooltip="{{(fullscreen ? 'fullscreen.exit' : 'fullscreen.expand') | translate}}"
+            matTooltipPosition="above">
+      <mat-icon class="material-icons">{{ fullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+    </button>
+  </div>
+  <div id="tb-json-panel" tb-toast toastTarget="{{toastTargetId}}"
+       class="tb-json-object-panel flex flex-col">
+    <div #jsonEditor id="tb-json-input" [style]="editorStyle" [class.fill-height]="fillHeight"></div>
+  </div>
+</div>

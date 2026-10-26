@@ -1,0 +1,31 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div #toggleGroupContainer class="tb-toggle-container">
+  <mat-button-toggle-group #widgetButton
+                           class="tb-toggle-header"
+                           [ngModel]="value"
+                           (change)="clicked.emit($event)"
+                           [style.border-radius]="computedBorderRadius"
+                           [style.border-color]="disabled ? 'rgba(0,0,0,0.38)': computedBorderColor"
+                           [style.border-width]="computedBorderWidth"
+                           [class.tb-pointer-events]="disableEvents"
+                           [class.tb-disabled-state]="disabled"
+                           [class.tb-disabled]="disabled">
+    <mat-button-toggle [value]="true" [disabled]="disabled" [class.tb-hover-state]="hovered">
+      <div #leftButtonContent class="tb-widget-button-content" *ngIf="appearance.leftAppearance.showIcon || appearance.leftAppearance.showLabel">
+        <tb-icon matButtonIcon *ngIf="appearance.leftAppearance.showIcon" [style]="leftIconStyle">{{ appearance.leftAppearance.icon }}</tb-icon>
+        <span *ngIf="appearance.leftAppearance.showLabel" [style]="leftLabelStyle" class="tb-widget-button-label">{{ leftLabel$ | async }}</span>
+      </div>
+    </mat-button-toggle>
+    <mat-button-toggle [value]="false" [disabled]="disabled" [class.tb-hover-state]="hovered">
+      <div #rightButtonContent class="tb-widget-button-content" *ngIf="appearance.rightAppearance.showIcon || appearance.rightAppearance.showLabel">
+        <tb-icon matButtonIcon *ngIf="appearance.rightAppearance.showIcon" [style]="rightIconStyle">{{ appearance.rightAppearance.icon }}</tb-icon>
+        <span *ngIf="appearance.rightAppearance.showLabel" [style]="rightLabelStyle" class="tb-widget-button-label">{{ rightLabel$ | async }}</span>
+      </div>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

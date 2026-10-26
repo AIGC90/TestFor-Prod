@@ -1,0 +1,18 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-dashboard-page *ngIf="stateExists"
+  [embedded]="true"
+  [syncStateWithQueryParam]="false"
+  [hideToolbar]="true"
+  [currentState]="currentState"
+  [dashboard]="dashboard"
+  [parentDashboard]="parentDashboard"
+  [parentAliasController]="parentAliasController">
+</tb-dashboard-page>
+<div class="tb-absolute-fill tb-widget-error" *ngIf="!stateExists">
+  <span>{{ 'dashboard.non-existent-dashboard-state-error' | translate:{stateId} }}</span>
+</div>

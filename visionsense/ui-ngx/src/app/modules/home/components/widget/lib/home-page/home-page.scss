@@ -1,0 +1,20 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.tb-autocomplete.tb-quick-links {
+  .mat-mdc-option {
+    border-bottom: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: rgba(0, 0, 0, 0.76);
+    .mat-icon {
+      vertical-align: bottom;
+      margin-right: 10px;
+      color: rgba(0, 0, 0, 0.54);
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

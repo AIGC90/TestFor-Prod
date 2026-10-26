@@ -1,0 +1,30 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section style="min-width: 300px;">
+  <form [formGroup]="confirmFormGroup" style="padding-top: 16px;">
+    <fieldset [disabled]="(isLoading$ | async)">
+      <div style="user-select: none;" [innerHTML]="removeOtherEntitiesConfirmText"></div>
+      <mat-form-field class="mat-block" appearance="outline">
+        <input matInput formControlName="verification"/>
+      </mat-form-field>
+    </fieldset>
+  </form>
+  <div class="flex items-center justify-end gap-2">
+    <button mat-button color="primary"
+            type="button"
+            [disabled]="(isLoading$ | async)"
+            (click)="cancel()" cdkFocusInitial>
+      {{ 'action.cancel' | translate }}
+    </button>
+    <button mat-raised-button color="primary"
+            type="button"
+            (click)="confirm()"
+            [disabled]="(isLoading$ | async) || confirmFormGroup.invalid || confirmFormGroup.get('verification').value !== removeOtherEntitiesVerificationText">
+      {{ 'action.confirm' | translate }}
+    </button>
+  </div>
+</section>

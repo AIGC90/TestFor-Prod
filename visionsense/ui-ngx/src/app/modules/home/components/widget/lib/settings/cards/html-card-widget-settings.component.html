@@ -1,0 +1,14 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section [formGroup]="htmlCardWidgetSettingsForm" class="flex flex-col">
+  <tb-html formControlName="cardHtml" required
+          label="{{ 'widgets.html-card.html' | translate }}">
+  </tb-html>
+  <tb-css formControlName="cardCss"
+          label="{{ 'widgets.html-card.css' | translate }}">
+  </tb-css>
+</section>

@@ -1,0 +1,54 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../scss/constants';
+
+.tb-scada-symbol-behavior-settings-panel {
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media #{$mat-lt-md} {
+    width: 90vw;
+  }
+  .tb-scada-symbol-behavior-settings-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: auto;
+    margin: -10px;
+    padding: 10px;
+    .mat-mdc-form-field.tb-value-type {
+      .mat-mdc-form-field-infix {
+        max-height: 40px;
+      }
+      mat-select-trigger {
+        .tb-value-type-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 10px;
+          .mat-icon {
+            color: rgba(0, 0, 0, 0.38);
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+  }
+  .tb-scada-symbol-behavior-settings-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .tb-scada-symbol-behavior-settings-panel-buttons {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}

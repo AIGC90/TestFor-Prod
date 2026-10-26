@@ -1,0 +1,35 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="tb-axis-settings-panel" [formGroup]="axisSettingsFormGroup">
+  <div class="tb-axis-settings-title">{{ panelTitle }}</div>
+  <div class="tb-axis-settings-panel-content">
+    <tb-time-series-chart-axis-settings
+      [aliasController]="aliasController"
+      [dataKeyCallbacks]="dataKeyCallbacks"
+      [datasource]="datasource"
+      formControlName="axis"
+      alwaysExpanded
+      [advanced]="advanced"
+      [axisType]="axisType">
+    </tb-time-series-chart-axis-settings>
+  </div>
+  <div class="tb-axis-settings-panel-buttons">
+    <button mat-button
+            color="primary"
+            type="button"
+            (click)="cancel()">
+      {{ 'action.cancel' | translate }}
+    </button>
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="applyAxisSettings()"
+            [disabled]="axisSettingsFormGroup.invalid || !axisSettingsFormGroup.dirty">
+      {{ 'action.apply' | translate }}
+    </button>
+  </div>
+</div>

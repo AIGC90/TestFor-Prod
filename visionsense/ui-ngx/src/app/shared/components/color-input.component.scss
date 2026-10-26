@@ -1,0 +1,25 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import './../../../scss/mixins';
+
+:host {
+  .mat-mdc-form-field {
+    width: 100%;
+    mat-label {
+      .mat-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+  .tb-color-preview {
+    margin-left: 8px;
+    margin-right: 5px;
+    &.no-margin {
+      margin: 0;
+    }
+  }
+
+  .button-no-border {
+    border: none;
+  }
+}

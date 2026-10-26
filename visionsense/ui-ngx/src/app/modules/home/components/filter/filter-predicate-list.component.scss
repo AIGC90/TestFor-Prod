@@ -1,0 +1,17 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .predicate-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 350px;
+    .no-data-found {
+      height: 50px;
+    }
+  }
+  .filters-operation {
+    margin-top: -18px;
+    color: #666;
+    font-weight: 500;
+  }
+}

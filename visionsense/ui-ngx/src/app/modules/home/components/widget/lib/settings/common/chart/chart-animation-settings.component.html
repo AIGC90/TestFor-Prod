@@ -1,0 +1,77 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<ng-container [formGroup]="animationSettingsFormGroup">
+  <div class="tb-form-panel tb-slide-toggle">
+    <mat-expansion-panel class="tb-settings" [(expanded)]="settingsExpanded"
+                         [disabled]="!animationSettingsFormGroup.get('animation').value">
+      <mat-expansion-panel-header class="flex flex-row flex-wrap">
+        <mat-panel-title>
+          <mat-slide-toggle class="mat-slide flex items-stretch justify-center" formControlName="animation" (click)="$event.stopPropagation()">
+            {{ 'widgets.chart.animation.animation' | translate }}
+          </mat-slide-toggle>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div class="tb-form-row space-between column-xs">
+          <div>{{ 'widgets.chart.animation.animation-threshold' | translate }}</div>
+          <mat-form-field appearance="outline" class="medium-width number" subscriptSizing="dynamic">
+            <input matInput formControlName="animationThreshold" type="number" min="0" step="1" placeholder="{{ 'widget-config.set' | translate }}">
+            <div matSuffix>ms</div>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div>{{ 'widgets.chart.animation.animation-duration' | translate }}</div>
+          <mat-form-field appearance="outline" class="medium-width number" subscriptSizing="dynamic">
+            <input matInput formControlName="animationDuration" type="number" min="0" step="1" placeholder="{{ 'widget-config.set' | translate }}">
+            <div matSuffix>ms</div>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div translate>widgets.chart.animation.animation-easing</div>
+          <mat-form-field class="medium-width" appearance="outline" subscriptSizing="dynamic">
+            <mat-select formControlName="animationEasing">
+              <mat-option *ngFor="let easing of chartAnimationEasings" [value]="easing">
+                {{ easing }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div>{{ 'widgets.chart.animation.animation-delay' | translate }}</div>
+          <mat-form-field appearance="outline" class="medium-width number" subscriptSizing="dynamic">
+            <input matInput formControlName="animationDelay" type="number" min="0" step="1" placeholder="{{ 'widget-config.set' | translate }}">
+            <div matSuffix>ms</div>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div>{{ 'widgets.chart.animation.update-animation-duration' | translate }}</div>
+          <mat-form-field appearance="outline" class="medium-width number" subscriptSizing="dynamic">
+            <input matInput formControlName="animationDurationUpdate" type="number" min="0" step="1" placeholder="{{ 'widget-config.set' | translate }}">
+            <div matSuffix>ms</div>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div translate>widgets.chart.animation.update-animation-easing</div>
+          <mat-form-field class="medium-width" appearance="outline" subscriptSizing="dynamic">
+            <mat-select formControlName="animationEasingUpdate">
+              <mat-option *ngFor="let easing of chartAnimationEasings" [value]="easing">
+                {{ easing }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="tb-form-row space-between column-xs">
+          <div>{{ 'widgets.chart.animation.update-animation-delay' | translate }}</div>
+          <mat-form-field appearance="outline" class="medium-width number" subscriptSizing="dynamic">
+            <input matInput formControlName="animationDelayUpdate" type="number" min="0" step="1" placeholder="{{ 'widget-config.set' | translate }}">
+            <div matSuffix>ms</div>
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </div>
+</ng-container>

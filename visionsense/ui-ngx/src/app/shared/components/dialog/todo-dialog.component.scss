@@ -1,0 +1,10 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .mat-mdc-dialog-content {
+    padding: 0 24px 24px;
+    img {
+      max-width: 500px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field class="mat-block">
+  <mat-label translate>event.event-type</mat-label>
+  <mat-select [ngModel]="eventTableConfig.eventType"
+              (ngModelChange)="eventTypeChanged($event)">
+    <mat-option *ngFor="let type of eventTableConfig.eventTypes" [value]="type">
+      {{ eventTypeTranslationsMap.get(type) | translate }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,21 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="mat-content mat-padding flex flex-col">
+  <label class="tb-title" translate>entity.columns-to-display</label>
+  <mat-checkbox
+    [checked]="allColumnsVisible"
+    [indeterminate]="someColumnsVisible"
+    (change)="toggleAllColumns($event)">
+    {{'entity.show-all-columns' | translate}}
+  </mat-checkbox>
+  <mat-divider/>
+  @for (column of columns; track column.def) {
+    <mat-checkbox [(ngModel)]="column.display" (ngModelChange)="update()">
+      {{ column.title }}
+    </mat-checkbox>
+  }
+</div>

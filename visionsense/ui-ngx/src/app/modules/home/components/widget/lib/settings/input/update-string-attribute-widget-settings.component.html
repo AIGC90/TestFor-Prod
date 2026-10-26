@@ -1,0 +1,24 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section class="tb-widget-settings flex flex-col" [formGroup]="updateStringAttributeWidgetSettingsForm">
+  <tb-update-attribute-general-settings
+    formControlName="updateAttributeGeneralSettings">
+  </tb-update-attribute-general-settings>
+  <fieldset class="fields-group">
+    <legend class="group-title" translate>widgets.input-widgets.text-field-settings</legend>
+    <section class="flex flex-row xs:flex-col gt-xs:items-center gt-xs:justify-start gt-xs:gap-2">
+      <mat-form-field class="mat-block flex-1">
+        <mat-label translate>widgets.input-widgets.min-length</mat-label>
+        <input matInput type="number" step="1" min="0" formControlName="minLength">
+      </mat-form-field>
+      <mat-form-field class="mat-block flex-1">
+        <mat-label translate>widgets.input-widgets.max-length</mat-label>
+        <input matInput type="number" step="1" min="1" formControlName="maxLength">
+      </mat-form-field>
+    </section>
+  </fieldset>
+</section>

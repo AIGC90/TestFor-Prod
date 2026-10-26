@@ -1,0 +1,39 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div class="markdown-content" [class.tb-edit-mode]="!readonly"
+     tb-fullscreen [fullscreen]="fullscreen" (fullscreenChanged)="onFullscreen()">
+  <div style="min-height: 40px;" class="markdown-editor-toolbar flex flex-row items-center justify-start">
+    <label class="tb-title no-padding" [class]="{'tb-error': !disabled && required && !markdownValue, 'tb-required': !disabled && required}">{{ label }}</label>
+    <span class="flex-1"></span>
+    <button [class.!hidden]="editorMode"
+            type="button"
+            mat-button (click)="toggleEditMode()">{{ 'markdown.edit' | translate }}</button>
+    <button [class.!hidden]="!editorMode"
+            type="button"
+            mat-button (click)="toggleEditMode()">{{ 'markdown.preview' | translate }}</button>
+    <div *ngIf = "helpId" [tb-help-popup]="helpId"></div>
+    <fieldset style="width: initial">
+      <div matTooltip="{{(fullscreen ? 'fullscreen.exit' : 'fullscreen.expand') | translate}}"
+           matTooltipPosition="above"
+           style="border-radius: 50%"
+           (click)="fullscreen = !fullscreen">
+        <button type='button' mat-icon-button class="tb-mat-32">
+          <mat-icon class="material-icons">{{ fullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+        </button>
+      </div>
+    </fieldset>
+  </div>
+  <div [class.!hidden]="readonly || disabled" class="markdown-content-editor">
+    <div [class.!hidden]="!editorMode" #markdownEditor class="tb-markdown-editor"></div>
+    <div [class.!hidden]="editorMode" class="tb-markdown-view-container">
+      <tb-markdown [data]="renderValue" lineNumbers fallbackToPlainMarkdown></tb-markdown>
+    </div>
+  </div>
+  <div *ngIf="readonly || disabled" class="tb-markdown-view-container">
+    <tb-markdown [data]="renderValue" lineNumbers fallbackToPlainMarkdown></tb-markdown>
+  </div>
+</div>

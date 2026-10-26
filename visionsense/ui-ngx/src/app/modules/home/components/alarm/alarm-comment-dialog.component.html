@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<form style="width: 600px;">
+  <mat-toolbar color="primary">
+    <span class="flex-1"></span>
+    <button mat-icon-button (click)="close()" type="button">
+      <mat-icon class="material-icons">close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar color="warn" mode="indeterminate" *ngIf="isLoading$ | async">
+  </mat-progress-bar>
+  <div style="height: 4px;" *ngIf="!(isLoading$ | async)"></div>
+  <div mat-dialog-content style="padding: 0">
+    <tb-alarm-comment [alarmId]="alarmId"
+                      [alarmActivityOnly]="true">
+    </tb-alarm-comment>
+  </div>
+</form>

@@ -1,0 +1,11 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  .mat-mdc-card-header {
+    min-height: 64px;
+  }
+
+  .mdc-card__actions {
+    padding: 16px;
+  }
+}

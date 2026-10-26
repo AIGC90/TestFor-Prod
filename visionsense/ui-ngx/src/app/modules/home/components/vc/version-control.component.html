@@ -1,0 +1,22 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-repository-settings #repositorySettingsComponent
+                        [detailsMode]="detailsMode"
+                        hideLoadingBar
+                        [popoverComponent]="popoverComponent"
+                        *ngIf="!(hasRepository$ | async); else versionsTable">
+</tb-repository-settings>
+<ng-template #versionsTable>
+  <tb-entity-versions-table [singleEntityMode]="singleEntityMode"
+                            [popoverComponent]="popoverComponent"
+                            [onBeforeCreateVersion]="onBeforeCreateVersion"
+                            [active]="active"
+                            [entityId]="entityId"
+                            [entityName]="entityName"
+                            [externalEntityId]="externalEntityId"
+                            (versionRestored)="versionRestored.emit()"></tb-entity-versions-table>
+</ng-template>

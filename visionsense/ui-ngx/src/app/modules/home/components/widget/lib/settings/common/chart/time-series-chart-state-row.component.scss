@@ -1,0 +1,37 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../../../../../scss/constants';
+
+.tb-form-table-row.tb-time-series-state-row {
+  @media #{$mat-lt-md} {
+    align-items: flex-start;
+  }
+  .tb-state-label-field {
+    flex: 1;
+    min-width: 70px;
+  }
+  .tb-state-value-field {
+    width: 80px;
+    min-width: 80px;
+  }
+  .tb-state-source-field {
+    width: 100px;
+    min-width: 100px;
+  }
+  .tb-state-source-value-field {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    @media #{$mat-gt-sm} {
+      min-width: 358px;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    .tb-inline-field {
+      flex: 1;
+    }
+  }
+}

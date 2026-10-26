@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div #labelCardPanel class="tb-label-card-panel" [style.padding]="padding" [style]="backgroundStyle$ | async"
+     [class.tb-label-card-pointer]="hasCardClickAction" (click)="cardClick($event)">
+  <div class="tb-label-card-overlay" [style]="overlayStyle"></div>
+  <div class="tb-label-card-title-panel">
+    <ng-container *ngTemplateOutlet="widgetTitlePanel"></ng-container>
+  </div>
+  <div #labelCardContent class="tb-label-card-content">
+    <div #labelCardRow class="tb-label-card-row">
+      <tb-icon *ngIf="showIcon" [style]="iconStyle">{{ icon }}</tb-icon>
+      <div [class.tb-label-card-label]="!settings.autoScale" [style]="labelStyle" [innerHTML]="label | customTranslate  | safe:'html'"></div>
+    </div>
+  </div>
+</div>

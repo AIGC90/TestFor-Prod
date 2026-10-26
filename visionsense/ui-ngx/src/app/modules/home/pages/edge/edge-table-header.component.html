@@ -1,0 +1,13 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-entity-subtype-select
+  subscriptSizing="dynamic"
+  [showLabel]="true"
+  [entityType]="entityType.EDGE"
+  [ngModel]="entitiesTableConfig.componentsData.edgeType"
+  (ngModelChange)="edgeTypeChanged($event)">
+</tb-entity-subtype-select>

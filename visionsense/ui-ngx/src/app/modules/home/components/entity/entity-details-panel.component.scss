@@ -1,0 +1,29 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep {
+  tb-details-panel {
+    > .mat-content {
+      > .mat-mdc-tab-group {
+        > .mat-mdc-tab-body-wrapper {
+          position: absolute;
+          top: 49px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        > .mat-mdc-tab-header {
+          .mat-mdc-tab {
+            min-width: 40px;
+          }
+        }
+      }
+    }
+  }
+}

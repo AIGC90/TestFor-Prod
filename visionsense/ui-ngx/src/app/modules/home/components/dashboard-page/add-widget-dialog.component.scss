@@ -1,0 +1,25 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../scss/constants';
+
+.tb-add-widget-dialog {
+  .mat-mdc-dialog-content {
+    padding: 0;
+    position: relative;
+  }
+  @media #{$mat-gt-xs} {
+    width: 900px;
+    .mat-mdc-dialog-content {
+      height: 900px;
+    }
+  }
+  .tb-add-widget-toolbar {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    place-content: center flex-start;
+    align-items: center;
+    gap: 8px;
+  }
+}

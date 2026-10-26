@@ -1,0 +1,35 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [formGroup]="subTypeFormGroup" class="mat-block" [appearance]="appearance">
+  <mat-label>{{ entitySubtypeText | translate }}</mat-label>
+  <input matInput type="text" placeholder="{{ selectEntitySubtypeText | translate }}"
+         #subTypeInput
+         formControlName="subType"
+         (focusin)="onFocus()"
+         [required]="required"
+         [matAutocomplete]="subTypeAutocomplete">
+  <button *ngIf="subTypeFormGroup.get('subType').value && !disabled"
+          type="button"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="clear()">
+    <mat-icon class="material-icons">close</mat-icon>
+  </button>
+  <mat-autocomplete
+    class="tb-autocomplete"
+    #subTypeAutocomplete="matAutocomplete"
+    [displayWith]="displaySubTypeFn">
+    <mat-option *ngFor="let subType of filteredSubTypes | async" [value]="subType">
+      <span [innerHTML]="subType | highlight:searchText"></span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="subTypeFormGroup.get('subType').hasError('required')">
+    {{ entitySubtypeRequiredText | translate }}
+  </mat-error>
+  <mat-error *ngIf="subTypeFormGroup.get('subType').hasError('maxlength')">
+    {{ entitySubtypeMaxLength | translate }}
+  </mat-error>
+</mat-form-field>

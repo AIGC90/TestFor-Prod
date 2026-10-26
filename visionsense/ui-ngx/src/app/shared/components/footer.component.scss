@@ -1,0 +1,15 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+.footer-text {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  margin: 0;
+  left: 0;
+  line-height: 20px;
+  text-align: center;
+  small {
+    font-size: 14px;
+    color: #98a6ad;
+  }
+}

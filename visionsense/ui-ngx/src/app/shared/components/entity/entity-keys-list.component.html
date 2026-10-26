@@ -1,0 +1,38 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-form-field [formGroup]="keysListFormGroup" class="mat-block tb-chip-list">
+  <mat-chip-grid #chipList>
+    <mat-chip-row
+      *ngFor="let key of modelValue"
+      [removable]="!disabled"
+      (removed)="remove(key)">
+      {{key}}
+      <mat-icon matChipRemove *ngIf="!disabled">close</mat-icon>
+    </mat-chip-row>
+    <input matInput type="text" placeholder="{{ !disabled ? (keysText | translate) : '' }}"
+           style="max-width: 200px;"
+           #keyInput
+           formControlName="key"
+           matAutocompleteOrigin
+           #origin="matAutocompleteOrigin"
+           [matAutocompleteConnectedTo]="origin"
+           (focusin)="onFocus()"
+           [matAutocomplete]="keyAutocomplete"
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           matChipInputAddOnBlur
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-grid>
+  <mat-autocomplete #keyAutocomplete="matAutocomplete"
+                    class="tb-autocomplete"
+                    (optionSelected)="selected($event)"
+                    [displayWith]="displayKeyFn">
+    <mat-option *ngFor="let key of filteredKeys | async" [value]="key">
+      <span [innerHTML]="key | highlight:searchText"></span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

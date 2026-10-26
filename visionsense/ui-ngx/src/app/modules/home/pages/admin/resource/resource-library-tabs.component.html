@@ -1,0 +1,12 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<mat-tab *ngIf="entity && entity.tenantId.id !== NULL_UUID && authUser.authority === authorities.TENANT_ADMIN && !isEdit"
+         label="{{ 'version-control.version-control' | translate }}" #versionControlTab="matTab">
+  <tb-version-control detailsMode="true" singleEntityMode="true"
+                      (versionRestored)="entitiesTableConfig.updateData()"
+                      [active]="versionControlTab.isActive" [entityId]="entity.id" [entityName]="entity.name" [externalEntityId]="entity.externalId || entity.id"></tb-version-control>
+</mat-tab>

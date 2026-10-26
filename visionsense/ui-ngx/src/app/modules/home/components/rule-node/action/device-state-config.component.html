@@ -1,0 +1,16 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<section [formGroup]="deviceState">
+    <mat-form-field class="mat-block" subscriptSizing="dynamic">
+        <mat-label>{{ 'rule-node-config.select-device-connectivity-event' | translate }}</mat-label>
+        <mat-select formControlName="event">
+            <mat-option *ngFor="let eventOption of eventOptions" [value]="eventOption">
+                {{ messageTypeNames.get(eventOption) }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</section>

@@ -1,0 +1,14 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<div [formGroup]="widgetSettingsFormGroup" class="h-full">
+  <ng-container #definedSettingsContent></ng-container>
+  <div class="tb-settings-directive-error" *ngIf="definedDirectiveError">{{definedDirectiveError}}</div>
+  <tb-dynamic-form *ngIf="useDynamicForm()"
+    [properties]="settingsForm"
+    formControlName="settings">
+  </tb-dynamic-form>
+</div>

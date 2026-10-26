@@ -1,0 +1,17 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<button type="button"
+        mat-stroked-button
+        color="primary"
+        [disabled]="disabled"
+        #matButton
+        (click)="openAxisSettingsPopup($event, matButton)"
+        matTooltip="{{ panelTitle }}"
+        matTooltipPosition="above">
+  {{ (axisType === 'xAxis' ? 'widgets.time-series-chart.axis.x-axis' : 'widgets.time-series-chart.axis.y-axis') | translate }}
+  <tb-icon matButtonIcon>settings</tb-icon>
+</button>

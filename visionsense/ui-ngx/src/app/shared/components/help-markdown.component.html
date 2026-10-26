@@ -1,0 +1,7 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<tb-markdown [style]="style" [data]="markdownText$ | async" lineNumbers (ready)="onMarkdownReady()" markdownClass="tb-help-markdown" (click)="markdownClick($event)"></tb-markdown>

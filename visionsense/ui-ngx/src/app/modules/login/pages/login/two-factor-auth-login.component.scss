@@ -1,0 +1,85 @@
+// SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+// SPDX-License-Identifier: Apache-2.0
+@import '../../../../../scss/constants';
+
+:host {
+  display: flex;
+  flex: 1 1 0;
+
+  .tb-two-factor-auth-login-content {
+    background-color: #eee;
+    --mat-card-elevated-container-elevation: none;
+
+    .tb-two-factor-auth-login-card {
+      padding: 48px 48px 48px 16px;
+
+      @media #{$mat-gt-xs} {
+        width: 450px !important;
+      }
+
+      .mat-mdc-card-title {
+        font: 400 28px / 36px Roboto, "Helvetica Neue", sans-serif;
+      }
+
+      .mat-mdc-card-content {
+        margin-top: 44px;
+        margin-left: 40px;
+      }
+
+      .mat-body {
+        letter-spacing: 0.25px;
+        line-height: 16px;
+        margin: 0;
+      }
+
+      .code-block {
+        margin-top: 16px;
+      }
+
+      .providers-container {
+        padding: 0;
+
+        .mat-body {
+          padding-bottom: 8px;
+        }
+      }
+
+      .timer {
+        font: 500 12px / 14px Roboto, "Helvetica Neue", sans-serif;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .action-row:nth-child(n) {
+        min-height: 36px;
+
+        .action-resend {
+          min-width: 50%;
+        }
+      }
+    }
+  }
+
+  ::ng-deep {
+    .tb-two-factor-auth-login-content {
+      .tb-two-factor-auth-login-card {
+        button.mat-mdc-icon-button {
+          .mat-icon {
+            color: rgba(255, 255, 255, 0.8);
+          }
+        }
+      }
+    }
+    button.provider {
+      text-align: start;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      &:not([disabled][disabled]) {
+        border-color: rgba(255, 255, 255, .8);
+      }
+    }
+
+    .mat-form-field-invalid .mat-mdc-form-field-hint {
+      margin-top: 20px;
+    }
+  }
+}

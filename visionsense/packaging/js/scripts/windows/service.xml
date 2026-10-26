@@ -1,0 +1,19 @@
+<!--
+
+    SPDX-FileCopyrightText: Copyright The Thingsboard Authors
+    SPDX-License-Identifier: Apache-2.0
+
+-->
+<service>
+    <id>${pkg.name}</id>
+    <name>${project.name}</name>
+    <description>${project.description}</description>
+    <workingdirectory>%BASE%\bin</workingdirectory>
+    <logpath>${pkg.winWrapperLogFolder}</logpath>
+    <logmode>rotate</logmode>
+    <env name="NODE_CONFIG_DIR" value="%BASE%\conf" />
+    <env name="LOG_FOLDER" value="${pkg.winWrapperLogFolder}" />
+    <env name="NODE_ENV" value="production" />
+    <env name="WEB_FOLDER" value="%BASE%\web" />
+    <executable>%BASE%\bin\${pkg.name}.exe</executable>
+</service>
