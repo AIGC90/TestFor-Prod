@@ -66,7 +66,6 @@ import {
   WidgetPosition,
   widgetTypesData
 } from '@shared/models/widget.models';
-import { environment as env } from '@env/environment';
 import { Authority } from '@shared/models/authority.enum';
 import { DialogService } from '@core/services/dialog.service';
 import { EntityService } from '@core/http/entity.service';
@@ -137,6 +136,7 @@ import {
 import { HttpStatusCode } from '@angular/common/http';
 
 // @dynamic
+import { branding } from '@shared/models/branding.constants';
 @Component({
     selector: 'tb-dashboard-page',
     templateUrl: './dashboard-page.component.html',
@@ -234,7 +234,7 @@ export class DashboardPageComponent extends PageComponent implements IDashboardC
   editingWidgetSubtitle: string = null;
   editingLayoutCtx: DashboardPageLayoutContext = null;
 
-  thingsboardVersion: string = env.tbVersion;
+  poweredByName = branding.fullProductName;
 
   translatedDashboardTitle: string;
 

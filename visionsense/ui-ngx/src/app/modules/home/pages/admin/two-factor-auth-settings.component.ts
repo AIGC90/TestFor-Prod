@@ -19,6 +19,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { NotificationTargetConfigType, NotificationTargetConfigTypeInfoMap } from '@shared/models/notification.models';
 import { EntityType } from '@shared/models/entity-type.models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { branding } from '@shared/models/branding.constants';
 
 @Component({
     selector: 'tb-2fa-settings',
@@ -221,7 +222,7 @@ export class TwoFactorAuthSettingsComponent extends PageComponent implements OnI
     };
     switch (provider) {
       case TwoFactorAuthProviderType.TOTP:
-        formControlConfig.issuerName = [{value: 'ThingsBoard', disabled: true}, [Validators.required, Validators.pattern(/^(?!^\s+$).*$/)]];
+        formControlConfig.issuerName = [{value: branding.twoFaIssuerName, disabled: true}, [Validators.required, Validators.pattern(/^(?!^\s+$).*$/)]];
         break;
       case TwoFactorAuthProviderType.SMS:
         formControlConfig.smsVerificationMessageTemplate = [{value: 'Verification code: ${code}', disabled: true}, [

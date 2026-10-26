@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>AIGC VisionSense</title>
+  <defs>
+    <linearGradient id="fav-bg" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a2a60"/>
+      <stop offset="1" stop-color="#5a4589"/>
+    </linearGradient>
+    <linearGradient id="fav-gc" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5fd8de"/>
+      <stop offset="1" stop-color="#40c4cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#fav-bg)"/>
+  <path fill="none" stroke="url(#fav-gc)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+        d="M46 15 H31 C19 15 16 23 16 32 C16 42 19 49 31 49 H37 C44 49 47 45 47 40 C47 35 44 32 38 32 H33"/>
+</svg>

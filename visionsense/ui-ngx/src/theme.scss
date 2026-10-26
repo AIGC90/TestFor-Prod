@@ -11,20 +11,20 @@
 @include mat.app-background();
 
 $tb-mat-indigo: (
-  50: #e8eaf6,
-  100: #c5cae9,
-  200: #9fa8da,
+  50: #ede9f4,
+  100: #d2c8e3,
+  200: #b4a5d0,
   300: $tb-primary-color-light,
-  400: #5c6bc0,
+  400: #7f66ae,
   500: $tb-primary-color,
   600: $tb-secondary-color,
-  700: #303f9f,
-  800: #283593,
-  900: #1a237e,
+  700: #2f224e,
+  800: #261b40,
+  900: #1c1430,
   A100: $tb-hue3-color,
-  A200: #536dfe,
-  A400: #3d5afe,
-  A700: #304ffe,
+  A200: #8f6fd6,
+  A400: #7a52d0,
+  A700: #6a3fc8,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
@@ -43,8 +43,41 @@ $tb-mat-indigo: (
   )
 );
 
+$aigc-mat-teal: (
+  50: #e3f6f8,
+  100: #b9e9ed,
+  200: #8cdbe2,
+  300: #5ecdd6,
+  400: $aigc-teal,
+  500: #33aec0,
+  600: #2e9bb5,
+  700: $aigc-teal-dark,
+  800: #236c90,
+  900: #1a4f6b,
+  A100: #a6f4fa,
+  A200: #5ee8f2,
+  A400: #22d3e0,
+  A700: #0fbfcc,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
 $tb-primary: mat.m2-define-palette($tb-mat-indigo);
-$tb-accent: mat.m2-define-palette(mat.$m2-deep-orange-palette);
+$tb-accent: mat.m2-define-palette($aigc-mat-teal, 600);
 
 $tb-mat-theme: mat.m2-define-light-theme((
   color: (
@@ -65,20 +98,20 @@ $primary: mat.m2-get-color-from-palette($tb-primary);
 $accent: mat.m2-get-color-from-palette($tb-accent);
 
 $tb-dark-mat-indigo: (
-  50: #e8eaf6,
-  100: #c5cae9,
-  200: #9fa8da,
-  300: #7986cb,
-  400: #5c6bc0,
+  50: #ede9f4,
+  100: #d2c8e3,
+  200: #b4a5d0,
+  300: #9681bd,
+  400: #7f66ae,
   500: $tb-dark-primary-color,
   600: $tb-secondary-color,
-  700: #303f9f,
+  700: #2f224e,
   800: $tb-primary-color,
-  900: #1a237e,
+  900: #1c1430,
   A100: $tb-hue3-color,
-  A200: #536dfe,
-  A400: #3d5afe,
-  A700: #304ffe,
+  A200: #8f6fd6,
+  A400: #7a52d0,
+  A700: #6a3fc8,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),

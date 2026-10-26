@@ -13,7 +13,7 @@ import { BackgroundSettings, BackgroundType, cssUnit, Font } from '@shared/model
 import { AttributeScope } from '@shared/models/telemetry/telemetry.models';
 import { TbUnit } from '@shared/models/unit.models';
 
-const defaultMainColor = '#305680';
+const defaultMainColor = '#3a2a60';
 
 export enum ValueStepperType {
   simplified = 'simplified',

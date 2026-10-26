@@ -122,7 +122,7 @@ export class WidgetActionDialogComponent extends DialogComponent<WidgetActionDia
       showIcon: [{ value: this.action.showIcon ?? true, disabled: true}, []],
       icon: [this.action.icon, Validators.required],
       buttonColor: [{ value: this.action.buttonColor ?? this.defaultIconColor, disabled: true}, []],
-      buttonFillColor: [{ value: this.action.buttonFillColor ?? '#305680', disabled: true}, []],
+      buttonFillColor: [{ value: this.action.buttonFillColor ?? '#3a2a60', disabled: true}, []],
       buttonBorderColor: [{ value: this.action.buttonBorderColor ?? '#0000001F', disabled: true}, []],
       customButtonStyle: [{ value: this.action.customButtonStyle ?? {}, disabled: true}, []],
       useShowWidgetActionFunction: [this.action.useShowWidgetActionFunction],
@@ -186,7 +186,7 @@ export class WidgetActionDialogComponent extends DialogComponent<WidgetActionDia
       if ([WidgetHeaderActionButtonType.raised, WidgetHeaderActionButtonType.flat, WidgetHeaderActionButtonType.miniFab].includes(buttonType)) {
         this.widgetActionFormGroup.get('buttonColor').patchValue('#ffffff', {emitEvent: false});
       } else if ([WidgetHeaderActionButtonType.stroked].includes(buttonType)) {
-        this.widgetActionFormGroup.get('buttonColor').patchValue('#305680', {emitEvent: false});
+        this.widgetActionFormGroup.get('buttonColor').patchValue('#3a2a60', {emitEvent: false});
       } else {
         this.widgetActionFormGroup.get('buttonColor').patchValue(this.defaultIconColor, {emitEvent: false});
       }

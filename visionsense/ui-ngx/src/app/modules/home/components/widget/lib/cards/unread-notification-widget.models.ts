@@ -28,7 +28,7 @@ export const unreadNotificationDefaultSettings: UnreadNotificationWidgetSettings
     lineHeight: ''
   },
   counterValueColor: '#fff',
-  counterColor: '#305680',
+  counterColor: '#3a2a60',
   enableViewAll: true,
   enableFilter: true,
   enableMarkAsRead: true,

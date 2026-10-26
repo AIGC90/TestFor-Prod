@@ -10,6 +10,7 @@ import { OAuth2ClientLoginInfo } from '@shared/models/oauth2.models';
 import { validateEmail } from '@app/core/utils';
 import { PageComponent } from '@shared/components/page.component';
 import { finalize } from 'rxjs/operators';
+import { branding } from '@shared/models/branding.constants';
 
 @Component({
     selector: 'tb-login',
@@ -19,6 +20,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class LoginComponent extends PageComponent implements OnInit {
 
+  companyUrl = branding.companyUrl || null;
   passwordViolation = false;
   isLoading = false;
 

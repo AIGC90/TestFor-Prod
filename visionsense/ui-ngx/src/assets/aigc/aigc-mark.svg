@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -60 1760 610" width="1760" height="610">
+  <title>AIGC</title>
+  <defs>
+    <linearGradient id="aigc-ai" x1="0" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a2a60"/>
+      <stop offset="1" stop-color="#7055a0"/>
+    </linearGradient>
+    <linearGradient id="aigc-gc" x1="775" y1="0" x2="1660" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#40c4cc"/>
+      <stop offset="1" stop-color="#2a80a8"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="86">
+    <path stroke="url(#aigc-ai)" d="M45 455 L200 75 Q258 -40 316 75 L470 455"/>
+    <path stroke="url(#aigc-ai)" d="M618 165 V455"/>
+    <path stroke="url(#aigc-gc)" d="M1120 44 H960 C800 44 775 140 775 250 C775 370 810 455 960 455 H1040 C1120 455 1150 410 1150 345 C1150 280 1120 240 1050 240 H975"/>
+    <path stroke="url(#aigc-gc)" d="M1615 44 H1465 C1305 44 1283 140 1283 250 C1283 370 1310 455 1465 455 H1615"/>
+  </g>
+  <g fill="#3a2a60">
+    <rect x="588" y="-48" width="34" height="34"/>
+    <rect x="596" y="-4" width="34" height="34"/>
+    <rect x="642" y="-6" width="34" height="34"/>
+    <circle cx="578" cy="13" r="17"/>
+    <circle cx="662" cy="-31" r="17"/>
+    <circle cx="616" cy="78" r="17"/>
+    <path stroke="#3a2a60" stroke-width="6" d="M578 13 L596 13 M622 -31 L662 -31 M630 13 L642 11 M616 78 L626 30"/>
+  </g>
+</svg>
