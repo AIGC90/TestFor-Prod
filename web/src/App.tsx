@@ -13,6 +13,7 @@ import {
   attributesConfig,
   calendarsConfig,
   commandsConfig,
+  scheduledReportsConfig,
   DevicesPage,
   driversConfig,
   GroupsPage,
@@ -22,6 +23,20 @@ import {
 import { EntityPage } from './components/EntityPage';
 import { GeofencesPage } from './pages/GeofencesPage';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
+import { LogsPage } from './pages/reports/LogsPage';
+import {
+  AuditReport,
+  ChartReport,
+  CombinedReport,
+  EventsReport,
+  GeofencesReport,
+  ReportsHub,
+  RouteReport,
+  StatisticsReport,
+  StopsReport,
+  SummaryReport,
+  TripsReport,
+} from './pages/reports/reports';
 import { Placeholder } from './pages/Placeholder';
 
 const IMPLEMENTED: Record<string, React.ComponentType> = {
@@ -42,6 +57,19 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/settings/calendars': () => <EntityPage config={calendarsConfig} />,
   '/settings/attributes': () => <EntityPage config={attributesConfig} />,
   '/settings/commands': () => <EntityPage config={commandsConfig} />,
+  '/reports': ReportsHub,
+  '/reports/combined': CombinedReport,
+  '/reports/route': RouteReport,
+  '/reports/trips': TripsReport,
+  '/reports/stops': StopsReport,
+  '/reports/summary': SummaryReport,
+  '/reports/chart': ChartReport,
+  '/reports/events': EventsReport,
+  '/reports/geofences': GeofencesReport,
+  '/reports/statistics': StatisticsReport,
+  '/reports/audit': AuditReport,
+  '/reports/logs': LogsPage,
+  '/reports/scheduled': () => <EntityPage config={scheduledReportsConfig} />,
 };
 
 const router = createBrowserRouter([

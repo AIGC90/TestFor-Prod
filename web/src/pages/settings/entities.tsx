@@ -465,3 +465,45 @@ export const commandsConfig: EntityConfig<CommandRow> = {
     { path: 'textChannel', label: 'Send via SMS', type: 'switch' },
   ],
 };
+
+/* -------------------------------------------------------- scheduled reports */
+
+interface ScheduledReportRow {
+  id: number;
+  type: string;
+  description: string;
+  calendarId: number;
+  attributes: Record<string, unknown>;
+}
+
+const REPORT_TYPES: Option[] = [
+  ['summary', 'Summary'], ['trips', 'Trips'], ['stops', 'Stops'], ['events', 'Events'], ['route', 'Positions'], ['combined', 'Combined'],
+].map(([value, label]) => ({ value, label }));
+const deviceOptions = async (): Promise<Option[]> => (await http<Device[]>('/api/devices')).map((d) => ({ value: d.id, label: d.name }));
+
+export const scheduledReportsConfig: EntityConfig<ScheduledReportRow> = {
+  title: 'Scheduled Reports',
+  singular: 'scheduled report',
+  subtitle: 'Reports emailed automatically on the schedule of a calendar (needs SMTP).',
+  endpoint: '/api/reports',
+  queryKey: 'scheduled-reports',
+  defaults: { type: 'summary', attributes: {} } as Partial<ScheduledReportRow>,
+  columns: [
+    { label: 'Report', render: (r) => REPORT_TYPES.find((t) => t.value === r.type)?.label ?? r.type },
+    { label: 'Description', render: (r) => r.description },
+    { label: 'Schedule', render: (r) => `Calendar #${r.calendarId}` },
+  ],
+  fields: [
+    { path: 'type', label: 'Report', type: 'select', required: true, options: REPORT_TYPES },
+    { path: 'description', label: 'Description', required: true },
+    { path: 'calendarId', label: 'Schedule (calendar)', type: 'select', required: true, options: calendarOptions, optionsKey: 'calendars', helper: 'Create a repeating calendar first' },
+    { path: 'deviceIds', label: 'Vehicles', type: 'multiselect', options: deviceOptions, optionsKey: 'device-options', createOnly: true, fullWidth: true },
+  ],
+  omitOnSave: ['deviceIds'],
+  afterSave: async (saved, values, isNew) => {
+    if (!isNew) return;
+    for (const deviceId of (values.deviceIds as number[] | undefined) ?? []) {
+      await http('/api/permissions', { method: 'POST', body: JSON.stringify({ reportId: saved.id, deviceId }) });
+    }
+  },
+};
