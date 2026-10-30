@@ -153,7 +153,7 @@ export function AppShell() {
             />
             <Box sx={{ flexGrow: 1 }} />
             {desktop && (
-              <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/devices')}>
+              <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/devices?new=1')}>
                 Add Device
               </Button>
             )}

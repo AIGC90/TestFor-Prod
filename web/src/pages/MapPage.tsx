@@ -180,7 +180,7 @@ export function MapPage() {
               <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                 <Button size="small" variant="contained" onClick={() => navigate(`/replay?device=${selected.device.id}`)}>Replay</Button>
                 <Button size="small" variant="outlined" onClick={() => navigate(`/reports/trips?device=${selected.device.id}`)}>Trips</Button>
-                <Button size="small" onClick={() => navigate(`/devices/${selected.device.id}`)}>Edit</Button>
+                <Button size="small" onClick={() => navigate(`/devices?edit=${selected.device.id}`)}>Edit</Button>
               </Stack>
             </CardContent>
           </Card>

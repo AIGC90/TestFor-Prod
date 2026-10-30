@@ -7,10 +7,11 @@ import { HooksController } from './hooks/hooks.controller';
 import { MeController } from './me.controller';
 import { NotificationsController } from './notifications/notifications.controller';
 import { TraccarService } from './traccar/traccar.service';
+import { RolesController } from './users/roles.controller';
 
 @Module({
   imports: [DbModule],
-  controllers: [HealthController, HooksController, MeController, NotificationsController],
+  controllers: [HealthController, HooksController, MeController, NotificationsController, RolesController],
   providers: [TraccarService, { provide: APP_GUARD, useClass: AuthGuard }],
 })
 export class AppModule {}

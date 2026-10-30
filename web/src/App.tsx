@@ -8,6 +8,18 @@ import { Login } from './pages/Login';
 import { MapPage } from './pages/MapPage';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { ReplayPage } from './pages/ReplayPage';
+import {
+  alertRulesConfig,
+  attributesConfig,
+  calendarsConfig,
+  commandsConfig,
+  DevicesPage,
+  driversConfig,
+  GroupsPage,
+  maintenanceConfig,
+  UsersPage,
+} from './pages/settings/entities';
+import { EntityPage } from './components/EntityPage';
 import { Placeholder } from './pages/Placeholder';
 
 const IMPLEMENTED: Record<string, React.ComponentType> = {
@@ -15,6 +27,15 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/map': MapPage,
   '/replay': ReplayPage,
   '/notifications': NotificationsPage,
+  '/devices': DevicesPage,
+  '/settings/groups': GroupsPage,
+  '/settings/users': UsersPage,
+  '/drivers': () => <EntityPage config={driversConfig} />,
+  '/settings/notifications': () => <EntityPage config={alertRulesConfig} />,
+  '/settings/maintenance': () => <EntityPage config={maintenanceConfig} />,
+  '/settings/calendars': () => <EntityPage config={calendarsConfig} />,
+  '/settings/attributes': () => <EntityPage config={attributesConfig} />,
+  '/settings/commands': () => <EntityPage config={commandsConfig} />,
 };
 
 const router = createBrowserRouter([
