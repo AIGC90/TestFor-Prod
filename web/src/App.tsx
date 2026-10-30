@@ -20,6 +20,8 @@ import {
   UsersPage,
 } from './pages/settings/entities';
 import { EntityPage } from './components/EntityPage';
+import { GeofencesPage } from './pages/GeofencesPage';
+import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
 import { Placeholder } from './pages/Placeholder';
 
 const IMPLEMENTED: Record<string, React.ComponentType> = {
@@ -28,6 +30,10 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/replay': ReplayPage,
   '/notifications': NotificationsPage,
   '/devices': DevicesPage,
+  '/geofences': GeofencesPage,
+  '/settings/preferences': PreferencesPage,
+  '/settings/server': ServerConfigPage,
+  '/settings/announcement': AnnouncementPage,
   '/settings/groups': GroupsPage,
   '/settings/users': UsersPage,
   '/drivers': () => <EntityPage config={driversConfig} />,

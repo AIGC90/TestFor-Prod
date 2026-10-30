@@ -33,6 +33,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../auth/AuthProvider';
 import { onLiveEvents, useLiveSocket } from '../lib/live';
 import { eventTitle, useNotifications } from '../lib/notifications';
+import { useServer } from '../pages/settings/ServerPages';
 import { APP_NAME, APP_TAGLINE } from '../config';
 import { NAV } from '../nav';
 
@@ -110,6 +111,9 @@ export function AppShell() {
   useLiveSocket(Boolean(user));
   const { unreadCount } = useNotifications();
   const [toast, setToast] = useState<string | null>(null);
+  const server = useServer();
+  const [bannerHidden, setBannerHidden] = useState<string | null>(null);
+  const announcement = server.data?.announcement;
   useEffect(
     () =>
       onLiveEvents((events) => {
@@ -183,6 +187,11 @@ export function AppShell() {
             </Menu>
           </Toolbar>
         </AppBar>
+        {announcement && bannerHidden !== announcement && (
+          <Alert severity="info" onClose={() => setBannerHidden(announcement)} sx={{ borderRadius: 0 }}>
+            {announcement}
+          </Alert>
+        )}
         <Box component="main" sx={{ p: { xs: 2, md: 3 }, flexGrow: 1 }}>
           <Outlet />
         </Box>

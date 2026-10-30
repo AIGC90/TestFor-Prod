@@ -130,6 +130,8 @@ function toInput(field: Field, stored: unknown): unknown {
 
 /** Converts an input value back to what the API stores. */
 function toStored(field: Field, input: unknown): unknown {
+  // Empty optional attributes are dropped rather than stored as "" / null.
+  if (field.path.startsWith('attributes.') && (input === '' || input === null || (Array.isArray(input) && !input.length))) return undefined;
   if (field.type === 'multiselect' && field.joined) return (input as string[]).join(',');
   if (field.type === 'number') {
     if (input === '' || input === null || input === undefined) return field.required ? 0 : null;
@@ -504,5 +506,63 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
         </DialogActions>
       </Dialog>
     </Stack>
+  );
+}
+
+/** Inline (non-dialog) form for a single record such as server settings or the current user. */
+export function RecordForm({
+  fields,
+  initial,
+  onSubmit,
+  busy,
+  error,
+  success,
+  submitLabel = 'Save changes',
+}: {
+  fields: Field[];
+  initial: Record<string, unknown>;
+  onSubmit: (values: Record<string, unknown>) => void;
+  busy?: boolean;
+  error?: string | null;
+  success?: string | null;
+  submitLabel?: string;
+}) {
+  const [values, setValues] = useState(() =>
+    fields.reduce((acc, f) => setPath(acc, f.path, toInput(f, getPath(initial, f.path))), { ...initial }),
+  );
+  const shown = fields.filter((f) => !f.visible || f.visible(values));
+  const sections = [...new Set(shown.map((f) => f.section ?? ''))];
+  return (
+    <Box
+      component="form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(shown.reduce((acc, f) => setPath(acc, f.path, toStored(f, getPath(values, f.path))), { ...values }));
+      }}
+    >
+      <Stack spacing={2}>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
+        {sections.map((section) => (
+          <Card key={section || 'main'} sx={{ p: 2.5 }}>
+            {section && <Typography variant="h6" sx={{ mb: 2 }}>{section}</Typography>}
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 2 }}>
+              {shown
+                .filter((f) => (f.section ?? '') === section)
+                .map((f) => (
+                  <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' ? '1 / -1' : undefined }}>
+                    <FieldInput field={f} value={getPath(values, f.path)} onChange={(v) => setValues((s) => setPath(s, f.path, v))} />
+                  </Box>
+                ))}
+            </Box>
+          </Card>
+        ))}
+        <Box>
+          <Button type="submit" variant="contained" disabled={busy}>
+            {busy ? 'Saving…' : submitLabel}
+          </Button>
+        </Box>
+      </Stack>
+    </Box>
   );
 }

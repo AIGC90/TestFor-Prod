@@ -4,6 +4,7 @@ import { type GeoJSONSource, LngLatBounds, type LngLatLike, Map as MlMap, type M
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import { useEffect, useRef, useState } from 'react';
 import { DEFAULT_CENTER, MAP_STYLES } from '../config';
+import { type Shape, shapeCenter } from '../lib/wkt';
 
 export interface MapPoint {
   id: number;
@@ -20,18 +21,20 @@ export interface MapLine {
   color?: string;
 }
 
-export interface MapCircle {
+/** A geofence or drawing in progress. */
+export interface MapArea {
   id: string | number;
-  lon: number;
-  lat: number;
-  radiusM: number;
-  label: string;
+  shape: Shape;
+  label?: string;
+  highlight?: boolean;
 }
 
 interface Props {
   points?: MapPoint[];
   lines?: MapLine[];
-  circles?: MapCircle[];
+  areas?: MapArea[];
+  /** Called with [lon, lat] for clicks that do not hit a vehicle. */
+  onMapClick?: (lngLat: [number, number]) => void;
   selectedId?: number | null;
   onSelect?: (id: number) => void;
   /** Fly to this coordinate whenever it changes. */
@@ -67,8 +70,14 @@ function readStyle() {
   }
 }
 
-/** MapLibre map with vehicle markers, polylines (trails, routes) and geofence circles. */
-export function FleetMap({ points = [], lines = [], circles = [], selectedId, onSelect, focus, fitToPoints, fitToLines, height = '100%', onMapReady }: Props) {
+function areaGeometry(shape: Shape) {
+  if (shape.kind === 'circle') return { type: 'Polygon' as const, coordinates: [circlePolygon(shape.center[0], shape.center[1], shape.radius)] };
+  if (shape.kind === 'polygon') return { type: 'Polygon' as const, coordinates: [[...shape.coords, shape.coords[0]]] };
+  return { type: 'LineString' as const, coordinates: shape.coords };
+}
+
+/** MapLibre map with vehicle markers, polylines (trails, routes) and geofence areas. */
+export function FleetMap({ points = [], lines = [], areas = [], onMapClick, selectedId, onSelect, focus, fitToPoints, fitToLines, height = '100%', onMapReady }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MlMap | null>(null);
   const [ready, setReady] = useState(false);
@@ -76,6 +85,8 @@ export function FleetMap({ points = [], lines = [], circles = [], selectedId, on
   const fitted = useRef(false);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
+  const onMapClickRef = useRef(onMapClick);
+  onMapClickRef.current = onMapClick;
 
   useEffect(() => {
     const style = MAP_STYLES.find((s) => s.id === styleId) ?? MAP_STYLES[0];
@@ -85,9 +96,18 @@ export function FleetMap({ points = [], lines = [], circles = [], selectedId, on
     mapRef.current = map;
     map.on('load', () => {
       const empty = { type: 'FeatureCollection' as const, features: [] };
-      map.addSource('circles', { type: 'geojson', data: empty });
-      map.addLayer({ id: 'circles-fill', type: 'fill', source: 'circles', paint: { 'fill-color': '#0b5cad', 'fill-opacity': 0.12 } });
-      map.addLayer({ id: 'circles-line', type: 'line', source: 'circles', paint: { 'line-color': '#0b5cad', 'line-width': 1.5 } });
+      map.addSource('areas', { type: 'geojson', data: empty });
+      const areaColor = ['case', ['get', 'highlight'], '#f57c00', '#0b5cad'] as unknown as string;
+      map.addLayer({ id: 'areas-fill', type: 'fill', source: 'areas', filter: ['==', ['geometry-type'], 'Polygon'], paint: { 'fill-color': areaColor, 'fill-opacity': 0.15 } });
+      map.addLayer({ id: 'areas-line', type: 'line', source: 'areas', paint: { 'line-color': areaColor, 'line-width': 2 } });
+      map.addSource('area-labels', { type: 'geojson', data: empty });
+      map.addLayer({
+        id: 'area-labels',
+        type: 'symbol',
+        source: 'area-labels',
+        layout: { 'text-field': ['get', 'label'], 'text-font': ['Noto Sans Regular'], 'text-size': 11 },
+        paint: { 'text-color': '#0b3d73', 'text-halo-color': '#fff', 'text-halo-width': 1.5 },
+      });
       map.addSource('lines', { type: 'geojson', data: empty });
       map.addLayer({
         id: 'lines',
@@ -125,6 +145,10 @@ export function FleetMap({ points = [], lines = [], circles = [], selectedId, on
       map.on('click', 'points', (e: MapLayerMouseEvent) => {
         const id = e.features?.[0]?.properties?.id;
         if (id !== undefined) onSelectRef.current?.(Number(id));
+      });
+      map.on('click', (e) => {
+        if (map.queryRenderedFeatures(e.point, { layers: ['points'] }).length) return;
+        onMapClickRef.current?.([e.lngLat.lng, e.lngLat.lat]);
       });
       map.on('mouseenter', 'points', () => (map.getCanvas().style.cursor = 'pointer'));
       map.on('mouseleave', 'points', () => (map.getCanvas().style.cursor = ''));
@@ -178,15 +202,18 @@ export function FleetMap({ points = [], lines = [], circles = [], selectedId, on
   useEffect(() => {
     const map = mapRef.current;
     if (!ready || !map) return;
-    (map.getSource('circles') as GeoJSONSource).setData({
+    const valid = areas.filter((a) => (a.shape.kind === 'circle' ? a.shape.radius > 0 : a.shape.coords.length >= (a.shape.kind === 'polygon' ? 3 : 2)));
+    (map.getSource('areas') as GeoJSONSource).setData({
       type: 'FeatureCollection',
-      features: circles.map((c) => ({
-        type: 'Feature',
-        geometry: { type: 'Polygon', coordinates: [circlePolygon(c.lon, c.lat, c.radiusM)] },
-        properties: { id: c.id, label: c.label },
-      })),
+      features: valid.map((a) => ({ type: 'Feature', geometry: areaGeometry(a.shape), properties: { id: a.id, highlight: Boolean(a.highlight) } })),
     });
-  }, [ready, circles]);
+    (map.getSource('area-labels') as GeoJSONSource).setData({
+      type: 'FeatureCollection',
+      features: valid
+        .filter((a) => a.label)
+        .map((a) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: shapeCenter(a.shape) }, properties: { label: a.label } })),
+    });
+  }, [ready, areas]);
 
   useEffect(() => {
     if (ready && focus) mapRef.current?.flyTo({ center: focus as LngLatLike, zoom: Math.max(mapRef.current.getZoom(), 10) });
