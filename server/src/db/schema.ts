@@ -35,3 +35,14 @@ export const traccarEvents = pgTable(
   },
   (t) => [uniqueIndex('traccar_events_event_id').on(t.traccarEventId)],
 );
+
+/** Which Traccar events each user has marked as read in the Notifications Center. */
+export const notificationReads = pgTable(
+  'notification_reads',
+  {
+    userId: integer('user_id').notNull(),
+    eventId: integer('event_id').notNull(),
+    readAt: timestamp('read_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('notification_reads_user_event').on(t.userId, t.eventId)],
+);

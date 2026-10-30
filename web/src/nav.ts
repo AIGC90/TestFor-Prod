@@ -29,11 +29,11 @@ export const NAV: NavSection[] = [
     icon: RadioButtonChecked,
     items: [
       { label: 'Dashboard', path: '/dashboard' },
-      { label: 'Map', path: '/map', day: 2, summary: 'Live positions, status filters, trails and clustering.' },
-      { label: 'Route Replay', path: '/replay', day: 2, summary: 'Play back a vehicle track for any period.' },
+      { label: 'Map', path: '/map' },
+      { label: 'Route Replay', path: '/replay' },
       { label: 'Dashcam Streams', path: '/dashcam', day: 6, summary: 'Live front/driver cameras, recordings, ADAS & DMS alerts.' },
       { label: 'SOS Emergency', path: '/sos', day: 6, summary: 'Panic and crash alarms, response tracking, emergency contacts.' },
-      { label: 'Notifications Center', path: '/notifications', day: 2, summary: 'Unified alert feed by category with read state.' },
+      { label: 'Notifications Center', path: '/notifications' },
     ],
   },
   {

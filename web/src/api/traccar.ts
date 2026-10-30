@@ -63,6 +63,22 @@ export interface Group {
   groupId: number;
 }
 
+export interface Driver {
+  id: number;
+  name: string;
+  uniqueId: string;
+  attributes: Record<string, unknown>;
+}
+
+export interface Geofence {
+  id: number;
+  name: string;
+  description: string | null;
+  area: string;
+  calendarId: number;
+  attributes: Record<string, unknown>;
+}
+
 export interface SummaryRow {
   deviceId: number;
   deviceName: string;
@@ -89,6 +105,10 @@ export const traccar = {
   groups: () => http<Group[]>('/api/groups'),
   summary: (deviceIds: number[], from: string, to: string, daily = false) =>
     http<SummaryRow[]>(`/api/reports/summary?${qs({ deviceId: deviceIds, from, to, daily })}`),
-  events: (deviceIds: number[], from: string, to: string) =>
-    http<TEvent[]>(`/api/reports/events?${qs({ deviceId: deviceIds, from, to })}`),
+  events: (deviceIds: number[], from: string, to: string, type?: string[]) =>
+    http<TEvent[]>(`/api/reports/events?${qs({ deviceId: deviceIds, from, to, type })}`),
+  route: (deviceId: number, from: string, to: string) =>
+    http<Position[]>(`/api/reports/route?${qs({ deviceId, from, to })}`),
+  drivers: () => http<Driver[]>('/api/drivers'),
+  geofences: () => http<Geofence[]>('/api/geofences'),
 };

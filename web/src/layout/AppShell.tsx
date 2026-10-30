@@ -19,6 +19,8 @@ import {
   ListItemIcon,
   ListItemText,
   Menu,
+  Snackbar,
+  Alert,
   MenuItem,
   TextField,
   Toolbar,
@@ -26,9 +28,11 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../auth/AuthProvider';
+import { onLiveEvents, useLiveSocket } from '../lib/live';
+import { eventTitle, useNotifications } from '../lib/notifications';
 import { APP_NAME, APP_TAGLINE } from '../config';
 import { NAV } from '../nav';
 
@@ -103,6 +107,17 @@ export function AppShell() {
   const [menuEl, setMenuEl] = useState<HTMLElement | null>(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  useLiveSocket(Boolean(user));
+  const { unreadCount } = useNotifications();
+  const [toast, setToast] = useState<string | null>(null);
+  useEffect(
+    () =>
+      onLiveEvents((events) => {
+        const important = events.find((e) => e.type === 'alarm' || e.type.startsWith('geofence'));
+        if (important) setToast(eventTitle(important));
+      }),
+    [],
+  );
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
@@ -143,7 +158,7 @@ export function AppShell() {
               </Button>
             )}
             <IconButton aria-label="notifications" onClick={() => navigate('/notifications')}>
-              <Badge color="error" variant="dot">
+              <Badge color="error" badgeContent={unreadCount} max={99}>
                 <NotificationsOutlined />
               </Badge>
             </IconButton>
@@ -171,6 +186,11 @@ export function AppShell() {
         <Box component="main" sx={{ p: { xs: 2, md: 3 }, flexGrow: 1 }}>
           <Outlet />
         </Box>
+        <Snackbar open={Boolean(toast)} autoHideDuration={5000} onClose={() => setToast(null)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+          <Alert severity="warning" variant="filled" onClose={() => setToast(null)} onClick={() => navigate('/notifications')} sx={{ cursor: 'pointer' }}>
+            {toast}
+          </Alert>
+        </Snackbar>
       </Box>
     </Box>
   );

@@ -5,10 +5,16 @@ import { AppShell } from './layout/AppShell';
 import { NAV_ITEMS } from './nav';
 import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/Login';
+import { MapPage } from './pages/MapPage';
+import { NotificationsPage } from './pages/NotificationsPage';
+import { ReplayPage } from './pages/ReplayPage';
 import { Placeholder } from './pages/Placeholder';
 
 const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/dashboard': Dashboard,
+  '/map': MapPage,
+  '/replay': ReplayPage,
+  '/notifications': NotificationsPage,
 };
 
 const router = createBrowserRouter([
