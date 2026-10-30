@@ -47,7 +47,7 @@ copy and seed data.
 
 * **Login page**: email, password (show/hide), "Remember me", "Forgot password?", language selector, marketing panel, links to Android/iOS apps, Privacy / Terms / Support.
 * **Top bar**: global search ("Search vehicles, drivers or locations…"), **Add Device** shortcut, notification bell with unread count, user avatar (name + role).
-* **Sidebar** — 9 groups, 76 entries (see §2–§10 for each).
+* **Sidebar** — 8 groups, 74 entries (see §2–§10 for each).
 * Greeting line on dashboard ("Good evening, {name} · {weekday, date}").
 * Common list-page pattern: KPI cards → status tabs with counts → search + filter dropdowns → table → row actions → pagination (25/50/100) → Export (Excel/CSV).
 * Common form pattern: modal dialog for small records; full page (`/x/new`) for multi-line documents; live "summary/preview" panel beside forms; required fields marked `*`; inline "still needed" validation hints.
@@ -458,7 +458,7 @@ Estimates assume a small team (3–5 developers) and will change once hardware, 
 
 Device fields: id, name, uniqueId (IMEI), status, lastUpdate, positionId, groupId, calendarId, phone, model, contact, category, disabled, expirationTime, attributes (used for sell type, customer, SIM/ICCID, MDN, operator, odometer…).
 
-## Appendix B — Sidebar map (76 entries)
+## Appendix B — Sidebar map (74 entries)
 
 * **Live operations & fleet**: Dashboard, Map, Route Replay, Dashcam Streams, SOS Emergency, Notifications Center
 * **Operations & trips**: Trip Dispatch Hub, Customer & Orders, Revenue & Financials, Fuel Indents, Loading Sheet, Material Received, LR Register, Freight Memos, Incoming Vehicles, FASTag & Tolls, Subscriptions & Licenses
