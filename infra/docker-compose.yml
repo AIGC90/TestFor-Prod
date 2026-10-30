@@ -1,0 +1,46 @@
+# Local development stack: PostgreSQL (traccar + erp databases) and Traccar.
+# Usage: docker compose -f infra/docker-compose.yml up -d
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: fleet
+      POSTGRES_PASSWORD: fleet
+      POSTGRES_DB: erp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fleet -d erp"]
+      interval: 5s
+      retries: 20
+
+  traccar:
+    image: traccar/traccar:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      CONFIG_USE_ENVIRONMENT_VARIABLES: "true"
+      DATABASE_DRIVER: org.postgresql.Driver
+      DATABASE_URL: jdbc:postgresql://postgres:5432/traccar
+      DATABASE_USER: fleet
+      DATABASE_PASSWORD: fleet
+      LOGGER_CONSOLE: "true"
+      GEOCODER_ENABLE: "false"   # enable with a provider key in production
+      # Forward every event to the ERP API so it can react (SOS, geofence arrival, ...)
+      EVENT_FORWARD_ENABLE: "true"
+      EVENT_FORWARD_URL: http://host.docker.internal:3000/erp/hooks/traccar-event
+      EVENT_FORWARD_HEADER: "X-Hook-Secret: dev-hook-secret"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8082:8082"   # web/API
+      - "5055:5055"   # OsmAnd protocol (used by the simulator and phone apps)
+      - "5027:5027"   # Teltonika
+      - "5023:5023"   # GT06 / Concox
+
+volumes:
+  pgdata:

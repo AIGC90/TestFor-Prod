@@ -1,0 +1,1 @@
+CREATE DATABASE traccar OWNER fleet;

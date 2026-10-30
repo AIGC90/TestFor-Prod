@@ -7,3 +7,10 @@ __pycache__/
 htmlcov/
 build/
 dist/
+node_modules/
+.env
+*.log
+coverage/
+server/dist/
+web/dist/
+server.log
