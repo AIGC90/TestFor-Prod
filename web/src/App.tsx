@@ -23,6 +23,8 @@ import {
 import { EntityPage } from './components/EntityPage';
 import { GeofencesPage } from './pages/GeofencesPage';
 import { ItemMasterPage } from './pages/masters/ItemMasterPage';
+import { DocumentPermissionsPage, FieldMasksPage } from './pages/admin/AccessPages';
+import { PendingInboxPage } from './pages/admin/PendingInboxPage';
 import { PartiesPage, PlantsStoresPage } from './pages/masters/masters';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
 import { LogsPage } from './pages/reports/LogsPage';
@@ -49,6 +51,9 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/devices': DevicesPage,
   '/geofences': GeofencesPage,
   '/item-master': ItemMasterPage,
+  '/pending-inbox': PendingInboxPage,
+  '/document-permissions': DocumentPermissionsPage,
+  '/field-masks': FieldMasksPage,
   '/settings/plants': PlantsStoresPage,
   '/settings/partners': PartiesPage,
   '/settings/preferences': PreferencesPage,

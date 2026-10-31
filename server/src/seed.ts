@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { and, eq, isNull } from 'drizzle-orm';
 import { AppModule } from './app.module';
 import { DB, type Db } from './db/db.module';
-import { itemCategories, items, parties, plants, stores } from './db/schema';
+import { approvalRules, itemCategories, items, parties, plants, stores } from './db/schema';
 
 const PLANTS = [
   { code: 'PUN', name: 'Pune Central Plant', city: 'Pune', state: 'Maharashtra', gstin: '27AAPFU0939F1ZV' },
@@ -97,6 +97,20 @@ async function seed() {
   await db
     .insert(items)
     .values(ITEMS.map(({ category, ...i }) => ({ ...i, tags: i.tags ?? [], categoryId: categoryIds.get(category.join('>'))! })))
+    .onConflictDoNothing();
+
+  // Default approval routing; admins tune it on the Pending Inbox > Rules tab.
+  await db
+    .insert(approvalRules)
+    .values([
+      { docType: 'job_card', minAmount: 25000, approverRole: 'workshop_manager' },
+      { docType: 'gate_pass', minAmount: 0, approverRole: 'workshop_manager' },
+      { docType: 'repair_bill', minAmount: 10000, approverRole: 'accountant' },
+      { docType: 'stock_request', minAmount: 0, approverRole: 'storekeeper' },
+      { docType: 'fuel_indent', minAmount: 0, approverRole: 'fleet_supervisor' },
+      { docType: 'stock_sale', minAmount: 0, approverRole: 'accountant' },
+      { docType: 'driver_charge', minAmount: 2000, approverRole: 'fleet_supervisor' },
+    ])
     .onConflictDoNothing();
 
   await app.close();

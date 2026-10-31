@@ -72,6 +72,10 @@ export interface CrudOptions {
   canDelete?: (row: Record<string, unknown>, ctx: CrudContext) => Promise<string | null> | string | null;
 }
 
+/** Field names per document type, for the Field Masks screen. */
+export const FIELD_REGISTRY = new Map<DocType, string[]>();
+const SYSTEM_FIELDS = new Set(['id', 'createdAt', 'updatedAt', 'createdBy']);
+
 const listQuery = z.object({
   search: z.string().trim().max(200).optional(),
   limit: z.coerce.number().int().min(1).max(5000).default(1000),
@@ -91,6 +95,7 @@ export function crudController(opts: CrudOptions): Type<unknown> {
   const hasUpdatedAt = 'updatedAt' in columns;
   const hasCreatedBy = 'createdBy' in columns;
   const updateSchema = opts.schema.partial();
+  FIELD_REGISTRY.set(opts.docType, Object.keys(columns).filter((c) => !SYSTEM_FIELDS.has(c)));
 
   @Controller(opts.path)
   class CrudController {

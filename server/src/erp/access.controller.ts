@@ -6,7 +6,7 @@ import { type Db, InjectDb } from '../db/db.module';
 import { docPermissions, fieldMasks } from '../db/schema';
 import { AccessService } from './access.service';
 import { AuditService } from './audit.service';
-import { validationError } from './crud';
+import { FIELD_REGISTRY, validationError } from './crud';
 import { ACTIONS, DOC_TYPES, type DocType } from './doctypes';
 
 const docTypeEnum = z.enum(Object.keys(DOC_TYPES) as [DocType, ...DocType[]]);
@@ -50,7 +50,7 @@ export class AccessController {
 
   @Get('doc-types')
   docTypes() {
-    return { roles: editableRoles, actions: ACTIONS, docTypes: DOC_TYPES };
+    return { roles: editableRoles, actions: ACTIONS, docTypes: DOC_TYPES, fields: Object.fromEntries(FIELD_REGISTRY) };
   }
 
   @Roles('admin')
