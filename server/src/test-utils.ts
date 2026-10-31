@@ -24,11 +24,16 @@ export const ADMIN: TraccarUser = {
 export const USER: TraccarUser = {
   id: 2, name: 'Store User', email: 'store@test', administrator: false, readonly: false, disabled: false,
 };
+/** A third account whose ERP role tests set as needed. */
+export const STAFF: TraccarUser = {
+  id: 3, name: 'Staff User', email: 'staff@test', administrator: false, readonly: false, disabled: false,
+};
 
 export async function createTestApp(): Promise<{ app: INestApplication; traccar: FakeTraccar }> {
   const traccar = new FakeTraccar();
   traccar.sessions.set('admin-session', ADMIN);
   traccar.sessions.set('user-session', USER);
+  traccar.sessions.set('staff-session', STAFF);
   const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
     .overrideProvider(TraccarService)
     .useValue(traccar)

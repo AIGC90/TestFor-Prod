@@ -36,6 +36,7 @@ import dayjs from 'dayjs';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { http, HttpError } from '../api/http';
+import { useAccess } from '../lib/access';
 import { downloadCsv } from '../lib/csv';
 
 export interface Option {
@@ -92,6 +93,10 @@ export interface EntityConfig<T extends { id: number }> {
   beforeSave?: (values: Record<string, unknown>) => Record<string, unknown>;
   toolbar?: ReactNode;
   readOnly?: boolean;
+  /** ERP document type: hides actions the role may not take and applies field masks. */
+  docType?: string;
+  /** Client-side filter applied before search (e.g. the selected category subtree). */
+  rowFilter?: (row: T) => boolean;
 }
 
 export function getPath(obj: unknown, path: string): unknown {
@@ -142,7 +147,7 @@ function toStored(field: Field, input: unknown): unknown {
   return input;
 }
 
-function FieldInput({ field, value, onChange }: { field: Field; value: unknown; onChange: (v: unknown) => void }) {
+function FieldInput({ field, value, onChange, disabled }: { field: Field; value: unknown; onChange: (v: unknown) => void; disabled?: boolean }) {
   const loader = typeof field.options === 'function' ? field.options : null;
   const loaded = useQuery({
     queryKey: ['options', field.optionsKey ?? field.path],
@@ -158,12 +163,13 @@ function FieldInput({ field, value, onChange }: { field: Field; value: unknown; 
     helperText: field.helper,
     fullWidth: true,
     size: 'small' as const,
+    disabled,
     slotProps: { inputLabel: { shrink: filled || undefined } },
   };
 
   switch (field.type) {
     case 'switch':
-      return <FormControlLabel control={<Switch checked={Boolean(value)} onChange={(e) => onChange(e.target.checked)} />} label={field.label} />;
+      return <FormControlLabel disabled={disabled} control={<Switch checked={Boolean(value)} onChange={(e) => onChange(e.target.checked)} />} label={field.label} />;
     case 'select':
       return (
         <TextField select {...common} value={value ?? ''} onChange={(e) => onChange(e.target.value)}>
@@ -178,6 +184,7 @@ function FieldInput({ field, value, onChange }: { field: Field; value: unknown; 
         <Autocomplete
           multiple
           size="small"
+          disabled={disabled}
           options={options}
           disableCloseOnSelect
           getOptionLabel={(o) => o.label}
@@ -228,11 +235,15 @@ export function EntityForm({
   onSubmit,
   busy,
   error,
+  hidden = [],
+  readonlyFields = [],
 }: {
   title: string;
   fields: Field[];
   initial: Record<string, unknown>;
   isNew: boolean;
+  hidden?: string[];
+  readonlyFields?: string[];
   onCancel: () => void;
   onSubmit: (values: Record<string, unknown>) => void;
   busy?: boolean;
@@ -241,7 +252,8 @@ export function EntityForm({
   const [values, setValues] = useState(() =>
     fields.reduce((acc, f) => setPath(acc, f.path, toInput(f, getPath(initial, f.path))), { ...initial }),
   );
-  const shown = fields.filter((f) => (!f.createOnly || isNew) && (!f.visible || f.visible(values)));
+  const top = (f: Field) => f.path.split('.')[0];
+  const shown = fields.filter((f) => (!f.createOnly || isNew) && (!f.visible || f.visible(values)) && !hidden.includes(top(f)));
   const sections = [...new Set(shown.map((f) => f.section ?? ''))];
 
   return (
@@ -270,7 +282,12 @@ export function EntityForm({
                     .filter((f) => (f.section ?? '') === section)
                     .map((f) => (
                       <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' ? '1 / -1' : undefined }}>
-                        <FieldInput field={f} value={getPath(values, f.path)} onChange={(v) => setValues((s) => setPath(s, f.path, v))} />
+                        <FieldInput
+                          field={f}
+                          value={getPath(values, f.path)}
+                          onChange={(v) => setValues((s) => setPath(s, f.path, v))}
+                          disabled={!isNew && readonlyFields.includes(top(f))}
+                        />
                       </Box>
                     ))}
                 </Box>
@@ -291,6 +308,13 @@ export function EntityForm({
 
 export function errorMessage(e: unknown) {
   if (e instanceof HttpError) {
+    // Our API answers {"message": "..."}; Traccar answers plain text or a stack trace.
+    try {
+      const body = JSON.parse(e.message) as { message?: string | string[] };
+      if (body.message) return Array.isArray(body.message) ? body.message.join('; ') : body.message;
+    } catch {
+      /* not JSON */
+    }
     const text = e.message.split('\n')[0];
     return text.length > 200 ? `${text.slice(0, 200)}…` : text;
   }
@@ -301,6 +325,8 @@ export function errorMessage(e: unknown) {
 export function EntityPage<T extends { id: number }>({ config }: { config: EntityConfig<T> }) {
   const qc = useQueryClient();
   const list = useQuery({ queryKey: [config.queryKey], queryFn: () => http<T[]>(config.endpoint) });
+  const access = useAccess();
+  const allowed = (action: 'create' | 'edit' | 'delete') => !config.readOnly && (!config.docType || access.can(config.docType, action));
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
@@ -333,7 +359,7 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
 
   const rows = useMemo(() => {
     const q = search.trim().toLowerCase();
-    const all = list.data ?? [];
+    const all = config.rowFilter ? (list.data ?? []).filter(config.rowFilter) : (list.data ?? []);
     if (!q) return all;
     return all.filter((r) => (config.searchText ? config.searchText(r) : JSON.stringify(r)).toLowerCase().includes(q));
   }, [list.data, search, config]);
@@ -395,7 +421,7 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
           <Button variant="outlined" startIcon={<FileDownloadOutlined />} onClick={exportCsv} disabled={!rows.length}>
             Export
           </Button>
-          {!config.readOnly && (
+          {allowed('create') && (
             <Button
               variant="contained"
               startIcon={<AddIcon />}
@@ -429,7 +455,7 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
                 {config.columns.map((c) => (
                   <TableCell key={c.label} sx={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{c.label}</TableCell>
                 ))}
-                {!config.readOnly && <TableCell align="right" />}
+                {(allowed('edit') || allowed('delete')) && <TableCell align="right" />}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -450,14 +476,18 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
                   {config.columns.map((c) => (
                     <TableCell key={c.label}>{c.render(r)}</TableCell>
                   ))}
-                  {!config.readOnly && (
+                  {(allowed('edit') || allowed('delete')) && (
                     <TableCell align="right" sx={{ whiteSpace: 'nowrap' }}>
-                      <IconButton size="small" aria-label="edit" onClick={() => void openEdit(r)}>
-                        <EditOutlined fontSize="small" />
-                      </IconButton>
-                      <IconButton size="small" aria-label="delete" onClick={() => setDeleting(r)}>
-                        <DeleteOutline fontSize="small" />
-                      </IconButton>
+                      {allowed('edit') && (
+                        <IconButton size="small" aria-label="edit" onClick={() => void openEdit(r)}>
+                          <EditOutlined fontSize="small" />
+                        </IconButton>
+                      )}
+                      {allowed('delete') && (
+                        <IconButton size="small" aria-label="delete" onClick={() => setDeleting(r)}>
+                          <DeleteOutline fontSize="small" />
+                        </IconButton>
+                      )}
                     </TableCell>
                   )}
                 </TableRow>
@@ -489,6 +519,8 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
           onSubmit={(v) => save.mutate(v)}
           busy={save.isPending}
           error={save.isError ? errorMessage(save.error) : null}
+          hidden={config.docType ? access.hidden(config.docType) : []}
+          readonlyFields={config.docType ? access.readonly(config.docType) : []}
         />
       )}
 

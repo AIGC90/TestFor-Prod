@@ -61,7 +61,7 @@ export const NAV: NavSection[] = [
       { label: 'Stock Movements', path: '/movements', day: 4, summary: 'Every receipt, issue, transfer, adjustment and write-off.' },
       { label: 'Stock Requests', path: '/requests', day: 4, summary: 'Buy or inter-store requests with approval and fulfilment.' },
       { label: 'Goods to Receive', path: '/receive', day: 4, summary: 'Land purchase receipts into stores, unlock bills.' },
-      { label: 'Item Master', path: '/item-master', day: 3, summary: '4-level category tree, HSN/GST, reorder levels.' },
+      { label: 'Item Master', path: '/item-master' },
       { label: 'Opening Stock', path: '/opening-stock', day: 4, summary: 'Post opening balances manually or from a spreadsheet.' },
       { label: 'Stock Sales', path: '/sales', day: 4, summary: 'Scrap and surplus sales with GST invoices.' },
       { label: 'Group Loans', path: '/group-loans', day: 4, summary: 'Tyres lent to / borrowed from sister companies.' },
@@ -131,6 +131,8 @@ export const NAV: NavSection[] = [
     title: 'Settings & administration',
     icon: AdminPanelSettings,
     items: [
+      { label: 'Plants & Stores', path: '/settings/plants' },
+      { label: 'Business Partners', path: '/settings/partners' },
       { label: 'Devices', path: '/devices' },
       { label: 'Vehicle Groups', path: '/settings/groups' },
       { label: 'Geofences', path: '/geofences' },

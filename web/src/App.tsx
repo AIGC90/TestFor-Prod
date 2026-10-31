@@ -22,6 +22,8 @@ import {
 } from './pages/settings/entities';
 import { EntityPage } from './components/EntityPage';
 import { GeofencesPage } from './pages/GeofencesPage';
+import { ItemMasterPage } from './pages/masters/ItemMasterPage';
+import { PartiesPage, PlantsStoresPage } from './pages/masters/masters';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
 import { LogsPage } from './pages/reports/LogsPage';
 import {
@@ -46,6 +48,9 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/notifications': NotificationsPage,
   '/devices': DevicesPage,
   '/geofences': GeofencesPage,
+  '/item-master': ItemMasterPage,
+  '/settings/plants': PlantsStoresPage,
+  '/settings/partners': PartiesPage,
   '/settings/preferences': PreferencesPage,
   '/settings/server': ServerConfigPage,
   '/settings/announcement': AnnouncementPage,

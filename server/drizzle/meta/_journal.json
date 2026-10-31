@@ -15,6 +15,13 @@
       "when": 1793363315253,
       "tag": "0001_notification_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793483201266,
+      "tag": "0002_erp_framework_masters",
+      "breakpoints": true
     }
   ]
 }
