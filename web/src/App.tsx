@@ -24,6 +24,7 @@ import { EntityPage } from './components/EntityPage';
 import { GeofencesPage } from './pages/GeofencesPage';
 import { ItemMasterPage } from './pages/masters/ItemMasterPage';
 import { DocumentPermissionsPage, FieldMasksPage } from './pages/admin/AccessPages';
+import { IntegrationsPage } from './pages/admin/IntegrationsPage';
 import { PendingInboxPage } from './pages/admin/PendingInboxPage';
 import { PartiesPage, PlantsStoresPage } from './pages/masters/masters';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
@@ -54,6 +55,7 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/pending-inbox': PendingInboxPage,
   '/document-permissions': DocumentPermissionsPage,
   '/field-masks': FieldMasksPage,
+  '/settings/integrations': IntegrationsPage,
   '/settings/plants': PlantsStoresPage,
   '/settings/partners': PartiesPage,
   '/settings/preferences': PreferencesPage,

@@ -34,10 +34,24 @@ export class TraccarService {
   }
 
   async get<T>(cookie: string, path: string): Promise<T> {
+    return this.request<T>(cookie, 'GET', path);
+  }
+
+  async post<T>(cookie: string, path: string, body: unknown): Promise<T> {
+    return this.request<T>(cookie, 'POST', path, body);
+  }
+
+  private async request<T>(cookie: string, method: string, path: string, body?: unknown): Promise<T> {
     const res = await fetch(`${config.traccarUrl}/api${path}`, {
-      headers: { Cookie: cookie, Accept: 'application/json' },
+      method,
+      headers: { Cookie: cookie, Accept: 'application/json', ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}) },
+      body: body !== undefined ? JSON.stringify(body) : undefined,
     });
-    if (!res.ok) throw new Error(`Traccar GET ${path} failed: ${res.status}`);
-    return (await res.json()) as T;
+    if (!res.ok) {
+      const text = (await res.text()).split('\n')[0].slice(0, 200);
+      throw new Error(`Traccar ${method} ${path} failed: ${res.status} ${text}`);
+    }
+    const text = await res.text();
+    return (text ? JSON.parse(text) : null) as T;
   }
 }

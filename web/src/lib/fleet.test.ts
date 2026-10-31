@@ -35,9 +35,9 @@ describe('helpers', () => {
 });
 
 describe('navigation', () => {
-  it('has the 74 reference entries plus 2 master-data screens in 8 sections with unique paths', () => {
+  it('has the 74 reference entries plus 2 master-data screens and integrations in 8 sections with unique paths', () => {
     expect(NAV).toHaveLength(8);
-    expect(NAV_ITEMS).toHaveLength(76);
-    expect(new Set(NAV_ITEMS.map((i) => i.path)).size).toBe(76);
+    expect(NAV_ITEMS).toHaveLength(77);
+    expect(new Set(NAV_ITEMS.map((i) => i.path)).size).toBe(77);
   });
 });

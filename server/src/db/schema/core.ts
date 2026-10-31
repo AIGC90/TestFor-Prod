@@ -46,3 +46,12 @@ export const notificationReads = pgTable(
   },
   (t) => [uniqueIndex('notification_reads_user_event').on(t.userId, t.eventId)],
 );
+
+/** Settings and state for external connectors (flespi, ...). Secrets are stored encrypted. */
+export const integrations = pgTable('integrations', {
+  key: text('key').primaryKey(),
+  secret: text('secret'),
+  config: jsonb('config').notNull().default({}),
+  state: jsonb('state').notNull().default({}),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});

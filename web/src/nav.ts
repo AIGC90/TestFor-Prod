@@ -146,6 +146,7 @@ export const NAV: NavSection[] = [
       { label: 'Field Masks', path: '/field-masks' },
       { label: 'Server Announcements', path: '/settings/announcement' },
       { label: 'Server Configuration', path: '/settings/server' },
+      { label: 'Integrations (flespi)', path: '/settings/integrations' },
     ],
   },
 ];

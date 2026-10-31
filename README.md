@@ -29,6 +29,15 @@ pnpm dev:web                   # app on http://localhost:5173
 pnpm simulate                  # optional: moving demo trucks
 ```
 
+## flespi integration
+
+Trackers connected to a [flespi.io](https://flespi.io) account can feed this platform:
+Settings → Integrations (flespi). Save a flespi token and the public host of your Traccar
+server, import the flespi devices (their `ident` becomes the Traccar unique ID), then create
+the stream. flespi pushes messages to Traccar's flespi port **5149**, which must be reachable
+from the internet. Commands to these trackers are sent from flespi (the stream is one-way).
+Set `SECRET_KEY` in production; it encrypts stored connector tokens.
+
 ## Checks
 
 ```bash

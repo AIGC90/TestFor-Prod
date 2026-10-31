@@ -5,4 +5,7 @@ export const config = {
   // Shared secret Traccar sends with forwarded events (event.forward.header).
   hookSecret: process.env.HOOK_SECRET ?? 'dev-hook-secret',
   sessionCacheMs: Number(process.env.SESSION_CACHE_MS ?? 30_000),
+  // Key for encrypting connector secrets at rest. MUST be set in production.
+  secretKey: process.env.SECRET_KEY ?? 'dev-only-secret-key-change-me',
+  flespiApiUrl: process.env.FLESPI_API_URL ?? 'https://flespi.io',
 };

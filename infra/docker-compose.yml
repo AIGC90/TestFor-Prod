@@ -41,6 +41,7 @@ services:
       - "5055:5055"   # OsmAnd protocol (used by the simulator and phone apps)
       - "5027:5027"   # Teltonika
       - "5023:5023"   # GT06 / Concox
+      - "5149:5149"   # flespi (HTTP stream from flespi.io)
 
 volumes:
   pgdata:

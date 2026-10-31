@@ -13,8 +13,15 @@ export class FakeTraccar {
     return this.sessions.get(cookie.replace('JSESSIONID=', '')) ?? null;
   }
 
+  posted: { path: string; body: unknown }[] = [];
+
   async get<T>(_cookie: string, path: string): Promise<T> {
     return (this.data.get(path) ?? []) as T;
+  }
+
+  async post<T>(_cookie: string, path: string, body: unknown): Promise<T> {
+    this.posted.push({ path, body });
+    return { id: 1000 + this.posted.length, ...(body as object) } as T;
   }
 }
 

@@ -5,6 +5,8 @@ import { DbModule } from './db/db.module';
 import { ErpModule } from './erp/erp.module';
 import { HealthController } from './health/health.controller';
 import { HooksController } from './hooks/hooks.controller';
+import { FlespiService } from './integrations/flespi.service';
+import { IntegrationsController } from './integrations/integrations.controller';
 import { MeController } from './me.controller';
 import { NotificationsController } from './notifications/notifications.controller';
 import { TraccarService } from './traccar/traccar.service';
@@ -12,7 +14,7 @@ import { RolesController } from './users/roles.controller';
 
 @Module({
   imports: [DbModule, ErpModule],
-  controllers: [HealthController, HooksController, MeController, NotificationsController, RolesController],
-  providers: [TraccarService, { provide: APP_GUARD, useClass: AuthGuard }],
+  controllers: [HealthController, HooksController, MeController, NotificationsController, RolesController, IntegrationsController],
+  providers: [TraccarService, FlespiService, { provide: APP_GUARD, useClass: AuthGuard }],
 })
 export class AppModule {}
