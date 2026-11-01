@@ -11,8 +11,9 @@ const run = Date.now().toString(36).toUpperCase();
 const n = parseInt(run.slice(-4), 36);
 const VEH = `MH14PP${run.slice(-4)}`;
 const VEH2 = `GJ01PP${run.slice(-4)}`;
-const YEAR = 1995 + (n % 30);
-const MONTH = `${YEAR}-0${1 + (n % 9)}`;
+// payroll months are unique across the shared test DB, so spread runs over ~12,000 past months
+const YEAR = 1000 + (n % 1026);
+const MONTH = `${YEAR}-${String(1 + (Math.floor(n / 1026) % 12)).padStart(2, '0')}`;
 const LICENCE = new Date(Date.now() + 19 * 86_400_000).toISOString().slice(0, 10);
 
 describe('people: pure rules', () => {
