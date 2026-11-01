@@ -57,7 +57,7 @@ export interface CrudOptions {
   path: string;
   docType: DocType;
   table: PgTable;
-  /** Validates create input; updates use `.partial()` of the same schema. */
+  /** Validates create input; updates accept any subset of the same fields, without applying defaults. */
   schema: z.ZodObject<z.ZodRawShape>;
   /** Columns searched by `?search=`. */
   searchColumns?: PgColumn[];
@@ -97,7 +97,8 @@ export function crudController(opts: CrudOptions): Type<unknown> {
   const idCol = columns.id as PgColumn;
   const hasUpdatedAt = 'updatedAt' in columns;
   const hasCreatedBy = 'createdBy' in columns;
-  const updateSchema = opts.schema.partial();
+  // Not `.partial()`: in zod 4 that still fills `.default()` values, so an update that leaves a field out would reset it.
+  const updateSchema = z.object(Object.fromEntries(Object.entries(opts.schema.shape).map(([k, f]) => [k, (f instanceof z.ZodDefault ? (f.unwrap() as z.ZodType) : (f as z.ZodType)).optional()])));
   FIELD_REGISTRY.set(opts.docType, Object.keys(columns).filter((c) => !SYSTEM_FIELDS.has(c)));
 
   @Controller(opts.path)

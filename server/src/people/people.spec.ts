@@ -247,7 +247,9 @@ describe('people API', () => {
     await http.put(`/erp/safety/claims/${clm.id}`).set(admin).send({ status: 'approved' }).expect(400);
     await http.put(`/erp/safety/claims/${clm.id}`).set(admin).send({ status: 'approved', approvedPayout: 70000 }).expect(200);
     await http.put(`/erp/safety/claims/${clm.id}`).set(admin).send({ status: 'settled', settledAmount: 90000 }).expect(400);
-    expect((await http.put(`/erp/safety/claims/${clm.id}`).set(admin).send({ status: 'settled', settledAmount: 70000 }).expect(200)).body.settledAt).toBeTruthy();
+    const settled = (await http.put(`/erp/safety/claims/${clm.id}`).set(admin).send({ status: 'settled', settledAmount: 70000 }).expect(200)).body;
+    expect(settled.settledAt).toBeTruthy();
+    expect(settled.estimatedDamage).toBe(85000); // partial updates must not reset fields that have defaults
     await http.delete(`/erp/safety/incidents/${inc.id}`).set(admin).expect(409);
     const s = (await http.get('/erp/safety/summary').set(admin).expect(200)).body;
     expect(s.recovered).toBeGreaterThanOrEqual(70000);
