@@ -29,6 +29,13 @@
       "when": 1793484178326,
       "tag": "0003_integrations",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793513345919,
+      "tag": "0004_stock",
+      "breakpoints": true
     }
   ]
 }
