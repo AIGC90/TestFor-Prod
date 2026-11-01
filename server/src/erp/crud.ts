@@ -15,6 +15,7 @@ import {
   Query,
   type Type,
 } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { and, asc, desc, eq, getTableColumns, ilike, or, type SQL } from 'drizzle-orm';
 import type { PgColumn, PgTable } from 'drizzle-orm/pg-core';
 import { z } from 'zod';
@@ -48,6 +49,8 @@ export interface CrudContext {
   db: Db;
   user: AuthUser;
   numbering: NumberingService;
+  /** Any provider in the app, e.g. `ctx.get(ApprovalsService)`. */
+  get<T>(token: Type<T>): T;
 }
 
 export interface CrudOptions {
@@ -104,10 +107,11 @@ export function crudController(opts: CrudOptions): Type<unknown> {
       readonly access: AccessService,
       readonly audit: AuditService,
       readonly numbering: NumberingService,
+      readonly moduleRef: ModuleRef,
     ) {}
 
     ctx(user: AuthUser): CrudContext {
-      return { db: this.db, user, numbering: this.numbering };
+      return { db: this.db, user, numbering: this.numbering, get: (token) => this.moduleRef.get(token, { strict: false }) };
     }
 
     async find(id: number) {

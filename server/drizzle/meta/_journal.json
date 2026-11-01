@@ -36,6 +36,13 @@
       "when": 1793513345919,
       "tag": "0004_stock",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793513543716,
+      "tag": "0005_inventory_docs",
+      "breakpoints": true
     }
   ]
 }
