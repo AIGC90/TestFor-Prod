@@ -27,6 +27,8 @@ import { DocumentPermissionsPage, FieldMasksPage } from './pages/admin/AccessPag
 import { IntegrationsPage } from './pages/admin/IntegrationsPage';
 import { GroupLoansPage, ReceivePage, RequestsPage, SalesPage } from './pages/inventory/documents';
 import { InventoryGlPage, MovementsPage, OpeningStockPage, StockPage } from './pages/inventory/stock';
+import { CustomersPage, FreightMemosPage, FuelIndentsPage, IncomingVehiclesPage, LoadingSheetPage, LrRegisterPage, MaterialReceivedPage } from './pages/ops/operations';
+import { TripsPage } from './pages/ops/TripsPage';
 import { PendingInboxPage } from './pages/admin/PendingInboxPage';
 import { PartiesPage, PlantsStoresPage } from './pages/masters/masters';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
@@ -62,6 +64,14 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/sales': SalesPage,
   '/group-loans': GroupLoansPage,
   '/inventory-gl': InventoryGlPage,
+  '/trips': TripsPage,
+  '/customers': CustomersPage,
+  '/fuel-indents': FuelIndentsPage,
+  '/loading-sheet': LoadingSheetPage,
+  '/lr-register': LrRegisterPage,
+  '/freight-memos': FreightMemosPage,
+  '/incoming-vehicles': IncomingVehiclesPage,
+  '/material-received': MaterialReceivedPage,
   '/pending-inbox': PendingInboxPage,
   '/document-permissions': DocumentPermissionsPage,
   '/field-masks': FieldMasksPage,
