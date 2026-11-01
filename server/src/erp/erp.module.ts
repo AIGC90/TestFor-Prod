@@ -1,3 +1,4 @@
+import { AttachmentsController } from './attachments.controller';
 import { Global, Module } from '@nestjs/common';
 import { AccessController } from './access.controller';
 import { AccessService } from './access.service';
@@ -9,7 +10,7 @@ import { NumberingService } from './numbering.service';
 
 @Global()
 @Module({
-  controllers: [AccessController, ApprovalsController, PlantsController, StoresController, PartiesController, ItemCategoriesController, ItemsController],
+  controllers: [AttachmentsController, AccessController, ApprovalsController, PlantsController, StoresController, PartiesController, ItemCategoriesController, ItemsController],
   providers: [AccessService, ApprovalsService, AuditService, NumberingService],
   exports: [AccessService, ApprovalsService, AuditService, NumberingService],
 })

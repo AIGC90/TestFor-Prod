@@ -4,9 +4,11 @@ import { config } from '../config';
 import { type Db, InjectDb } from '../db/db.module';
 import { traccarEvents } from '../db/schema';
 import { OperationsService } from '../operations/ops.service';
+import { SafetyService } from '../people/safety';
 
 interface ForwardedEvent {
-  event?: { id?: number; type?: string; deviceId?: number; geofenceId?: number; eventTime?: string };
+  event?: { id?: number; type?: string; deviceId?: number; geofenceId?: number; eventTime?: string; attributes?: Record<string, unknown> };
+  position?: { latitude?: number; longitude?: number; speed?: number; address?: string; attributes?: Record<string, unknown> };
   device?: { name?: string };
 }
 
@@ -16,6 +18,7 @@ export class HooksController {
   constructor(
     @InjectDb() private readonly db: Db,
     private readonly ops: OperationsService,
+    private readonly safety: SafetyService,
   ) {}
 
   @Public()
@@ -36,5 +39,6 @@ export class HooksController {
       })
       .onConflictDoNothing();
     await this.ops.onTraccarEvent(e);
+    await this.safety.onTraccarEvent(body);
   }
 }

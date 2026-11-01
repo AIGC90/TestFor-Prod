@@ -1,13 +1,12 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
-import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
+import { setupApp } from './app.setup';
 import { config } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('erp');
-  app.use(cookieParser());
+  setupApp(app);
   app.enableShutdownHooks();
   await app.listen(config.port);
 }

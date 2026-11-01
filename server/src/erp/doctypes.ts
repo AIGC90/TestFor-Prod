@@ -20,6 +20,8 @@ export const DOC_TYPES = {
   incoming_vehicle: { label: 'Incoming vehicles', module: 'operations' },
   material_return: { label: 'Material received', module: 'operations' },
   invoice: { label: 'Invoices & receipts', module: 'finance' },
+  fastag: { label: 'FASTag accounts & tolls', module: 'finance' },
+  subscription: { label: 'Device licences & subscriptions', module: 'finance' },
   // inventory
   stock_movement: { label: 'Stock movements', module: 'inventory' },
   stock_request: { label: 'Stock requests', module: 'inventory' },
@@ -40,6 +42,7 @@ export const DOC_TYPES = {
   incident: { label: 'Incidents & claims', module: 'compliance' },
   sos: { label: 'SOS incidents', module: 'compliance' },
   field_staff: { label: 'Field staff & tasks', module: 'people' },
+  expense_claim: { label: 'Field expense claims', module: 'people' },
   payroll: { label: 'Driver payroll & attendance', module: 'people' },
 } as const;
 export type DocType = keyof typeof DOC_TYPES;
@@ -60,7 +63,8 @@ const viewAll = grant(allDocs, VIEW);
 export const DEFAULT_PERMISSIONS: Record<Exclude<Role, 'admin'>, Partial<Record<DocType, Grant>>> = {
   fleet_supervisor: {
     ...viewAll,
-    ...grant(['order', 'trip', 'lr', 'freight_memo', 'incoming_vehicle', 'material_return', 'compliance_doc', 'incident', 'sos', 'payroll', 'field_staff'], FULL),
+    ...grant(['order', 'trip', 'lr', 'freight_memo', 'incoming_vehicle', 'material_return', 'compliance_doc', 'incident', 'sos', 'payroll', 'field_staff', 'fastag'], FULL),
+    expense_claim: { ...FULL, approve: true },
     fuel_indent: { ...FULL, approve: true },
   },
   workshop_manager: {
@@ -82,10 +86,11 @@ export const DEFAULT_PERMISSIONS: Record<Exclude<Role, 'admin'>, Partial<Record<
   },
   accountant: {
     ...viewAll,
-    ...grant(['party', 'invoice'], FULL),
+    ...grant(['party', 'invoice', 'fastag', 'subscription'], FULL),
     repair_bill: { ...FULL, approve: true },
     stock_sale: { ...FULL, approve: true },
-    payroll: WRITE,
+    payroll: { ...WRITE, approve: true },
+    expense_claim: { ...WRITE, approve: true },
   },
   driver: {
     ...grant(['trip', 'fuel_indent', 'tool_checklist'], VIEW),

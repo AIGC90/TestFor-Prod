@@ -64,6 +64,13 @@
       "when": 1793516233302,
       "tag": "0008_tyres",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793517370089,
+      "tag": "0009_people",
+      "breakpoints": true
     }
   ]
 }

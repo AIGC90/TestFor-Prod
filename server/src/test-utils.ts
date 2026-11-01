@@ -1,6 +1,6 @@
+import { setupApp } from './app.setup';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { TraccarService, type TraccarUser } from './traccar/traccar.service';
 
@@ -16,7 +16,7 @@ export class FakeTraccar {
   posted: { path: string; body: unknown }[] = [];
 
   async get<T>(_cookie: string, path: string): Promise<T> {
-    return (this.data.get(path) ?? []) as T;
+    return (this.data.get(path) ?? this.data.get(path.split('?')[0]) ?? []) as T;
   }
 
   async post<T>(_cookie: string, path: string, body: unknown): Promise<T> {
@@ -46,8 +46,7 @@ export async function createTestApp(): Promise<{ app: INestApplication; traccar:
     .useValue(traccar)
     .compile();
   const app = moduleRef.createNestApplication({ logger: false });
-  app.setGlobalPrefix('erp');
-  app.use(cookieParser());
+  setupApp(app);
   await app.init();
   return { app, traccar };
 }
