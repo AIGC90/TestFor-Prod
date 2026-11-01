@@ -3,16 +3,20 @@ import { Public } from '../auth/auth';
 import { config } from '../config';
 import { type Db, InjectDb } from '../db/db.module';
 import { traccarEvents } from '../db/schema';
+import { OperationsService } from '../operations/ops.service';
 
 interface ForwardedEvent {
-  event?: { id?: number; type?: string; deviceId?: number; eventTime?: string };
+  event?: { id?: number; type?: string; deviceId?: number; geofenceId?: number; eventTime?: string };
   device?: { name?: string };
 }
 
 /** Receives Traccar event forwarding (event.forward.url) and stores events for ERP processing. */
 @Controller('hooks')
 export class HooksController {
-  constructor(@InjectDb() private readonly db: Db) {}
+  constructor(
+    @InjectDb() private readonly db: Db,
+    private readonly ops: OperationsService,
+  ) {}
 
   @Public()
   @Post('traccar-event')
@@ -31,5 +35,6 @@ export class HooksController {
         payload: body,
       })
       .onConflictDoNothing();
+    await this.ops.onTraccarEvent(e);
   }
 }

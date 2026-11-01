@@ -43,6 +43,13 @@
       "when": 1793513543716,
       "tag": "0005_inventory_docs",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793514199264,
+      "tag": "0006_operations",
+      "breakpoints": true
     }
   ]
 }
