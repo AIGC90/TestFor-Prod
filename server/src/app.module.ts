@@ -5,6 +5,7 @@ import { DbModule } from './db/db.module';
 import { ErpModule } from './erp/erp.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { OperationsModule } from './operations/operations.module';
+import { TyresModule } from './tyres/tyres.module';
 import { WorkshopModule } from './workshop/workshop.module';
 import { HealthController } from './health/health.controller';
 import { HooksController } from './hooks/hooks.controller';
@@ -16,7 +17,7 @@ import { TraccarModule } from './traccar/traccar.module';
 import { RolesController } from './users/roles.controller';
 
 @Module({
-  imports: [DbModule, TraccarModule, ErpModule, InventoryModule, OperationsModule, WorkshopModule],
+  imports: [DbModule, TraccarModule, ErpModule, InventoryModule, OperationsModule, WorkshopModule, TyresModule],
   controllers: [HealthController, HooksController, MeController, NotificationsController, RolesController, IntegrationsController],
   providers: [FlespiService, { provide: APP_GUARD, useClass: AuthGuard }],
 })

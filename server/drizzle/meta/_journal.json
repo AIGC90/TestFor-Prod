@@ -57,6 +57,13 @@
       "when": 1793515984028,
       "tag": "0007_workshop",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793516233302,
+      "tag": "0008_tyres",
+      "breakpoints": true
     }
   ]
 }
