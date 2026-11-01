@@ -1,0 +1,152 @@
+<title>FleetOne Screen Tour</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: navy masthead band, sticky module filter, then one screen per row: caption column + framed screenshot. */
+  :root {
+    --bg: #f3f5f9;
+    --surface: #ffffff;
+    --ink: #142033;
+    --muted: #5a6577;
+    --line: #dde3ec;
+    --navy: #0f2340;
+    --navy-ink: #e8eef8;
+    --accent: #1565c0;
+    --flag: #e8710a;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c1422; --surface: #131e30; --ink: #e4eaf3; --muted: #9aa7ba; --line: #24324a;
+      --navy: #08111f; --navy-ink: #e8eef8; --accent: #64a8f0; --flag: #f59a45; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1422; --surface: #131e30; --ink: #e4eaf3; --muted: #9aa7ba; --line: #24324a;
+    --navy: #08111f; --navy-ink: #e8eef8; --accent: #64a8f0; --flag: #f59a45; color-scheme: dark;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  header { background: var(--navy); color: var(--navy-ink); }
+  header .wrap { padding-block: 40px 32px; display: grid; gap: 12px; }
+  .brand { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 5vw, 46px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+  header p { margin: 0; max-width: 64ch; opacity: .88; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--mono); font-size: 13px; margin-top: 6px; }
+  .facts b { color: #ffb067; font-weight: 500; }
+  nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--navy); }
+  nav .wrap { display: flex; gap: 6px; padding-block: 10px; overflow-x: auto; scrollbar-width: thin; }
+  nav button { font: 500 13px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; white-space: nowrap; cursor: pointer; }
+  nav button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  nav button:focus-visible, .shot:focus-visible, .close:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+  main .wrap { display: grid; gap: 44px; padding-block: 36px 64px; }
+  section.screen { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .cap { display: grid; gap: 8px; min-width: 0; }
+  .area { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  h2 { font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.2; margin: 0; text-wrap: balance; }
+  .cap p { margin: 0; color: var(--muted); }
+  .path { font-family: var(--mono); font-size: 13px; color: var(--ink); }
+  .note { font-size: 13px; color: var(--flag); }
+  .shot { display: block; padding: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); cursor: zoom-in; box-shadow: 0 1px 2px rgba(15,35,64,.06), 0 8px 24px rgba(15,35,64,.08); max-width: 100%; }
+  .shot img { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 900; }
+  .lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(8,17,31,.92); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+  .lightbox img { max-width: 100%; max-height: 88vh; border-radius: 6px; }
+  .close { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); font: 600 14px var(--body); color: #fff; background: rgba(255,255,255,.12); border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+  footer .wrap { padding-block: 0 48px; color: var(--muted); font-size: 13px; }
+  @media (max-width: 820px) { section.screen { grid-template-columns: minmax(0, 1fr); gap: 14px; } }
+  @media (prefers-reduced-motion: no-preference) { .shot { transition: transform .15s ease; } .shot:hover { transform: translateY(-2px); } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brand">FleetOne · Track · Operate · Grow</div>
+    <h1>The platform, screen by screen</h1>
+    <p>Screenshots of the running build: Traccar GPS tracking plus the fleet ERP for trips, stores, tyres, workshop, compliance, drivers, money and AI. The sample data is a Saudi fleet: 25 trucks on the Riyadh, Jeddah, Dammam and Madinah corridors, Saudi customers, and every amount in SAR. Click any screen to enlarge it.</p>
+    <div class="facts"><span><b>78</b> menu pages</span><span><b>87</b> API tests</span><span><b>27</b> web tests</span><span>branch <b>claude/fleet-platform-spec</b></span></div>
+  </div>
+</header>
+
+<nav aria-label="Filter by area"><div class="wrap" id="filters"></div></nav>
+
+<main><div class="wrap" id="screens"></div></main>
+
+<footer><div class="wrap">Captured 1 November 2026 at 1440 × 900 with the Saudi sample data. Map tiles need internet access, which the build sandbox did not have, so the live map shows only the vehicle list here.</div></footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+  <button class="close" id="close" type="button">Close</button>
+  <img id="big" alt="">
+</div>
+
+<script>
+  const SCREENS = [
+    { area: 'Live operations', file: 'dashboard', title: 'Fleet dashboard', path: '/dashboard', text: 'Moving, idle, stopped and offline counts, alerts and the day at a glance, live over a WebSocket from Traccar.' },
+    { area: 'Live operations', file: 'map', title: 'Live map', path: '/map', text: 'Every tracker with speed, status and last update; filter by status or search a registration number.', note: 'Map tiles did not load in the sandbox.' },
+    { area: 'Live operations', file: 'sos', title: 'SOS emergency desk', path: '/sos', text: 'A panic or crash alarm from a tracker opens an incident within seconds, with location, speed, ignition and the assigned driver. Respond, resolve, or escalate to the incident register.' },
+    { area: 'Operations', file: 'trips', title: 'Trip dispatch hub', path: '/trips', text: 'Trips with GPS progress and ETA, automatic arrival when the truck enters the destination geofence, and e-POD.' },
+    { area: 'Operations', file: 'revenue', title: 'Revenue & financials', path: '/revenue', text: 'Revenue in SAR against diesel, driver pay, maintenance and tyres; profit per vehicle and lane; invoices, receipts and receivables ageing.' },
+    { area: 'Operations', file: 'fastag', title: 'FASTag & tolls', path: '/fastag', text: 'Toll tag wallets, statement import with duplicate protection, recharges, and each toll matched to its trip. No Saudi toll data in the sample.' },
+    { area: 'Operations', file: 'subscriptions', title: 'Subscriptions & licences', path: '/subscriptions', text: 'A licence per tracker, plans, renewals billed with 18% GST, and printable invoices.' },
+    { area: 'Inventory', file: 'stock', title: 'Stock by store', path: '/stock', text: 'Moving-average cost, serial-tracked pieces, reorder alerts and no negative stock.' },
+    { area: 'Workshop & tyres', file: 'workshop', title: 'Workshop hub', path: '/workshop', text: 'Open and ageing job cards, PM overdue by GPS kilometres, gate passes out, money owed to garages and costliest vehicles.' },
+    { area: 'Workshop & tyres', file: 'job-cards', title: 'Job cards', path: '/job-cards', text: 'Submit, approve, start, issue parts from stock, complete. Completing a PM job resets its schedule.' },
+    { area: 'Workshop & tyres', file: 'tyre-map', title: 'Tyre map & fitment', path: '/tyre-map', text: 'Axle layout per vehicle. Click an empty slot to fit a tyre; slot colour follows the last tread reading.' },
+    { area: 'Workshop & tyres', file: 'tyres', title: 'Tyre overview', path: '/tyres', text: 'Tread health, spend, low pressure and the replacement forecast, with km from the GPS odometer.' },
+    { area: 'People & compliance', file: 'compliance', title: 'Statutory compliance', path: '/compliance', text: 'Istimara, insurance, Fahas inspection and operating card per vehicle, with expiry status, renewals and a missing-papers matrix.' },
+    { area: 'People & compliance', file: 'drivers', title: 'Driver management', path: '/driver-management', text: 'Truck assignment, driving hours against the 9-hour limit, attendance grid and payroll that recovers driver charges.' },
+    { area: 'People & compliance', file: 'field', title: 'Field staff', path: '/field-staff', text: 'Technicians and collection agents: tasks, check-in and check-out, expense claims and a leaderboard.' },
+    { area: 'Approvals', file: 'pending', title: 'Pending inbox', path: '/pending-inbox', text: 'Fuel indents, job cards, repair bills, payroll, claims and AI proposals wait here for the right role to approve.' },
+    { area: 'Analytics & AI', file: 'bi', title: 'Fleet executive BI', path: '/fleet-analytics', text: 'Utilisation, revenue and cost per km by category, fuel economy, idling loss, corridors and vehicles.' },
+    { area: 'Analytics & AI', file: 'ai_ops', title: 'AI Ops', path: '/ai-ops', text: 'Claude triages alerts across GPS, safety, compliance, maintenance, tyres and money, writes the morning briefing, and logs its proposals.', note: 'Shown with sample AI responses: no API key in the sandbox.' },
+    { area: 'Analytics & AI', file: 'copilot', title: 'Fleet copilot', path: '✨ in the top bar', text: 'Answers from live data the user is allowed to see, with masked personal numbers. Actions such as a job card are only proposed and wait for approval.', note: 'Shown with a sample AI response: no API key in the sandbox.' },
+  ];
+
+  const areas = ['All', ...new Set(SCREENS.map((s) => s.area))];
+  const filters = document.getElementById('filters');
+  const list = document.getElementById('screens');
+  let current = 'All';
+  try { current = areas.includes(localStorage.getItem('tour-area')) ? localStorage.getItem('tour-area') : 'All'; } catch (e) {}
+
+  function render() {
+    filters.innerHTML = '';
+    for (const a of areas) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = a === 'All' ? `All (${SCREENS.length})` : a;
+      b.setAttribute('aria-pressed', String(a === current));
+      b.addEventListener('click', () => { current = a; try { localStorage.setItem('tour-area', a); } catch (e) {} render(); });
+      filters.appendChild(b);
+    }
+    list.innerHTML = '';
+    for (const s of SCREENS.filter((x) => current === 'All' || x.area === current)) {
+      const sec = document.createElement('section');
+      sec.className = 'screen';
+      sec.innerHTML = `<div class="cap"><div class="area"></div><h2></h2><div class="path"></div><p></p>${s.note ? '<div class="note"></div>' : ''}</div>
+        <button class="shot" type="button"><img loading="lazy" width="1440" height="900"></button>`;
+      sec.querySelector('.area').textContent = s.area;
+      sec.querySelector('h2').textContent = s.title;
+      sec.querySelector('.path').textContent = s.path;
+      sec.querySelector('p').textContent = s.text;
+      if (s.note) sec.querySelector('.note').textContent = s.note;
+      const img = sec.querySelector('img');
+      img.src = `shots/${s.file}.jpg`;
+      img.alt = `Screenshot: ${s.title}`;
+      sec.querySelector('.shot').setAttribute('aria-label', `Enlarge ${s.title}`);
+      sec.querySelector('.shot').addEventListener('click', () => open(s));
+      list.appendChild(sec);
+    }
+  }
+
+  const box = document.getElementById('lightbox');
+  const big = document.getElementById('big');
+  let opener = null;
+  function open(s) { opener = document.activeElement; big.src = `shots/${s.file}.jpg`; big.alt = `Screenshot: ${s.title}`; box.hidden = false; document.getElementById('close').focus(); }
+  function close() { box.hidden = true; if (opener) opener.focus(); }
+  document.getElementById('close').addEventListener('click', close);
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !box.hidden) close(); });
+  render();
+</script>
