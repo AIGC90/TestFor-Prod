@@ -158,7 +158,8 @@ export const StockSalesController = crudController({
   orderBy: [desc(stockSales.id)],
   numbering: { prefix: 'SALE', column: 'saleNo' },
   schema: z.object({
-    saleDate: z.coerce.date().optional(),
+    // blank means today (coercing null would give 1 Jan 1970)
+    saleDate: z.preprocess((v) => (v === null || v === '' ? undefined : v), z.coerce.date().optional()),
     buyerId: id,
     storeId: id,
     lines: z.array(saleLine).min(1).max(200),

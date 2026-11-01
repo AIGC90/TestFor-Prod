@@ -101,6 +101,10 @@ describe('inventory documents', () => {
     expect(local).toMatchObject({ taxable: 1000, cgst: 140, sgst: 140, igst: 0, total: 1280, status: 'draft' });
     const away = (await http.post('/erp/inventory/sales').set(staff).send({ buyerId: outstationBuyer, storeId: central, lines: [{ itemId: brake, qty: 2, rate: 500, gstRate: 18 }] }).expect(201)).body;
     expect(away).toMatchObject({ taxable: 1000, igst: 180, cgst: 0, total: 1180 });
+    const undated = (await http.post('/erp/inventory/sales').set(staff).send({ saleDate: null, buyerId: outstationBuyer, storeId: central, lines: [{ itemId: brake, qty: 1, rate: 1, gstRate: 0 }] }).expect(201)).body;
+    expect(new Date(undated.saleDate).getFullYear()).toBeGreaterThan(2000);
+    await http.delete(`/erp/inventory/sales/${undated.id}`).set(staff).expect(403); // storekeepers may not delete sales
+    await http.delete(`/erp/inventory/sales/${undated.id}`).set(admin).expect(204);
 
     await http.post(`/erp/inventory/sales/${local.id}/invoice`).set(staff).expect(409);
     await http.post(`/erp/inventory/sales/${local.id}/submit`).set(staff).expect(201);

@@ -25,6 +25,8 @@ import { GeofencesPage } from './pages/GeofencesPage';
 import { ItemMasterPage } from './pages/masters/ItemMasterPage';
 import { DocumentPermissionsPage, FieldMasksPage } from './pages/admin/AccessPages';
 import { IntegrationsPage } from './pages/admin/IntegrationsPage';
+import { GroupLoansPage, ReceivePage, RequestsPage, SalesPage } from './pages/inventory/documents';
+import { InventoryGlPage, MovementsPage, OpeningStockPage, StockPage } from './pages/inventory/stock';
 import { PendingInboxPage } from './pages/admin/PendingInboxPage';
 import { PartiesPage, PlantsStoresPage } from './pages/masters/masters';
 import { AnnouncementPage, PreferencesPage, ServerConfigPage } from './pages/settings/ServerPages';
@@ -52,6 +54,14 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/devices': DevicesPage,
   '/geofences': GeofencesPage,
   '/item-master': ItemMasterPage,
+  '/stock': StockPage,
+  '/movements': MovementsPage,
+  '/requests': RequestsPage,
+  '/receive': ReceivePage,
+  '/opening-stock': OpeningStockPage,
+  '/sales': SalesPage,
+  '/group-loans': GroupLoansPage,
+  '/inventory-gl': InventoryGlPage,
   '/pending-inbox': PendingInboxPage,
   '/document-permissions': DocumentPermissionsPage,
   '/field-masks': FieldMasksPage,

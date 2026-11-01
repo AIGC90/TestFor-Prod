@@ -48,7 +48,7 @@ export interface Field {
   /** Dotted path into the record, e.g. `name` or `attributes.operator`. */
   path: string;
   label: string;
-  type?: 'text' | 'number' | 'password' | 'textarea' | 'select' | 'multiselect' | 'switch' | 'date' | 'datetime';
+  type?: 'text' | 'number' | 'password' | 'textarea' | 'select' | 'autocomplete' | 'multiselect' | 'switch' | 'date' | 'datetime' | 'list' | 'lines';
   required?: boolean;
   helper?: string;
   section?: string;
@@ -64,6 +64,9 @@ export interface Field {
   /** Hidden unless this returns true for the current form values. */
   visible?: (values: Record<string, unknown>) => boolean;
   fullWidth?: boolean;
+  /** For `lines`: the fields of each row, and a blank row. */
+  lineFields?: Field[];
+  newLine?: Record<string, unknown>;
 }
 
 export interface Column<T> {
@@ -97,6 +100,10 @@ export interface EntityConfig<T extends { id: number }> {
   docType?: string;
   /** Client-side filter applied before search (e.g. the selected category subtree). */
   rowFilter?: (row: T) => boolean;
+  /** Workflow buttons per row (submit, approve, land...). `run` refreshes the list and shows errors. */
+  rowActions?: (row: T, run: (action: () => Promise<unknown>) => void) => ReactNode;
+  /** Hide the edit button for rows that can no longer change (e.g. posted documents). */
+  canEditRow?: (row: T) => boolean;
 }
 
 export function getPath(obj: unknown, path: string): unknown {
@@ -125,6 +132,12 @@ function omit(obj: Record<string, unknown>, paths: string[]) {
 
 /** Converts a stored value to what the input shows. */
 function toInput(field: Field, stored: unknown): unknown {
+  if (field.type === 'lines') {
+    return ((stored as Record<string, unknown>[] | null) ?? []).map((row) =>
+      (field.lineFields ?? []).reduce((acc, f) => setPath(acc, f.path, toInput(f, getPath(row, f.path))), { ...row }),
+    );
+  }
+  if (field.type === 'list') return ((stored as string[] | null) ?? []).join(', ');
   if (stored === undefined || stored === null) return field.type === 'multiselect' ? [] : field.type === 'switch' ? false : '';
   if (field.type === 'multiselect' && field.joined) return String(stored).split(',').filter(Boolean);
   if (field.type === 'number' && field.scale) return Number(stored) / field.scale;
@@ -138,13 +151,55 @@ function toStored(field: Field, input: unknown): unknown {
   // Empty optional attributes are dropped rather than stored as "" / null.
   if (field.path.startsWith('attributes.') && (input === '' || input === null || (Array.isArray(input) && !input.length))) return undefined;
   if (field.type === 'multiselect' && field.joined) return (input as string[]).join(',');
+  if (field.type === 'list') return String(input ?? '').split(/[,\n]/).map((x) => x.trim()).filter(Boolean);
+  if (field.type === 'lines') {
+    return ((input as Record<string, unknown>[]) ?? []).map((row) =>
+      (field.lineFields ?? []).reduce((acc, f) => setPath(acc, f.path, toStored(f, getPath(row, f.path))), { ...row }),
+    );
+  }
   if (field.type === 'number') {
     if (input === '' || input === null || input === undefined) return field.required ? 0 : null;
     return Number(input) * (field.scale ?? 1);
   }
   if (field.type === 'date' || field.type === 'datetime') return input ? dayjs(String(input)).toISOString() : null;
-  if (field.type === 'select' && input === '') return null;
+  if ((field.type === 'select' || field.type === 'autocomplete') && input === '') return null;
   return input;
+}
+
+/** Editable table of line items (each row uses `lineFields`). */
+function LinesInput({ field, value, onChange, disabled }: { field: Field; value: Record<string, unknown>[]; onChange: (v: unknown) => void; disabled?: boolean }) {
+  const rows = value ?? [];
+  const lineFields = field.lineFields ?? [];
+  const blank = () => lineFields.reduce((acc, f) => setPath(acc, f.path, toInput(f, getPath(field.newLine ?? {}, f.path))), {} as Record<string, unknown>);
+  return (
+    <Box>
+      <Typography variant="subtitle2" sx={{ mb: 1 }}>{field.label}</Typography>
+      <Stack spacing={1}>
+        {rows.map((row, i) => (
+          <Box key={i} sx={{ display: 'flex', gap: 1, alignItems: 'flex-start', p: 1, border: 1, borderColor: 'divider', borderRadius: 1 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ pt: 1, minWidth: 18 }}>{i + 1}</Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: lineFields.map((f) => (f.fullWidth ? '2fr' : '1fr')).join(' ') }, gap: 1, flexGrow: 1 }}>
+              {lineFields.map((f) => (
+                <FieldInput
+                  key={f.path}
+                  field={f}
+                  value={getPath(row, f.path)}
+                  disabled={disabled}
+                  onChange={(v) => onChange(rows.map((r, j) => (j === i ? setPath(r, f.path, v) : r)))}
+                />
+              ))}
+            </Box>
+            <IconButton size="small" aria-label={`remove line ${i + 1}`} disabled={disabled} onClick={() => onChange(rows.filter((_, j) => j !== i))}>
+              <DeleteOutline fontSize="small" />
+            </IconButton>
+          </Box>
+        ))}
+        <Box>
+          <Button size="small" startIcon={<AddIcon />} disabled={disabled} onClick={() => onChange([...rows, blank()])}>Add line</Button>
+        </Box>
+      </Stack>
+    </Box>
+  );
 }
 
 function FieldInput({ field, value, onChange, disabled }: { field: Field; value: unknown; onChange: (v: unknown) => void; disabled?: boolean }) {
@@ -168,6 +223,23 @@ function FieldInput({ field, value, onChange, disabled }: { field: Field; value:
   };
 
   switch (field.type) {
+    case 'lines':
+      return <LinesInput field={field} value={value as Record<string, unknown>[]} onChange={onChange} disabled={disabled} />;
+    case 'list':
+      return <TextField {...common} value={value ?? ''} onChange={(e) => onChange(e.target.value)} helperText={field.helper ?? 'Separate with commas'} />;
+    case 'autocomplete':
+      return (
+        <Autocomplete
+          size="small"
+          disabled={disabled}
+          options={options}
+          getOptionLabel={(o) => o.label}
+          isOptionEqualToValue={(a, b) => a.value === b.value}
+          value={options.find((o) => String(o.value) === String(value)) ?? null}
+          onChange={(_, o) => onChange(o?.value ?? '')}
+          renderInput={(p) => <TextField {...p} label={field.label} required={field.required} helperText={field.helper} />}
+        />
+      );
     case 'switch':
       return <FormControlLabel disabled={disabled} control={<Switch checked={Boolean(value)} onChange={(e) => onChange(e.target.checked)} />} label={field.label} />;
     case 'select':
@@ -281,7 +353,7 @@ export function EntityForm({
                   {shown
                     .filter((f) => (f.section ?? '') === section)
                     .map((f) => (
-                      <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' ? '1 / -1' : undefined }}>
+                      <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' || f.type === 'lines' ? '1 / -1' : undefined }}>
                         <FieldInput
                           field={f}
                           value={getPath(values, f.path)}
@@ -349,6 +421,11 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
     // Refresh even on failure: the record may exist although a follow-up step failed.
     onSettled: () => qc.invalidateQueries({ queryKey: [config.queryKey] }),
   });
+  const action = useMutation({
+    mutationFn: (fn: () => Promise<unknown>) => fn(),
+    onSettled: () => qc.invalidateQueries({ queryKey: [config.queryKey] }),
+  });
+  const runAction = (fn: () => Promise<unknown>) => action.mutate(fn);
   const remove = useMutation({
     mutationFn: (row: T) => http<void>(`${config.endpoint}/${row.id}`, { method: 'DELETE' }),
     onSuccess: () => {
@@ -446,6 +523,7 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
       />
 
       {list.isError && <Alert severity="error">{errorMessage(list.error)}</Alert>}
+      {action.isError && <Alert severity="error" onClose={() => action.reset()}>{errorMessage(action.error)}</Alert>}
 
       <Card>
         <TableContainer>
@@ -455,7 +533,7 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
                 {config.columns.map((c) => (
                   <TableCell key={c.label} sx={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{c.label}</TableCell>
                 ))}
-                {(allowed('edit') || allowed('delete')) && <TableCell align="right" />}
+                {(allowed('edit') || allowed('delete') || config.rowActions) && <TableCell align="right" />}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -476,9 +554,10 @@ export function EntityPage<T extends { id: number }>({ config }: { config: Entit
                   {config.columns.map((c) => (
                     <TableCell key={c.label}>{c.render(r)}</TableCell>
                   ))}
-                  {(allowed('edit') || allowed('delete')) && (
+                  {(allowed('edit') || allowed('delete') || config.rowActions) && (
                     <TableCell align="right" sx={{ whiteSpace: 'nowrap' }}>
-                      {allowed('edit') && (
+                      {config.rowActions?.(r, runAction)}
+                      {allowed('edit') && (config.canEditRow?.(r) ?? true) && (
                         <IconButton size="small" aria-label="edit" onClick={() => void openEdit(r)}>
                           <EditOutlined fontSize="small" />
                         </IconButton>
@@ -582,7 +661,7 @@ export function RecordForm({
               {shown
                 .filter((f) => (f.section ?? '') === section)
                 .map((f) => (
-                  <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' ? '1 / -1' : undefined }}>
+                  <Box key={f.path} sx={{ gridColumn: f.fullWidth || f.type === 'textarea' || f.type === 'lines' ? '1 / -1' : undefined }}>
                     <FieldInput field={f} value={getPath(values, f.path)} onChange={(v) => setValues((s) => setPath(s, f.path, v))} />
                   </Box>
                 ))}
