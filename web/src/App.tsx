@@ -47,6 +47,8 @@ import {
   TripsReport,
 } from './pages/reports/reports';
 import { Placeholder } from './pages/Placeholder';
+import { DriverChargesPage, GatePassesPage, JobCardsPage, PmSchedulesPage, RepairBillsPage, ToolChecklistsPage, WorkshopHubPage } from './pages/workshop/workshop';
+import { NsdAlertsPage, TyreCostKmPage, TyreInterchangesPage, TyreMapPage, TyreOverviewPage, TyrePerformancePage, TyreRegisterPage } from './pages/tyres/tyres';
 
 const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/dashboard': Dashboard,
@@ -73,6 +75,20 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/incoming-vehicles': IncomingVehiclesPage,
   '/material-received': MaterialReceivedPage,
   '/pending-inbox': PendingInboxPage,
+  '/workshop': WorkshopHubPage,
+  '/job-cards': JobCardsPage,
+  '/pm-schedules': PmSchedulesPage,
+  '/gate-passes': GatePassesPage,
+  '/repair-bills': RepairBillsPage,
+  '/tools-checklists': ToolChecklistsPage,
+  '/driver-charges': DriverChargesPage,
+  '/tyres': TyreOverviewPage,
+  '/tyre-map': TyreMapPage,
+  '/tyre-register': TyreRegisterPage,
+  '/tyre-interchanges': TyreInterchangesPage,
+  '/nsd-alerts': NsdAlertsPage,
+  '/tyre-cost-km': TyreCostKmPage,
+  '/tyre-performance': TyrePerformancePage,
   '/document-permissions': DocumentPermissionsPage,
   '/field-masks': FieldMasksPage,
   '/settings/integrations': IntegrationsPage,

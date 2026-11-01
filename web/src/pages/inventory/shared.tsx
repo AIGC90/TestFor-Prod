@@ -40,6 +40,7 @@ const STATUS_COLOR: Record<string, 'default' | 'primary' | 'success' | 'warning'
   rejected: 'error', cancelled: 'default', in_procurement: 'secondary', fulfilled: 'success', landed: 'success',
   invoiced: 'primary', dispatched: 'secondary', paid: 'success', active: 'warning', returned: 'success', overdue: 'error',
   completed: 'success', in_transit: 'warning', in_stock: 'success', damaged: 'warning', issued: 'info', written_off: 'default', sold: 'default',
+  fitted: 'primary', in_store: 'success', at_retreader: 'warning', scrapped: 'default', out: 'warning', recovered: 'success', waived: 'default',
 };
 
 export const statusLabel = (s: string) => s.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
