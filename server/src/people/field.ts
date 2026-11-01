@@ -11,11 +11,11 @@ import { type CrudContext, crudController, validationError } from '../erp/crud';
 import { requiredText, text } from '../erp/zod-helpers';
 
 const DAY = 86_400_000;
-const TZ = 'Asia/Kolkata';
+const TZ = 'Asia/Riyadh';
 /** Check-ins after this local time count as late. */
-export const LATE_AFTER = '09:30';
+export const LATE_AFTER = '08:30';
 const r1 = (n: number) => Math.round(n * 10) / 10;
-/** Calendar date in India for a timestamp. */
+/** Calendar date in Saudi Arabia for a timestamp. */
 export const localDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: TZ });
 export const localTime = (d: Date) => d.toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false });
 const optCoord = z.coerce.number().min(-180).max(180).nullish().transform((v) => (v === undefined ? null : v));

@@ -90,8 +90,8 @@ const tripFields: Field[] = [
   { section: 'Route', path: 'plannedKm', label: 'Distance (km)', type: 'number' },
   { section: 'Schedule & money', path: 'scheduledAt', label: 'Departure', type: 'datetime' },
   { section: 'Schedule & money', path: 'plannedArrival', label: 'Planned arrival', type: 'datetime' },
-  { section: 'Schedule & money', path: 'freight', label: 'Freight (₹)', type: 'number' },
-  { section: 'Schedule & money', path: 'driverAdvance', label: 'Driver advance (₹)', type: 'number' },
+  { section: 'Schedule & money', path: 'freight', label: 'Freight (SAR)', type: 'number' },
+  { section: 'Schedule & money', path: 'driverAdvance', label: 'Driver advance (SAR)', type: 'number' },
 ];
 
 type View = 'open' | 'in_transit' | 'scheduled' | 'delayed' | 'arrived' | 'completed';

@@ -155,7 +155,7 @@ export function ReceivePage() {
           itemField,
           { path: 'expected', label: 'Expected', type: 'number', required: true },
           { path: 'received', label: 'Arrived', type: 'number' },
-          { path: 'rate', label: 'Rate ₹', type: 'number' },
+          { path: 'rate', label: 'Rate SAR', type: 'number' },
           { path: 'serials', label: 'Serials (tracked items)', type: 'list' },
         ],
       },
@@ -209,7 +209,7 @@ export function SalesPage() {
         lineFields: [
           itemField,
           { path: 'qty', label: 'Qty', type: 'number', required: true },
-          { path: 'rate', label: 'Rate ₹', type: 'number', required: true },
+          { path: 'rate', label: 'Rate SAR', type: 'number', required: true },
           { path: 'gstRate', label: 'GST %', type: 'number', required: true },
           { path: 'serials', label: 'Serials (tracked items)', type: 'list' },
         ],

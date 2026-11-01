@@ -121,10 +121,12 @@ export const EmergencyContactsController = crudController({
 });
 
 export const DEFAULT_CONTACTS = [
-  { name: 'Emergency (police, fire, ambulance)', phone: '112', kind: 'police', sort: 1 },
-  { name: 'NHAI highway helpline', phone: '1033', kind: 'highway', sort: 2 },
-  { name: 'Ambulance', phone: '108', kind: 'ambulance', sort: 3 },
-  { name: 'Company control room', phone: '+91 00000 00000', kind: 'control_room', sort: 4 },
+  { name: 'Unified emergency (police)', phone: '911', kind: 'police', sort: 1 },
+  { name: 'Red Crescent ambulance', phone: '997', kind: 'ambulance', sort: 2 },
+  { name: 'Civil Defence (fire)', phone: '998', kind: 'fire', sort: 3 },
+  { name: 'Traffic police / road accidents', phone: '993', kind: 'highway', sort: 4 },
+  { name: 'Najm (accident reporting)', phone: '920000560', kind: 'highway', sort: 5 },
+  { name: 'Company control room', phone: '+966 11 000 0000', kind: 'control_room', sort: 6 },
 ];
 
 /* ------------------------------------------------------------------ SOS */

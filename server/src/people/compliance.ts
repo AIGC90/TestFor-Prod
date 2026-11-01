@@ -28,8 +28,11 @@ export const DRIVER_DOCS = {
   medical: 'Medical fitness',
   police_verification: 'Police verification',
 } as const;
-/** A vehicle without a valid one of these must not run. */
-export const MANDATORY_VEHICLE_DOCS = ['rc', 'insurance', 'fitness', 'puc', 'national_permit'] as const;
+/** A vehicle without a valid one of these must not run. Set COMPLIANCE_MANDATORY for your country (KSA: rc,insurance,fitness,national_permit). */
+export const MANDATORY_VEHICLE_DOCS: readonly string[] = (process.env.COMPLIANCE_MANDATORY ?? 'rc,insurance,fitness,puc,national_permit')
+  .split(',')
+  .map((s) => s.trim())
+  .filter((s) => s in VEHICLE_DOCS);
 export const EXPIRING_DAYS = 30;
 
 const day = z.preprocess((v) => (v === '' ? null : v instanceof Date ? v.toISOString().slice(0, 10) : v), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'use YYYY-MM-DD').nullish()).transform((v) => v ?? null);
@@ -164,7 +167,7 @@ export class ComplianceService {
     const vehicleStatus = [...subjects].sort().map((v) => {
       const mine = docs.filter((d) => d.subjectType === 'vehicle' && d.subject === v);
       const missing = MANDATORY_VEHICLE_DOCS.filter((t) => !mine.some((d) => d.docType === t));
-      const expired = mine.filter((d) => d.status === 'expired' && (MANDATORY_VEHICLE_DOCS as readonly string[]).includes(d.docType)).map((d) => d.docType);
+      const expired = mine.filter((d) => d.status === 'expired' && MANDATORY_VEHICLE_DOCS.includes(d.docType)).map((d) => d.docType);
       const expiring = mine.filter((d) => d.status === 'expiring').map((d) => d.docType);
       return { vehicleNo: v, documents: mine.length, missing, expired, expiring, grounded: expired.length > 0, compliant: !missing.length && !expired.length };
     });

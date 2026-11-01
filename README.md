@@ -26,8 +26,13 @@ pnpm infra:up                  # PostgreSQL :5432, Traccar :8082
 node tools/seed-traccar.mjs    # admin@fleet.local / admin + demo fleet
 pnpm --filter server build && pnpm dev:server   # API on :3000
 pnpm dev:web                   # app on http://localhost:5173
+pnpm --filter server seed && pnpm demo   # optional: Saudi sample data (60 days, SAR)
 pnpm simulate                  # optional: moving demo trucks
 ```
+
+Sample data is a Saudi fleet: 25 trucks on the Riyadh, Jeddah, Dammam and Madinah corridors,
+Saudi customers and suppliers, and all amounts in SAR. Set `COMPLIANCE_MANDATORY=rc,insurance,fitness,national_permit`
+so the compliance check matches Saudi documents (Istimara, insurance, Fahas, operating card).
 
 See [docs/handover.md](docs/handover.md) for a test plan per module.
 
@@ -65,6 +70,7 @@ and `SECRET_KEY` are needed to run; the rest switch on optional features.
 | `FASTAG_API_URL`, `FASTAG_API_KEY` | FASTag issuer or aggregator for balances and toll transactions (otherwise import bank statements) |
 | `DASHCAM_STREAM_URL` | Video media server URL template, e.g. `https://media.example.com/live/{uniqueId}/{channel}.m3u8` |
 | `MAX_UPLOAD_BYTES` | Attachment size limit (default 8 MB) |
+| `COMPLIANCE_MANDATORY` | Vehicle documents a truck must hold, comma-separated (KSA: `rc,insurance,fitness,national_permit`) |
 
 ## AI features
 

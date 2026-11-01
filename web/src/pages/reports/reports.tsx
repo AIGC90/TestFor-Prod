@@ -14,7 +14,7 @@ export function fmtDuration(ms: number) {
   const m = Math.round(ms / 60000);
   return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`;
 }
-const km = (m: number) => `${(m / 1000).toLocaleString('en-IN', { maximumFractionDigits: 1 })} km`;
+const km = (m: number) => `${(m / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 })} km`;
 const kmh = (knots: number) => `${Math.round(knotsToKmh(knots))} km/h`;
 const coords = (lat?: number, lon?: number) => (lat !== undefined && lon !== undefined ? `${lat.toFixed(5)}, ${lon.toFixed(5)}` : '—');
 
@@ -436,7 +436,7 @@ export function StatisticsReport() {
           ['API requests', rows.reduce((s, r) => s + r.requests, 0)],
         ] as [string, number][]).map(([k, v]) => (
           <Grid key={k} size={{ xs: 6, md: 3 }}>
-            <Card><CardContent><Typography variant="body2" color="text.secondary">{k}</Typography><Typography variant="h5">{v.toLocaleString('en-IN')}</Typography></CardContent></Card>
+            <Card><CardContent><Typography variant="body2" color="text.secondary">{k}</Typography><Typography variant="h5">{v.toLocaleString('en-US')}</Typography></CardContent></Card>
           </Grid>
         ))}
       </Grid>

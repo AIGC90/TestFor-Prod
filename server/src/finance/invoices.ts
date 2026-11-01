@@ -131,7 +131,7 @@ export class InvoicesService {
     if (inv.status === 'cancelled' || inv.status === 'paid') throw new ConflictException(`${inv.invNo} is ${inv.status}`);
     const settle = r2(d.amount + d.tds);
     if (!(settle > 0)) throw new BadRequestException('amount: enter the amount received');
-    if (settle > outstanding(inv)) throw new BadRequestException(`amount: only ₹${outstanding(inv)} is outstanding`);
+    if (settle > outstanding(inv)) throw new BadRequestException(`amount: only SAR ${outstanding(inv)} is outstanding`);
     return this.db.transaction(async (tx) => {
       await tx.insert(invoiceReceipts).values({ invoiceId: id, receivedOn: d.receivedOn ?? today(), amount: d.amount, tds: d.tds, mode: d.mode, reference: d.reference, createdBy: user.id });
       const received = r2(inv.received + settle);

@@ -6,6 +6,7 @@
     "infra:up": "docker compose -f infra/docker-compose.yml up -d",
     "infra:down": "docker compose -f infra/docker-compose.yml down",
     "seed": "node tools/seed-traccar.mjs && pnpm --filter server seed",
+    "demo": "pnpm --filter server demo",
     "simulate": "node tools/simulate-gps.mjs",
     "dev:server": "pnpm --filter server dev",
     "dev:web": "pnpm --filter web dev",

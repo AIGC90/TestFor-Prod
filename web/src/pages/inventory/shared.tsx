@@ -6,8 +6,9 @@ import type { Option } from '../../components/EntityPage';
 import type { Item } from '../masters/ItemMasterPage';
 import type { Party, Store } from '../masters/masters';
 
-export const inr = (n: number | null | undefined) => (n === null || n === undefined ? '—' : `${n < 0 ? '−' : ''}₹${Math.abs(n).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
-export const num = (n: number | null | undefined) => (n === null || n === undefined ? '—' : n.toLocaleString('en-IN', { maximumFractionDigits: 3 }));
+/** Formats an amount in the app's currency (Saudi riyal). */
+export const inr = (n: number | null | undefined) => (n === null || n === undefined ? '—' : `${n < 0 ? '−' : ''}SAR ${Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 })}`);
+export const num = (n: number | null | undefined) => (n === null || n === undefined ? '—' : n.toLocaleString('en-US', { maximumFractionDigits: 3 }));
 
 export const itemOptions = async (): Promise<Option[]> =>
   (await http<Item[]>('/erp/masters/items')).filter((i) => i.active).map((i) => ({ value: i.id, label: `${i.name} (${i.code})` }));

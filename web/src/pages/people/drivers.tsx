@@ -328,9 +328,9 @@ function DriversTab() {
       { section: 'Driver', path: 'aadhar', label: 'Aadhar number', helper: '12 digits' },
       { section: 'Driver', path: 'joinedOn', label: 'Joined on', type: 'day' },
       { section: 'Driver', path: 'status', label: 'Status', type: 'select', options: [{ value: 'active', label: 'Active' }, { value: 'inactive', label: 'Inactive' }] },
-      { section: 'Pay', path: 'monthlySalary', label: 'Monthly salary (₹)', type: 'number' },
-      { section: 'Pay', path: 'dailyBata', label: 'Daily bata (₹)', type: 'number', helper: 'Per day worked' },
-      { section: 'Pay', path: 'tripAllowance', label: 'Trip allowance (₹)', type: 'number', helper: 'Per completed trip' },
+      { section: 'Pay', path: 'monthlySalary', label: 'Monthly salary (SAR)', type: 'number' },
+      { section: 'Pay', path: 'dailyBata', label: 'Daily bata (SAR)', type: 'number', helper: 'Per day worked' },
+      { section: 'Pay', path: 'tripAllowance', label: 'Trip allowance (SAR)', type: 'number', helper: 'Per completed trip' },
       { section: 'Pay', path: 'notes', label: 'Notes', type: 'textarea' },
     ],
     rowActions: (d, run) =>

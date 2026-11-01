@@ -186,7 +186,7 @@ export function AnnouncementPage() {
           <Typography variant="h6" gutterBottom>Banner for all users</Typography>
           {saveBanner.isError && <Alert severity="error" sx={{ mb: 2 }}>{errorMessage(saveBanner.error)}</Alert>}
           {saveBanner.isSuccess && <Alert severity="success" sx={{ mb: 2 }}>Banner updated.</Alert>}
-          <TextField fullWidth multiline minRows={2} placeholder="e.g. Planned maintenance on Sunday 02:00–03:00 IST" value={bannerText} onChange={(e) => setBanner(e.target.value)} slotProps={{ htmlInput: { maxLength: 500 } }} />
+          <TextField fullWidth multiline minRows={2} placeholder="e.g. Planned maintenance on Friday 02:00–03:00 KSA time" value={bannerText} onChange={(e) => setBanner(e.target.value)} slotProps={{ htmlInput: { maxLength: 500 } }} />
           <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
             <Button variant="contained" onClick={() => saveBanner.mutate(bannerText)} disabled={saveBanner.isPending}>Publish banner</Button>
             <Button onClick={() => { setBanner(''); saveBanner.mutate(''); }}>Clear banner</Button>

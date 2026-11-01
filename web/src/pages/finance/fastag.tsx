@@ -59,7 +59,7 @@ export function tollRowsFromCsv(text: string) {
         const key = keys[i];
         const v = cell.trim();
         if (!key || !v) return;
-        if (key === 'amount' || key === 'balanceAfter') row[key] = Math.abs(Number(v.replace(/[₹,\s]/g, '')));
+        if (key === 'amount' || key === 'balanceAfter') row[key] = Math.abs(Number(v.replace(/SAR|SR|[₹﷼,\s]/gi, '')));
         else if (key === 'at') {
           const d = dayjs(v, DATE_FORMATS, true);
           row.at = d.isValid() ? d.toISOString() : v;
@@ -128,7 +128,7 @@ export function FastagPage() {
                   <ResponsiveContainer>
                     <BarChart data={s?.topPlazas ?? []} layout="vertical" margin={{ left: 80 }}>
                       <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                      <XAxis type="number" fontSize={11} tickFormatter={(v) => `₹${v}`} />
+                      <XAxis type="number" fontSize={11} tickFormatter={(v) => `SAR ${v}`} />
                       <YAxis type="category" dataKey="plaza" fontSize={10} width={170} />
                       <Tooltip formatter={(v) => inr(Number(v))} />
                       <Bar dataKey="amount" name="Tolls" fill="#0b5cad" />
@@ -268,8 +268,8 @@ function Accounts({ classes, onChange }: { classes: Record<string, string>; onCh
       { path: 'tagId', label: 'FASTag ID / serial', required: true },
       { path: 'bank', label: 'Issuing bank', required: true },
       { path: 'vehicleClass', label: 'Vehicle class', type: 'select', options: Object.entries(classes).map(([value, label]) => ({ value, label: `${value} · ${label}` })) },
-      { path: 'balance', label: 'Current balance (₹)', type: 'number', helper: 'Leave blank to take it from the first statement' },
-      { path: 'lowBalance', label: 'Low-balance alert below (₹)', type: 'number' },
+      { path: 'balance', label: 'Current balance (SAR)', type: 'number', helper: 'Leave blank to take it from the first statement' },
+      { path: 'lowBalance', label: 'Low-balance alert below (SAR)', type: 'number' },
       { path: 'status', label: 'Status', type: 'select', options: [{ value: 'active', label: 'Active' }, { value: 'blacklisted', label: 'Blacklisted' }, { value: 'closed', label: 'Closed' }] },
     ],
     rowActions: (a, run) =>
@@ -278,7 +278,7 @@ function Accounts({ classes, onChange }: { classes: Record<string, string>; onCh
         <Button
           size="small"
           onClick={async () => {
-            const v = await ask({ title: `Recharge ${a.vehicleNo} (${inr(a.balance)})`, initial: { amount: 5000 }, fields: [{ path: 'amount', label: 'Amount (₹)', type: 'number', required: true }, { path: 'reference', label: 'Bank reference' }] });
+            const v = await ask({ title: `Recharge ${a.vehicleNo} (${inr(a.balance)})`, initial: { amount: 5000 }, fields: [{ path: 'amount', label: 'Amount (SAR)', type: 'number', required: true }, { path: 'reference', label: 'Bank reference' }] });
             if (v) run(async () => { await post(`/erp/fastag/accounts/${a.id}/recharge`, v); onChange(); });
           }}
         >

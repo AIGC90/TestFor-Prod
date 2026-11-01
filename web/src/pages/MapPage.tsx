@@ -160,7 +160,7 @@ export function MapPage() {
                   ['Speed', selected.position ? `${Math.round(knotsToKmh(selected.position.speed))} km/h` : '—'],
                   ['Ignition', selected.position?.attributes.ignition ? 'On' : 'Off'],
                   ['Fuel', selected.position?.attributes.fuel !== undefined ? `${selected.position.attributes.fuel}` : '—'],
-                  ['Odometer', selected.position?.attributes.odometer ? `${Math.round(selected.position.attributes.odometer / 1000).toLocaleString('en-IN')} km` : '—'],
+                  ['Odometer', selected.position?.attributes.odometer ? `${Math.round(selected.position.attributes.odometer / 1000).toLocaleString('en-US')} km` : '—'],
                   ['Driver', driverName(selected.position?.attributes.driverUniqueId)],
                   ['Model', selected.device.model ?? '—'],
                   ['IMEI', selected.device.uniqueId],

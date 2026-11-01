@@ -76,6 +76,7 @@ describe('AI: masking', () => {
   it('masks Aadhar and mobile numbers but not IMEIs or amounts', () => {
     expect(maskPii('Aadhar 1234 5678 9012, ph +91 98220 11111 / 9822011111')).toBe('Aadhar XXXX-XXXX-9012, ph +91 XXXXXX1111 / XXXXXX1111');
     expect(maskPii('IMEI 867010075167001 paid 125000.50')).toBe('IMEI 867010075167001 paid 125000.50');
+    expect(maskPii('call 0551234567 or +966 55 123 4567 / +966551234567')).toBe('call 05XXXXX4567 or +966 5XXXXX4567 / +966 5XXXXX4567');
     expect(toolJson({ a: 'x'.repeat(50) }, 20)).toMatch(/truncated/);
   });
 });

@@ -128,7 +128,7 @@ export function Copilot({ open, onClose }: { open: boolean; onClose: () => void 
           {history.data?.length === 0 && <Typography color="text.secondary" sx={{ p: 2 }}>No conversations yet.</Typography>}
           {history.data?.map((c) => (
             <ListItemButton key={c.id} selected={c.id === conversationId} onClick={() => void load(c.id)}>
-              <ListItemText primary={c.title} secondary={new Date(c.updatedAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })} />
+              <ListItemText primary={c.title} secondary={new Date(c.updatedAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
             </ListItemButton>
           ))}
         </List>

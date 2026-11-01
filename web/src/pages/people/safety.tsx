@@ -110,7 +110,7 @@ const incidentFields: Field[] = [
   { section: 'Where', path: 'longitude', label: 'Longitude', type: 'number' },
   { section: 'Roadside assistance & cost', path: 'rsaProvider', label: 'RSA provider' },
   { section: 'Roadside assistance & cost', path: 'rsaStatus', label: 'RSA status', type: 'select', options: RSA_STATUS },
-  { section: 'Roadside assistance & cost', path: 'repairCost', label: 'Repair cost (₹)', type: 'number' },
+  { section: 'Roadside assistance & cost', path: 'repairCost', label: 'Repair cost (SAR)', type: 'number' },
 ];
 
 const incidentOptions = async (): Promise<Option[]> => (await http<Incident[]>('/erp/safety/incidents')).map((i) => ({ value: i.id, label: `${i.incNo} · ${i.vehicleNo} · ${dayjs(i.occurredAt).format('D MMM YYYY')}` }));
@@ -122,9 +122,9 @@ const claimFields: Field[] = [
   { path: 'policyNo', label: 'Policy no.' },
   { path: 'insurerClaimNo', label: "Insurer's claim no." },
   { path: 'surveyor', label: 'Surveyor' },
-  { path: 'estimatedDamage', label: 'Estimated damage (₹)', type: 'number', required: true },
-  { path: 'approvedPayout', label: 'Approved payout (₹)', type: 'number' },
-  { path: 'settledAmount', label: 'Amount received (₹)', type: 'number' },
+  { path: 'estimatedDamage', label: 'Estimated damage (SAR)', type: 'number', required: true },
+  { path: 'approvedPayout', label: 'Approved payout (SAR)', type: 'number' },
+  { path: 'settledAmount', label: 'Amount received (SAR)', type: 'number' },
   { path: 'status', label: 'Status', type: 'select', required: true, options: CLAIM_STATUS },
   { path: 'remarks', label: 'Remarks', type: 'textarea' },
 ];
@@ -226,10 +226,10 @@ function ClaimsTab({ onFiles }: { onFiles: (c: Claim) => void }) {
             <Button size="small" onClick={async () => { const v = await ask({ title: `Survey for ${c.clmNo}`, initial: { surveyor: c.surveyor }, fields: [{ path: 'surveyor', label: 'Surveyor', required: true }] }); if (v) run(() => put(c, { ...v, status: 'survey' })); }}>Survey</Button>
           )}
           {['filed', 'survey'].includes(c.status) && (
-            <Button size="small" onClick={async () => { const v = await ask({ title: `Insurer approved ${c.clmNo}`, initial: { approvedPayout: c.estimatedDamage }, fields: [{ path: 'approvedPayout', label: 'Approved payout (₹)', type: 'number', required: true }, { path: 'insurerClaimNo', label: "Insurer's claim no." }] }); if (v) run(() => put(c, { ...v, status: 'approved' })); }}>Approved</Button>
+            <Button size="small" onClick={async () => { const v = await ask({ title: `Insurer approved ${c.clmNo}`, initial: { approvedPayout: c.estimatedDamage }, fields: [{ path: 'approvedPayout', label: 'Approved payout (SAR)', type: 'number', required: true }, { path: 'insurerClaimNo', label: "Insurer's claim no." }] }); if (v) run(() => put(c, { ...v, status: 'approved' })); }}>Approved</Button>
           )}
           {c.status === 'approved' && (
-            <Button size="small" variant="contained" onClick={async () => { const v = await ask({ title: `Settle ${c.clmNo}`, initial: { settledAmount: c.approvedPayout }, fields: [{ path: 'settledAmount', label: 'Amount received (₹)', type: 'number', required: true }, { path: 'remarks', label: 'Remarks', type: 'textarea' }] }); if (v) run(() => put(c, { ...v, status: 'settled' })); }}>Settle</Button>
+            <Button size="small" variant="contained" onClick={async () => { const v = await ask({ title: `Settle ${c.clmNo}`, initial: { settledAmount: c.approvedPayout }, fields: [{ path: 'settledAmount', label: 'Amount received (SAR)', type: 'number', required: true }, { path: 'remarks', label: 'Remarks', type: 'textarea' }] }); if (v) run(() => put(c, { ...v, status: 'settled' })); }}>Settle</Button>
           )}
           {!['settled', 'rejected'].includes(c.status) && (
             <Button size="small" color="inherit" onClick={async () => { const v = await ask({ title: `Reject ${c.clmNo}`, fields: [{ path: 'remarks', label: 'Reason', type: 'textarea', required: true }] }); if (v) run(() => put(c, { ...v, status: 'rejected' })); }}>Rejected</Button>

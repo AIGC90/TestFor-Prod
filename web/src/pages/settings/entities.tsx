@@ -299,7 +299,7 @@ const MAINT_TYPES: Record<string, { label: string; unit: string; scale: number }
 };
 const maintFmt = (type: string, v: number) => {
   const t = MAINT_TYPES[type];
-  return t ? `${(v / t.scale).toLocaleString('en-IN')} ${t.unit}` : String(v);
+  return t ? `${(v / t.scale).toLocaleString('en-US')} ${t.unit}` : String(v);
 };
 
 export const maintenanceConfig: EntityConfig<MaintenanceRow> = {

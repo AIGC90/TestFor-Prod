@@ -85,7 +85,7 @@ function ExtractDialog({ fields, ai, onClose }: { fields: Record<string, unknown
           {lines.length > 0 && (
             <Box>
               <Typography variant="subtitle2">Line items</Typography>
-              {lines.map((l, i) => <Typography key={i} variant="body2">{l.description}{l.qty !== null ? ` × ${l.qty}` : ''}{l.amount !== null ? ` · ₹${l.amount.toLocaleString('en-IN')}` : ''}</Typography>)}
+              {lines.map((l, i) => <Typography key={i} variant="body2">{l.description}{l.qty !== null ? ` × ${l.qty}` : ''}{l.amount !== null ? ` · SAR ${l.amount.toLocaleString('en-US')}` : ''}</Typography>)}
             </Box>
           )}
           {apply.isError && <Alert severity="error">{errorMessage(apply.error)}</Alert>}

@@ -17,9 +17,9 @@ describe('FASTag statement import', () => {
 });
 
 describe('revenue periods', () => {
-  it('starts the financial year on 1 April', () => {
-    expect(dayjs(presetRange('fy', dayjs('2026-11-01T10:00:00')).from).format('YYYY-MM-DD')).toBe('2026-04-01');
-    expect(dayjs(presetRange('fy', dayjs('2027-02-10T10:00:00')).from).format('YYYY-MM-DD')).toBe('2026-04-01');
+  it('starts the financial year on 1 January', () => {
+    expect(dayjs(presetRange('fy', dayjs('2026-11-01T10:00:00')).from).format('YYYY-MM-DD')).toBe('2026-01-01');
+    expect(dayjs(presetRange('fy', dayjs('2027-02-10T10:00:00')).from).format('YYYY-MM-DD')).toBe('2027-01-01');
     expect(dayjs(presetRange('month', dayjs('2026-11-15T10:00:00')).from).format('YYYY-MM-DD')).toBe('2026-11-01');
   });
 });

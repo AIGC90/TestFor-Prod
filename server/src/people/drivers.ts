@@ -419,7 +419,7 @@ export class DriversService implements OnModuleInit {
       docId: row.id,
       docNo: row.prNo,
       title: `Driver payroll ${month}`,
-      summary: `${p.lines.length} drivers, gross ₹${p.gross}, deductions ₹${p.deductions}`,
+      summary: `${p.lines.length} drivers, gross SAR ${p.gross}, deductions SAR ${p.deductions}`,
       amount: p.net,
       meta: { link: '/driver-management?tab=payroll' },
     });

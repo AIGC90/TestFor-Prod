@@ -4,7 +4,7 @@
 //
 //   TRACCAR_URL=http://localhost:8082 ADMIN_EMAIL=admin@fleet.local ADMIN_PASSWORD=admin node tools/seed-traccar.mjs
 
-import { CITIES, DRIVERS, GEOFENCES, GROUPS, demoVehicles } from './fleet-data.mjs';
+import { CITIES, DRIVERS, GEOFENCES, GROUPS, LEGACY_GEOFENCES, LEGACY_GROUPS, demoVehicles } from './fleet-data.mjs';
 
 const BASE = process.env.TRACCAR_URL ?? 'http://localhost:8082';
 const EMAIL = process.env.ADMIN_EMAIL ?? 'admin@fleet.local';
@@ -38,15 +38,38 @@ async function ensureAdmin() {
   console.log('created admin', EMAIL);
 }
 
-async function ensureMany(path, items, key) {
+/**
+ * Creates missing records. With `update`, records that exist but differ (e.g. a device renamed in a new
+ * demo dataset) are updated in place, which keeps their history and positions.
+ */
+async function ensureMany(path, items, key, { update = false } = {}) {
   const existing = await api('GET', path);
   const byKey = new Map(existing.map((e) => [e[key], e]));
   const out = [];
+  let created = 0;
+  let updated = 0;
   for (const item of items) {
-    out.push(byKey.get(item[key]) ?? (await api('POST', path, item)));
+    const found = byKey.get(item[key]);
+    if (!found) {
+      out.push(await api('POST', path, item));
+      created++;
+    } else if (update && Object.entries(item).some(([k, v]) => JSON.stringify(found[k]) !== JSON.stringify(v))) {
+      out.push(await api('PUT', `${path}/${found.id}`, { ...found, ...item }));
+      updated++;
+    } else out.push(found);
   }
-  console.log(`${path}: ${out.length} (${out.length - byKey.size > 0 ? out.length - byKey.size : 0} new)`);
+  console.log(`${path}: ${out.length} (${created} new, ${updated} updated)`);
   return out;
+}
+
+/** Removes records left over from an earlier demo dataset. */
+async function removeNamed(path, names) {
+  for (const e of await api('GET', path)) {
+    if (names.includes(e.name)) {
+      await api('DELETE', `${path}/${e.id}`);
+      console.log(`removed ${path} ${e.name}`);
+    }
+  }
 }
 
 async function link(body) {
@@ -71,16 +94,20 @@ await ensureMany(
     category: v.category,
     phone: v.phone,
     groupId: groupId[v.group],
-    attributes: { sellType: 'rent', operator: 'Airtel', speedLimit: 43.2 }, // 80 km/h in knots
+    attributes: { sellType: 'rent', operator: 'STC', speedLimit: 43.2 }, // 80 km/h in knots
   })),
   'uniqueId',
+  { update: true },
 );
+await removeNamed('/api/groups', LEGACY_GROUPS);
 
 await ensureMany(
   '/api/drivers',
   DRIVERS.map((name, i) => ({ name, uniqueId: `DRV-${String(i + 1).padStart(3, '0')}` })),
   'uniqueId',
+  { update: true },
 );
+await removeNamed('/api/geofences', LEGACY_GEOFENCES);
 
 const geofences = await ensureMany(
   '/api/geofences',

@@ -7,7 +7,7 @@ the steps and what you should see. Automated tests already cover the business ru
 ## 1. Setup
 
 1. Start the stack as in the README (`pnpm infra:up`, seed Traccar, start the API and web app,
-   `pnpm simulate` for moving trucks).
+   `pnpm demo` for 60 days of Saudi sample data in SAR, `pnpm simulate` for moving trucks).
 2. Log in as `admin@fleet.local` / `admin`.
 3. Create test users in **Settings → Users Management** and set each one's *ERP role* in the user form:
    fleet supervisor, workshop manager, technician, storekeeper, accountant, driver, viewer.

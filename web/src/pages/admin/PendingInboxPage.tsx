@@ -7,7 +7,7 @@ import { type ApprovalRequest, type ApprovalRule, erpAdmin, ROLE_LABEL } from '.
 import { useAuth } from '../../auth/AuthProvider';
 import { errorMessage } from '../../components/EntityPage';
 
-const inr = (n: number) => `₹${n.toLocaleString('en-IN')}`;
+const inr = (n: number) => `SAR ${n.toLocaleString('en-US')}`;
 
 function RulesTab() {
   const qc = useQueryClient();
@@ -30,7 +30,7 @@ function RulesTab() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              {['Document', 'Needs approval', 'From amount (₹)', 'Routed to', ''].map((h) => <TableCell key={h} sx={{ fontWeight: 700 }}>{h}</TableCell>)}
+              {['Document', 'Needs approval', 'From amount (SAR)', 'Routed to', ''].map((h) => <TableCell key={h} sx={{ fontWeight: 700 }}>{h}</TableCell>)}
             </TableRow>
           </TableHead>
           <TableBody>

@@ -82,7 +82,7 @@ function useTaskActions() {
                 title: `Complete ${t.ftNo}`,
                 fields: [
                   { path: 'outcome', label: 'Outcome', type: 'textarea', required: true },
-                  { path: 'amountCollected', label: 'Amount collected (₹)', type: 'number', required: t.kind === 'collection', helper: t.kind === 'collection' ? 'Enter 0 if nothing was collected' : undefined },
+                  { path: 'amountCollected', label: 'Amount collected (SAR)', type: 'number', required: t.kind === 'collection', helper: t.kind === 'collection' ? 'Enter 0 if nothing was collected' : undefined },
                   { path: 'rating', label: 'Customer rating', type: 'select', options: [5, 4, 3, 2, 1].map((r) => ({ value: r, label: '★'.repeat(r) })) },
                 ],
               });
@@ -344,7 +344,7 @@ function AttendanceTab() {
   return (
     <Stack spacing={2}>
       <Stack direction={{ xs: 'column', sm: 'row' }} sx={{ justifyContent: 'space-between', gap: 1 }}>
-        <Typography color="text.secondary">Check-in and check-out times (IST). Check-ins after {a?.lateAfter ?? '09:30'} are late.</Typography>
+        <Typography color="text.secondary">Check-in and check-out times (KSA time). Check-ins after {a?.lateAfter ?? '08:30'} are late.</Typography>
         <ToggleButtonGroup size="small" exclusive value={days} onChange={(_, v) => v && setDays(v)}>
           {[7, 14, 30].map((d) => <ToggleButton key={d} value={d}>{d} days</ToggleButton>)}
         </ToggleButtonGroup>
@@ -421,7 +421,7 @@ function ClaimsTab() {
       { path: 'staffId', label: 'Staff member', type: 'autocomplete', required: true, options: staffOptions, optionsKey: 'field-staff-options' },
       { path: 'date', label: 'Date', type: 'day', required: true },
       { path: 'category', label: 'Category', type: 'select', required: true, options: CATEGORIES },
-      { path: 'amount', label: 'Amount (₹)', type: 'number', required: true },
+      { path: 'amount', label: 'Amount (SAR)', type: 'number', required: true },
       { path: 'description', label: 'Description', type: 'textarea', required: true },
     ],
     rowActions: (c, run) => c.status === 'approved' && access.can('expense_claim', 'edit') && <Button size="small" variant="contained" onClick={() => run(() => post(`/erp/field/claims/${c.id}/pay`))}>Pay</Button>,

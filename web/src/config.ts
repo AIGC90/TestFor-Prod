@@ -7,4 +7,4 @@ export const MAP_STYLES: { id: string; label: string; style: string }[] = [
   { id: 'positron', label: 'Light', style: 'https://tiles.openfreemap.org/styles/positron' },
   { id: 'bright', label: 'Bright', style: 'https://tiles.openfreemap.org/styles/bright' },
 ];
-export const DEFAULT_CENTER: [number, number] = [78.9629, 22.5937]; // India
+export const DEFAULT_CENTER: [number, number] = [45.0792, 23.8859]; // Saudi Arabia

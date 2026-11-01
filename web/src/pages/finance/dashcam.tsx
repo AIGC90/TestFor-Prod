@@ -128,7 +128,7 @@ export function DashcamPage() {
                     <Box>
                       <Typography variant="h6">{device.name}</Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {[pos?.attributes.driverUniqueId ? `Driver ${driverName(pos.attributes.driverUniqueId)}` : null, device.lastUpdate ? `last seen ${dayjs(device.lastUpdate).format('D MMM HH:mm')}` : null, pos ? `${pos.latitude.toFixed(5)}, ${pos.longitude.toFixed(5)}` : null, pos ? `${Math.round(knotsToKmh(pos.speed))} km/h` : null, pos?.attributes.totalDistance !== undefined ? `${Math.round(Number(pos.attributes.totalDistance) / 1000).toLocaleString('en-IN')} km` : null, pos?.attributes.power !== undefined ? `power ${Number(pos.attributes.power).toFixed(1)} V` : null].filter(Boolean).join(' · ')}
+                        {[pos?.attributes.driverUniqueId ? `Driver ${driverName(pos.attributes.driverUniqueId)}` : null, device.lastUpdate ? `last seen ${dayjs(device.lastUpdate).format('D MMM HH:mm')}` : null, pos ? `${pos.latitude.toFixed(5)}, ${pos.longitude.toFixed(5)}` : null, pos ? `${Math.round(knotsToKmh(pos.speed))} km/h` : null, pos?.attributes.totalDistance !== undefined ? `${Math.round(Number(pos.attributes.totalDistance) / 1000).toLocaleString('en-US')} km` : null, pos?.attributes.power !== undefined ? `power ${Number(pos.attributes.power).toFixed(1)} V` : null].filter(Boolean).join(' · ')}
                       </Typography>
                     </Box>
                     <ToggleButtonGroup size="small" exclusive value={view} onChange={(_, v) => v && setView(v)}>

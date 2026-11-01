@@ -12,8 +12,8 @@ import { eventLabel, fleetStatus, type FleetStatus, knotsToKmh, STATUS_COLOR, ST
 
 dayjs.extend(relativeTime);
 
-const nf = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 });
-const nf1 = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 1 });
+const nf = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+const nf1 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });
 const PIE_COLORS = ['#0b5cad', '#f57c00', '#2e7d32', '#c62828', '#6a1b9a', '#00838f', '#9e9e9e'];
 
 function greeting() {

@@ -141,7 +141,7 @@ export function AiOpsPage() {
         <Button variant="outlined" startIcon={<AutoAwesome />} onClick={() => openCopilot()}>Open copilot</Button>
       </Stack>
       {status && !status.enabled && <Alert severity="info">AI is off. Set the ANTHROPIC_API_KEY environment secret on the API server (model {status.model}). Past reports stay visible.</Alert>}
-      {status?.enabled && <Typography variant="caption" color="text.secondary">Model {status.model}{status.briefingHour !== null ? ` · daily briefing after ${status.briefingHour}:00 IST` : ' · daily briefing not scheduled'}</Typography>}
+      {status?.enabled && <Typography variant="caption" color="text.secondary">Model {status.model}{status.briefingHour !== null ? ` · daily briefing after ${status.briefingHour}:00 KSA time` : ' · daily briefing not scheduled'}</Typography>}
       <Tabs value={tab} onChange={(_, v) => setParams({ tab: v })} variant="scrollable" allowScrollButtonsMobile>
         <Tab value="triage" label="Alert triage" />
         <Tab value="briefing" label="Morning briefing" />

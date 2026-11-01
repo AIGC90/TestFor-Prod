@@ -227,7 +227,7 @@ export class WorkshopService implements OnModuleInit {
     if (c.status !== 'approved') throw new ConflictException(`Charge is ${c.status.replace('_', ' ')}`);
     if (!(amount > 0)) throw new BadRequestException('amount must be positive');
     const recovered = Math.round((c.recovered + amount) * 100) / 100;
-    if (recovered > c.amount) throw new BadRequestException(`Only ₹${c.amount - c.recovered} is left to recover`);
+    if (recovered > c.amount) throw new BadRequestException(`Only SAR ${c.amount - c.recovered} is left to recover`);
     const [row] = await this.db
       .update(driverCharges)
       .set({ recovered, status: recovered >= c.amount ? 'recovered' : 'approved', updatedAt: new Date() })

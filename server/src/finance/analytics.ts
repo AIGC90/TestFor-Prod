@@ -83,14 +83,14 @@ export class AnalyticsService {
     const days = Math.max(1, Math.round((to.getTime() - from.getTime()) / DAY));
 
     // ---- per-vehicle accumulation (fleet vehicles are the Traccar devices)
-    interface V { vehicleNo: string; model: string | null; trips: number; revenue: number; km: number; engineHours: number; drivingHours: number; activeDays: number; litres: number; costs: Costs }
+    interface V { vehicleNo: string; model: string | null; trips: number; revenue: number; km: number; tripKm: number; engineHours: number; drivingHours: number; activeDates: Set<string>; litres: number; costs: Costs }
     const vehicles = new Map<string, V>();
     const veh = (name: string): V => {
       const k = vehicleKey(name);
       let v = vehicles.get(k);
       if (!v) {
         const dev = g.devices.find((d) => vehicleKey(d.name) === k);
-        v = { vehicleNo: dev?.name ?? name, model: dev?.model ?? null, trips: 0, revenue: 0, km: 0, engineHours: 0, drivingHours: 0, activeDays: 0, litres: 0, costs: zero() };
+        v = { vehicleNo: dev?.name ?? name, model: dev?.model ?? null, trips: 0, revenue: 0, km: 0, tripKm: 0, engineHours: 0, drivingHours: 0, activeDates: new Set(), litres: 0, costs: zero() };
         vehicles.set(k, v);
       }
       return v;
@@ -103,9 +103,9 @@ export class AnalyticsService {
       v.km += s.distance / 1000;
       v.engineHours += s.engineHours / 3_600_000;
     }
-    for (const s of g.daily) {
+    for (const [i, s] of g.daily.entries()) {
       const name = deviceName.get(s.deviceId) ?? s.deviceName;
-      if (name && keep(name) && s.distance > 20_000) veh(name).activeDays++;
+      if (name && keep(name) && s.distance > 20_000) veh(name).activeDates.add(s.startTime ? ymd(new Date(s.startTime)) : `gps-${i}`);
     }
     for (const t of g.trips) {
       const name = deviceName.get(t.deviceId);
@@ -135,8 +135,14 @@ export class AnalyticsService {
       const v = veh(t.vehicleNo);
       v.trips++;
       v.revenue += t.freight ?? 0;
+      v.tripKm += t.plannedKm ?? 0;
+      // a day counts as active when the truck was on a trip, even if GPS data is missing for it
+      for (let d = new Date(t.startedAt ?? t.completedAt!); d <= t.completedAt!; d = new Date(d.getTime() + DAY)) v.activeDates.add(ymd(d));
+      v.activeDates.add(ymd(t.completedAt!));
       addDaily(t.completedAt!, 'revenue', t.freight ?? 0);
     }
+    // GPS gaps (tracker offline or replaced) must not inflate revenue per km: never count less than the trips ran
+    for (const v of vehicles.values()) v.km = Math.max(v.km, v.tripKm);
     for (const f of fuel) {
       cost(f.vehicleNo, 'fuel', f.amount, f.indentDate);
       if (keep(f.vehicleNo)) veh(f.vehicleNo).litres += f.litres ?? (f.rate ? f.amount / f.rate : 0);
@@ -192,7 +198,7 @@ export class AnalyticsService {
         margin: pct(v.revenue - exp, v.revenue),
         revenuePerKm: v.km ? r2(v.revenue / v.km) : null,
         costPerKm: v.km ? r2(exp / v.km) : null,
-        utilisation: pct(v.activeDays, days),
+        utilisation: pct(Math.min(v.activeDates.size, days), days),
         runningHours: Math.round(v.engineHours * 10) / 10,
         drivingHours: Math.round(v.drivingHours * 10) / 10,
         idleHours: Math.max(0, Math.round((v.engineHours - v.drivingHours) * 10) / 10),
@@ -239,7 +245,7 @@ export class AnalyticsService {
     const engine = [...vehicles.values()].reduce((s, v) => s + v.engineHours, 0);
     const driving = [...vehicles.values()].reduce((s, v) => s + v.drivingHours, 0);
     const vehicleDays = vehicles.size * days;
-    const activeDays = [...vehicles.values()].reduce((s, v) => s + v.activeDays, 0);
+    const activeDays = [...vehicles.values()].reduce((s, v) => s + Math.min(v.activeDates.size, days), 0);
 
     const kpis = {
       revenue,
@@ -264,16 +270,16 @@ export class AnalyticsService {
 
     // ---- plain-language insights
     const insights: string[] = [];
-    if (kpis.margin !== null) insights.push(`Net margin is ${kpis.margin}% on ₹${revenue.toLocaleString('en-IN')} of revenue from ${tripList.length} trips.`);
+    if (kpis.margin !== null) insights.push(`Net margin is ${kpis.margin}% on SAR ${revenue.toLocaleString('en-US')} of revenue from ${tripList.length} trips.`);
     const topCost = [...costPerKmBreakdown].sort((a, b) => b.amount - a.amount)[0];
     if (topCost?.amount && expenses) insights.push(`${topCost.category} is the biggest cost at ${pct(topCost.amount, expenses)}% of expenses.`);
     const losers = vehicleRows.filter((v) => v.revenue > 0 && v.profit < 0).sort((a, b) => a.profit - b.profit);
-    if (losers[0]) insights.push(`${losers[0].vehicleNo} lost ₹${Math.abs(losers[0].profit).toLocaleString('en-IN')} in this period.`);
+    if (losers[0]) insights.push(`${losers[0].vehicleNo} lost SAR ${Math.abs(losers[0].profit).toLocaleString('en-US')} in this period.`);
     const idle = vehicleRows.filter((v) => v.utilisation !== null && v.utilisation < 30 && !v.trips);
     if (idle.length) insights.push(`${idle.length} vehicle${idle.length > 1 ? 's were' : ' was'} under 30% utilised with no completed trips.`);
     const bestLane = laneRows.filter((l) => l.margin !== null).sort((a, b) => b.margin! - a.margin!)[0];
     if (bestLane) insights.push(`Best lane by margin: ${bestLane.lane} (${bestLane.margin}%).`);
-    if (overdue) insights.push(`₹${overdue.toLocaleString('en-IN')} of receivables is overdue${kpis.dso !== null ? `; DSO is ${kpis.dso} days` : ''}.`);
+    if (overdue) insights.push(`SAR ${overdue.toLocaleString('en-US')} of receivables is overdue${kpis.dso !== null ? `; DSO is ${kpis.dso} days` : ''}.`);
 
     return {
       period: { from: from.toISOString(), to: to.toISOString(), days, vehicleNo: vehicleFilter ?? null },

@@ -16,7 +16,7 @@ import { vehicleOptions } from '../workshop/workshop';
 
 const post = (url: string, body?: unknown) => http(url, { method: 'POST', body: body === undefined ? undefined : JSON.stringify(body) });
 const COLORS = ['#0b5cad', '#f57c00', '#2e7d32', '#6a1b9a', '#c62828', '#00838f'];
-const short = (n: number) => (Math.abs(n) >= 1e7 ? `₹${(n / 1e7).toFixed(1)}Cr` : Math.abs(n) >= 1e5 ? `₹${(n / 1e5).toFixed(1)}L` : Math.abs(n) >= 1e3 ? `₹${(n / 1e3).toFixed(0)}k` : `₹${Math.round(n)}`);
+const short = (n: number) => (Math.abs(n) >= 1e6 ? `SAR ${(n / 1e6).toFixed(1)}M` : Math.abs(n) >= 1e3 ? `SAR ${(n / 1e3).toFixed(0)}k` : `SAR ${Math.round(n)}`);
 const pctText = (v: number | null | undefined) => (v === null || v === undefined ? '—' : `${v}%`);
 
 /* --------------------------------------------------------------- period */
@@ -35,9 +35,8 @@ export function presetRange(p: Preset, now = dayjs()): { from: string; to: strin
   const to = now.add(1, 'day').startOf('day');
   if (p === 'month') return { from: now.startOf('month').toISOString(), to: to.toISOString() };
   if (p === 'fy') {
-    // Indian financial year starts on 1 April
-    const fyStart = now.month() >= 3 ? now.month(3).startOf('month') : now.subtract(1, 'year').month(3).startOf('month');
-    return { from: fyStart.toISOString(), to: to.toISOString() };
+    // Saudi companies usually keep a calendar financial year (1 January)
+    return { from: now.startOf('year').toISOString(), to: to.toISOString() };
   }
   return { from: to.subtract(Number(p), 'day').toISOString(), to: to.toISOString() };
 }
@@ -162,9 +161,9 @@ export function RevenuePage() {
         <Stack spacing={2}>
           <Grid container spacing={2}>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Revenue" value={inr(k.revenue)} sub={`${k.trips} trips · ${num(k.km)} km`} /></Grid>
-            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Operating expenses" value={inr(k.expenses)} sub={k.costPerKm !== null ? `₹${k.costPerKm}/km` : 'no GPS distance'} /></Grid>
+            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Operating expenses" value={inr(k.expenses)} sub={k.costPerKm !== null ? `SAR ${k.costPerKm}/km` : 'no GPS distance'} /></Grid>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Net profit" value={inr(k.profit)} tone={k.profit < 0 ? 'bad' : 'good'} sub={`Margin ${pctText(k.margin)}`} /></Grid>
-            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Revenue / km" value={k.revenuePerKm !== null ? `₹${k.revenuePerKm}` : '—'} sub={`Utilisation ${pctText(k.utilisation)}`} /></Grid>
+            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Revenue / km" value={k.revenuePerKm !== null ? `SAR ${k.revenuePerKm}` : '—'} sub={`Utilisation ${pctText(k.utilisation)}`} /></Grid>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Outstanding receivables" value={inr(k.outstanding)} sub={`${inr(k.overdue)} overdue · DSO ${k.dso ?? '—'} days`} tone={k.overdue > 0 ? 'bad' : undefined} /></Grid>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Collected, 30 days" value={inr(k.collected30)} sub={`${k.openInvoices} open invoices`} /></Grid>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Fuel economy" value={k.kmPerLitre !== null ? `${k.kmPerLitre} km/L` : '—'} sub={`${num(k.litres)} litres`} /></Grid>
@@ -258,7 +257,7 @@ export function RevenuePage() {
             <Grid size={{ xs: 12, md: 7 }}>
               <Card sx={{ height: '100%' }}>
                 <CardContent><Typography variant="h6">Lane profitability</Typography></CardContent>
-                <SimpleTable head={['Lane', 'Trips', 'Revenue', '₹/km', 'Margin']} rows={a.lanes.slice(0, 10)} cells={(l) => [l.lane, l.trips, inr(l.revenue), l.revenuePerKm ?? '—', margin(l.margin)]} />
+                <SimpleTable head={['Lane', 'Trips', 'Revenue', 'SAR/km', 'Margin']} rows={a.lanes.slice(0, 10)} cells={(l) => [l.lane, l.trips, inr(l.revenue), l.revenuePerKm ?? '—', margin(l.margin)]} />
               </Card>
             </Grid>
           </Grid>
@@ -308,10 +307,10 @@ function VehiclesTab({ a }: { a: Analytics }) {
             <ResponsiveContainer>
               <ScatterChart>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" dataKey="costPerKm" name="Cost/km" unit="₹" fontSize={11} />
-                <YAxis type="number" dataKey="revenuePerKm" name="Revenue/km" unit="₹" fontSize={11} />
+                <XAxis type="number" dataKey="costPerKm" name="Cost/km" unit=" SAR" fontSize={11} />
+                <YAxis type="number" dataKey="revenuePerKm" name="Revenue/km" unit=" SAR" fontSize={11} />
                 <ZAxis type="number" dataKey="km" range={[40, 300]} name="Km" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} formatter={(v, n) => [n === 'Km' ? num(Number(v)) : `₹${v}`, n]} labelFormatter={() => ''} />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} formatter={(v, n) => [n === 'Km' ? num(Number(v)) : `SAR ${v}`, n]} labelFormatter={() => ''} />
                 <Scatter data={withKm} fill={COLORS[0]} />
               </ScatterChart>
             </ResponsiveContainer>
@@ -351,10 +350,10 @@ function CustomersTab({ a }: { a: Analytics }) {
             <ResponsiveContainer>
               <BarChart data={a.lanes.filter((l) => l.revenuePerKm !== null).slice(0, 12)} layout="vertical" margin={{ left: 60 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                <XAxis type="number" fontSize={11} tickFormatter={(v) => `₹${v}`} />
+                <XAxis type="number" fontSize={11} tickFormatter={(v) => `SAR ${v}`} />
                 <YAxis type="category" dataKey="lane" fontSize={10} width={160} />
-                <Tooltip formatter={(v) => `₹${v}/km`} />
-                <Bar dataKey="revenuePerKm" name="₹/km" fill={COLORS[3]} />
+                <Tooltip formatter={(v) => `SAR ${v}/km`} />
+                <Bar dataKey="revenuePerKm" name="SAR/km" fill={COLORS[3]} />
               </BarChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -388,14 +387,14 @@ function ExpensesTab({ a }: { a: Analytics }) {
         <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ height: '100%' }}>
             <CardContent><Typography variant="h6">Cost per km</Typography></CardContent>
-            <SimpleTable head={['Category', 'Amount', '₹/km']} rows={a.costPerKmBreakdown} cells={(c) => [c.category, inr(c.amount), c.perKm ?? '—']} />
+            <SimpleTable head={['Category', 'Amount', 'SAR/km']} rows={a.costPerKmBreakdown} cells={(c) => [c.category, inr(c.amount), c.perKm ?? '—']} />
           </Card>
         </Grid>
       </Grid>
       <Card>
         <CardContent><Typography variant="h6">Cost by vehicle</Typography></CardContent>
         <SimpleTable
-          head={['Vehicle', ...COST_LABEL.map(([, l]) => l), 'Total', '₹/km']}
+          head={['Vehicle', ...COST_LABEL.map(([, l]) => l), 'Total', 'SAR/km']}
           rows={a.vehicles}
           cells={(v) => [v.vehicleNo, ...COST_LABEL.map(([key]) => inr(v.costs[key])), <b key="t">{inr(v.expenses)}</b>, v.costPerKm ?? '—']}
         />
@@ -445,7 +444,7 @@ function ReceivablesTab() {
       { path: 'customerId', label: 'Customer', type: 'autocomplete', required: true, options: partyOptions('customer'), optionsKey: 'customer-options' },
       { path: 'tripIds', label: 'Completed trips', type: 'multiselect', options: tripOptions, optionsKey: 'unbilled-trip-options', helper: 'Taxable value defaults to the trips’ freight', fullWidth: true },
       { path: 'invoiceDate', label: 'Invoice date', type: 'day' },
-      { path: 'taxable', label: 'Taxable value (₹)', type: 'number', helper: 'Leave blank to use trip freight' },
+      { path: 'taxable', label: 'Taxable value (SAR)', type: 'number', helper: 'Leave blank to use trip freight' },
       { path: 'gstRate', label: 'GST %', type: 'select', options: [0, 5, 12, 18].map((r) => ({ value: r, label: `${r}%` })) },
       { path: 'interState', label: 'Customer in another state (IGST)', type: 'select', options: [{ value: 0, label: 'No: CGST + SGST' }, { value: 1, label: 'Yes: IGST' }] },
       { path: 'lane', label: 'Lane' },
@@ -464,8 +463,8 @@ function ReceivablesTab() {
                   initial: { amount: left, tds: 0, mode: 'neft', receivedOn: today },
                   fields: [
                     { path: 'receivedOn', label: 'Received on', type: 'day', required: true },
-                    { path: 'amount', label: 'Amount received (₹)', type: 'number', required: true },
-                    { path: 'tds', label: 'TDS deducted by customer (₹)', type: 'number' },
+                    { path: 'amount', label: 'Amount received (SAR)', type: 'number', required: true },
+                    { path: 'tds', label: 'TDS deducted by customer (SAR)', type: 'number' },
                     { path: 'mode', label: 'Mode', type: 'select', options: ['neft', 'rtgs', 'upi', 'cheque', 'cash'].map((m) => ({ value: m, label: m.toUpperCase() })) },
                     { path: 'reference', label: 'UTR / cheque no.' },
                   ],
@@ -551,8 +550,8 @@ export function FleetAnalyticsPage() {
         <>
           <Grid container spacing={2}>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Fleet utilisation" value={pctText(k.utilisation)} sub="vehicle-days with 20+ km" /></Grid>
-            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Revenue / km" value={k.revenuePerKm !== null ? `₹${k.revenuePerKm}` : '—'} sub={`${num(k.km)} km`} /></Grid>
-            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Cost / km" value={k.costPerKm !== null ? `₹${k.costPerKm}` : '—'} sub="fuel · toll · wages · PM · tyres" /></Grid>
+            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Revenue / km" value={k.revenuePerKm !== null ? `SAR ${k.revenuePerKm}` : '—'} sub={`${num(k.km)} km`} /></Grid>
+            <Grid size={{ xs: 6, md: 3 }}><Kpi label="Cost / km" value={k.costPerKm !== null ? `SAR ${k.costPerKm}` : '—'} sub="fuel · toll · wages · PM · tyres" /></Grid>
             <Grid size={{ xs: 6, md: 3 }}><Kpi label="Net operating margin" value={pctText(k.margin)} tone={k.margin !== null && k.margin < 0 ? 'bad' : 'good'} sub={inr(k.profit)} /></Grid>
           </Grid>
           <Grid container spacing={2}>
@@ -562,9 +561,9 @@ export function FleetAnalyticsPage() {
                   <BarChart data={a.costPerKmBreakdown}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="category" fontSize={11} />
-                    <YAxis fontSize={11} tickFormatter={(v) => `₹${v}`} />
-                    <Tooltip formatter={(v) => `₹${v}/km`} />
-                    <Bar dataKey="perKm" name="₹/km">
+                    <YAxis fontSize={11} tickFormatter={(v) => `SAR ${v}`} />
+                    <Tooltip formatter={(v) => `SAR ${v}/km`} />
+                    <Bar dataKey="perKm" name="SAR/km">
                       {a.costPerKmBreakdown.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                     </Bar>
                   </BarChart>
@@ -587,14 +586,14 @@ export function FleetAnalyticsPage() {
           </Grid>
           <Card>
             <CardContent><Typography variant="h6">Corridors</Typography></CardContent>
-            <SimpleTable head={['Route', 'Trips', 'Distance', 'Gross revenue', 'Operating cost', 'Net margin', '₹/km']} rows={a.lanes} cells={(l) => [l.lane, l.trips, `${num(l.km)} km`, inr(l.revenue), inr(l.cost), margin(l.margin), l.revenuePerKm ?? '—']} />
+            <SimpleTable head={['Route', 'Trips', 'Distance', 'Gross revenue', 'Operating cost', 'Net margin', 'SAR/km']} rows={a.lanes} cells={(l) => [l.lane, l.trips, `${num(l.km)} km`, inr(l.revenue), inr(l.cost), margin(l.margin), l.revenuePerKm ?? '—']} />
           </Card>
           <Card>
             <CardContent><Typography variant="h6">Vehicles</Typography></CardContent>
             <SimpleTable
               head={['Registration', 'Model', 'Distance', 'Running hours', 'Utilisation', 'Cost/km', 'Revenue/km', 'Km/L']}
               rows={a.vehicles}
-              cells={(v) => [v.vehicleNo, v.model ?? '—', `${num(v.km)} km`, <span key="h">{v.runningHours} h <Typography component="span" variant="caption" color="text.secondary">({v.idleHours} h idle)</Typography></span>, pctText(v.utilisation), v.costPerKm !== null ? `₹${v.costPerKm}` : '—', v.revenuePerKm !== null ? `₹${v.revenuePerKm}` : '—', v.kmPerLitre ?? '—']}
+              cells={(v) => [v.vehicleNo, v.model ?? '—', `${num(v.km)} km`, <span key="h">{v.runningHours} h <Typography component="span" variant="caption" color="text.secondary">({v.idleHours} h idle)</Typography></span>, pctText(v.utilisation), v.costPerKm !== null ? `SAR ${v.costPerKm}` : '—', v.revenuePerKm !== null ? `SAR ${v.revenuePerKm}` : '—', v.kmPerLitre ?? '—']}
             />
           </Card>
         </>

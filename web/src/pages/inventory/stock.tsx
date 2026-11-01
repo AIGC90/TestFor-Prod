@@ -94,7 +94,7 @@ function movementFields(kind: string): Field[] {
     ...(kind === 'transfer' ? [{ path: 'toStoreId', label: 'To store', type: 'select', required: true, options: storeOptions, optionsKey: 'store-options' } as Field] : []),
     { path: 'itemId', label: 'Item', type: 'autocomplete', required: true, options: itemOptions, optionsKey: 'item-options', fullWidth: true },
     { path: 'qty', label: kind === 'adjustment' ? 'Quantity (+ found / − missing)' : 'Quantity', type: 'number', required: true },
-    ...(['receipt', 'return', 'adjustment'].includes(kind) ? [{ path: 'unitRate', label: 'Rate per unit (₹)', type: 'number', helper: 'Blank uses the current average cost' } as Field] : []),
+    ...(['receipt', 'return', 'adjustment'].includes(kind) ? [{ path: 'unitRate', label: 'Rate per unit (SAR)', type: 'number', helper: 'Blank uses the current average cost' } as Field] : []),
     { path: 'serials', label: 'Serial numbers (tracked items only)', type: 'list', fullWidth: true },
     ...(kind === 'issue' || kind === 'return' ? [{ path: 'vehicleNo', label: 'Vehicle no.', required: kind === 'issue' } as Field] : []),
     { path: 'lrNo', label: 'LR / reference no.' },
@@ -375,7 +375,7 @@ const openingFields: Field[] = [
     lineFields: [
       { path: 'itemId', label: 'Item', type: 'autocomplete', required: true, options: itemOptions, optionsKey: 'item-options', fullWidth: true },
       { path: 'qty', label: 'Qty', type: 'number', required: true },
-      { path: 'rate', label: 'Rate ₹', type: 'number', required: true },
+      { path: 'rate', label: 'Rate SAR', type: 'number', required: true },
       { path: 'serials', label: 'Serials (tracked items)', type: 'list' },
     ],
   },

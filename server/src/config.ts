@@ -19,7 +19,7 @@ export const config = {
   // AI: the Anthropic key comes from ANTHROPIC_API_KEY (an environment secret); without it AI features are off.
   aiEnabled: !!(process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN),
   aiModel: process.env.AI_MODEL ?? 'claude-opus-5-5',
-  // Daily AI briefing hour (IST, 0-23); needs a Traccar service login to read fleet data unattended.
+  // Daily AI briefing hour (KSA time, 0-23); needs a Traccar service login to read fleet data unattended.
   aiBriefingHour: process.env.AI_BRIEFING_HOUR ? Number(process.env.AI_BRIEFING_HOUR) : null,
   traccarServiceEmail: process.env.TRACCAR_SERVICE_EMAIL ?? '',
   traccarServicePassword: process.env.TRACCAR_SERVICE_PASSWORD ?? '',

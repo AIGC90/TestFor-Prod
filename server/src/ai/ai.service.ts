@@ -31,21 +31,21 @@ export const anthropicProvider = { provide: ANTHROPIC, useFactory: () => (config
 const FALLBACK = { betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' as const };
 const DAY = 86_400_000;
 
-const COPILOT_SYSTEM = `You are FleetOne Copilot, the assistant inside an Indian fleet-management and transport ERP (live GPS tracking on Traccar, trips and lorry receipts, workshop, tyres, stock, compliance, drivers, finance).
+const COPILOT_SYSTEM = `You are FleetOne Copilot, the assistant inside a fleet-management and transport ERP operating in Saudi Arabia (live GPS tracking on Traccar, trips and lorry receipts, workshop, tyres, stock, compliance, drivers, finance).
 
 How to work:
 - Answer from the tools, not from memory. Call the tools you need (in parallel when they are independent), then answer.
-- Be concise and specific: name vehicles, documents and amounts. Use ₹ and Indian number formatting (₹1,25,000). Times are IST.
+- Be concise and specific: name vehicles, documents and amounts. Amounts are in Saudi riyals: write them as SAR 125,000. Times are KSA time (UTC+3).
 - When data is missing or a tool says "Not permitted", say so plainly; never guess numbers.
 - Personal identifiers in tool results are masked (XXXX). Keep them masked.
 - You can only read data and propose actions. propose_action records a proposal that a person must approve in the Pending Inbox; say that clearly. You cannot send commands to vehicles (no engine stop/resume, no immobiliser) and must decline such requests.
 - Format answers in short paragraphs or bullet lists; use a small table when comparing several vehicles.`;
 
-const TRIAGE_SYSTEM = `You are the AI Ops analyst for an Indian truck fleet. You receive a snapshot of signals: GPS events, SOS alarms, tread-depth alerts, expiring or expired statutory documents, overdue maintenance, low FASTag balances and overdue receivables.
+const TRIAGE_SYSTEM = `You are the AI Ops analyst for a truck fleet in Saudi Arabia. You receive a snapshot of signals: GPS events, SOS alarms, tread-depth alerts, expiring or expired statutory documents, overdue maintenance, low FASTag balances and overdue receivables.
 Group related signals into a short list of issues, most urgent first. Severity: critical = safety or legal risk now (active SOS, crash, expired insurance/fitness on a running truck, tread below 1.6 mm); high = needs action today; medium = this week; low = watch.
 Each recommendedAction must be one concrete step for a fleet supervisor. Use vehicle numbers exactly as given. Do not invent signals that are not in the snapshot.`;
 
-const BRIEFING_SYSTEM = `You write the daily morning briefing for the owner of an Indian trucking company. Use only the numbers in the data. Lead with what changed and what needs a decision today. Use ₹ with Indian formatting, keep each bullet to one line, and avoid jargon.`;
+const BRIEFING_SYSTEM = `You write the daily morning briefing for the owner of a trucking company in Saudi Arabia. Use only the numbers in the data. Lead with what changed and what needs a decision today. Write amounts as SAR 125,000, keep each bullet to one line, and avoid jargon.`;
 
 export const TriageSchema = z.object({
   headline: z.string().describe('One sentence on the fleet’s state'),
@@ -99,8 +99,8 @@ const RepairBillExtract = z.object({
   notes: z.string().nullable(),
 });
 export const EXTRACTORS = {
-  compliance: { schema: ComplianceExtract, prompt: 'Read this Indian vehicle or driver document (RC, insurance policy, fitness certificate, PUC, permit, road tax, driving licence...). Extract the fields. Use null for anything not visible; do not guess dates.' },
-  repair_bill: { schema: RepairBillExtract, prompt: 'Read this garage / workshop repair invoice from India. Extract the fields; amounts in rupees as plain numbers. Use null for anything not visible.' },
+  compliance: { schema: ComplianceExtract, prompt: 'Read this vehicle or driver document (vehicle registration / Istimara, insurance policy, periodic inspection / Fahas, permit or operating card, driving licence...). Map registration to rc and periodic inspection to fitness. Extract the fields. Use null for anything not visible; do not guess dates.' },
+  repair_bill: { schema: RepairBillExtract, prompt: 'Read this garage / workshop repair invoice from Saudi Arabia. Extract the fields; amounts in Saudi riyals as plain numbers; put VAT in gstRate and igst if it is shown as one tax. Use null for anything not visible.' },
 } as const;
 type ExtractKind = keyof typeof EXTRACTORS;
 
@@ -218,8 +218,8 @@ export class AiService implements OnModuleInit, OnModuleDestroy {
     }
     const history = conv.messages as Anthropic.Beta.BetaMessageParam[];
     // per-turn context goes in the user message so the system prompt and tools stay cacheable
-    const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
-    const userTurn: Anthropic.Beta.BetaMessageParam = { role: 'user', content: `[Context: ${now} IST; user ${user.name}, role ${user.role}]\n${maskPii(message)}` };
+    const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Riyadh', dateStyle: 'medium', timeStyle: 'short' });
+    const userTurn: Anthropic.Beta.BetaMessageParam = { role: 'user', content: `[Context: ${now} KSA time; user ${user.name}, role ${user.role}]\n${maskPii(message)}` };
     const toolsUsed: string[] = [];
     const proposed: string[] = [];
     const tools = buildTools(
@@ -418,7 +418,7 @@ export class AiService implements OnModuleInit, OnModuleDestroy {
   async briefing(user: AuthUser) {
     const client = this.requireClient();
     const can = (d: DocType) => this.access.can(user, d, 'view');
-    const data: Record<string, unknown> = { date: new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'full' }) };
+    const data: Record<string, unknown> = { date: new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Riyadh', dateStyle: 'full' }) };
     if (await can('invoice')) {
       const y = await this.analytics.compute(user, new Date(Date.now() - DAY), new Date());
       const w = await this.analytics.compute(user, new Date(Date.now() - 7 * DAY), new Date());
@@ -457,7 +457,7 @@ export class AiService implements OnModuleInit, OnModuleDestroy {
   /** Writes today's briefing once, after the configured hour, using a Traccar service login. */
   private async maybeBriefing() {
     const now = new Date();
-    const hour = Number(now.toLocaleString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', hour12: false }));
+    const hour = Number(now.toLocaleString('en-GB', { timeZone: 'Asia/Riyadh', hour: '2-digit', hour12: false }));
     if (hour < (config.aiBriefingHour ?? 25)) return;
     const startOfDay = new Date(now.getTime() - (hour * 3_600_000 + now.getMinutes() * 60_000));
     const [done] = await this.db.select({ id: aiReports.id }).from(aiReports).where(and(eq(aiReports.kind, 'briefing'), isNull(aiReports.createdBy), gte(aiReports.createdAt, startOfDay)));

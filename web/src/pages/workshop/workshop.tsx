@@ -202,7 +202,7 @@ export function JobCardsPage() {
       { section: 'Job', path: 'partyId', label: 'Garage / AMC provider', type: 'autocomplete', options: partyOptions('garage'), optionsKey: 'garage-options', visible: (v) => v.jobType !== 'own_workshop' },
       { section: 'Job', path: 'storeId', label: 'Parts from store', type: 'select', options: storeOptions, optionsKey: 'store-options' },
       { section: 'Job', path: 'priority', label: 'Priority', type: 'select', options: opts([['normal', 'Normal'], ['high', 'High']]) },
-      { section: 'Job', path: 'estimatedCost', label: 'Estimated cost (₹)', type: 'number', helper: 'Decides whether approval is needed' },
+      { section: 'Job', path: 'estimatedCost', label: 'Estimated cost (SAR)', type: 'number', helper: 'Decides whether approval is needed' },
       { section: 'Job', path: 'problem', label: 'Problem / work requested', type: 'textarea', required: true },
     ],
     rowActions: (j, run) => (
@@ -237,7 +237,7 @@ export function JobCardsPage() {
                   initial: { labourCost: j.labourCost, runningKm: j.runningKm ?? '' },
                   fields: [
                     { path: 'workDone', label: 'Work done', type: 'textarea', required: true },
-                    { path: 'labourCost', label: 'Labour cost (₹)', type: 'number' },
+                    { path: 'labourCost', label: 'Labour cost (SAR)', type: 'number' },
                     { path: 'runningKm', label: 'Odometer at completion (km)', type: 'number' },
                   ],
                 });
@@ -421,7 +421,7 @@ export function GatePassesPage() {
       { path: 'partyId', label: 'Party / vendor', type: 'autocomplete', required: true, options: partyOptions('vendor'), optionsKey: 'vendor-options' },
       { ...vehicleField(false), label: 'Vehicle (optional)' },
       { path: 'expectedReturn', label: 'Expected return', type: 'datetime', visible: (v) => v.kind !== 'transfer' },
-      { path: 'estimatedValue', label: 'Estimated value (₹)', type: 'number' },
+      { path: 'estimatedValue', label: 'Estimated value (SAR)', type: 'number' },
       {
         path: 'lines',
         label: 'Items',
@@ -494,7 +494,7 @@ export function RepairBillsPage() {
       vehicleField(),
       { path: 'vendorBillNo', label: 'Garage invoice no.' },
       { path: 'billDate', label: 'Bill date', type: 'date' },
-      { path: 'taxable', label: 'Taxable amount (₹)', type: 'number', required: true },
+      { path: 'taxable', label: 'Taxable amount (SAR)', type: 'number', required: true },
       { path: 'gstRate', label: 'GST %', type: 'select', options: [0, 5, 12, 18, 28].map((r) => ({ value: r, label: `${r}%` })) },
       { path: 'interState', label: 'Garage in another state (IGST)', type: 'select', options: [{ value: 0, label: 'No: CGST + SGST' }, { value: 1, label: 'Yes: IGST' }] },
       { path: 'tdsRate', label: 'TDS u/s 194C', type: 'select', options: [{ value: 2, label: '2% (company / firm)' }, { value: 1, label: '1% (individual / HUF)' }, { value: 0, label: 'None' }] },
@@ -608,7 +608,7 @@ export function ToolChecklistsPage() {
               title: `Charge ${c.driverName} for missing tools`,
               initial: { amount: '', recoveryPlan: 'one_time', instalments: 1 },
               fields: [
-                { path: 'amount', label: 'Amount (₹)', type: 'number', required: true },
+                { path: 'amount', label: 'Amount (SAR)', type: 'number', required: true },
                 { path: 'recoveryPlan', label: 'Recovery', type: 'select', options: opts([['one_time', 'One-time payroll deduction'], ['instalments', 'Instalments']]) },
                 { path: 'instalments', label: 'Instalments', type: 'number', visible: (x) => x.recoveryPlan === 'instalments' },
               ],
@@ -674,7 +674,7 @@ export function DriverChargesPage() {
       { path: 'incidentDate', label: 'Incident date', type: 'date' },
       { path: 'category', label: 'Category', type: 'select', required: true, options: opts([['missing_tool', 'Missing tool (from checklist)'], ['vehicle_damage', 'Vehicle damage'], ['fuel_shortage', 'Fuel shortage'], ['other', 'Other']]) },
       { ...vehicleField(false), label: 'Vehicle' },
-      { path: 'amount', label: 'Amount (₹)', type: 'number', required: true },
+      { path: 'amount', label: 'Amount (SAR)', type: 'number', required: true },
       { path: 'refNo', label: 'Reference / audit no.' },
       { path: 'recoveryPlan', label: 'Recovery', type: 'select', options: opts([['one_time', 'One-time payroll deduction'], ['instalments', 'Instalments']]) },
       { path: 'instalments', label: 'Instalments', type: 'number', visible: (v) => v.recoveryPlan === 'instalments' },
@@ -687,7 +687,7 @@ export function DriverChargesPage() {
             size="small"
             onClick={async () => {
               const left = c.amount - c.recovered;
-              const v = await ask({ title: `Recover from ${c.driverName}`, initial: { amount: c.recoveryPlan === 'instalments' ? Math.min(left, Math.ceil(c.amount / c.instalments)) : left }, fields: [{ path: 'amount', label: `Amount (₹, ${inr(left)} left)`, type: 'number', required: true }] });
+              const v = await ask({ title: `Recover from ${c.driverName}`, initial: { amount: c.recoveryPlan === 'instalments' ? Math.min(left, Math.ceil(c.amount / c.instalments)) : left }, fields: [{ path: 'amount', label: `Amount (SAR, ${inr(left)} left)`, type: 'number', required: true }] });
               if (v) run(() => post(`/erp/workshop/driver-charges/${c.id}/recover`, v));
             }}
           >

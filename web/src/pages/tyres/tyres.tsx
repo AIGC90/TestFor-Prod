@@ -122,21 +122,21 @@ function useTyreActions(onDone: () => void) {
       ], `/erp/tyres/${t.id}/remove`, { to: 'store' }),
     retreadIn: (t: Tyre) =>
       run(`${t.serial} back from the retreader`, [
-        { path: 'cost', label: 'Retread cost (₹)', type: 'number', required: true },
+        { path: 'cost', label: 'Retread cost (SAR)', type: 'number', required: true },
         { path: 'nsd', label: 'New tread depth (mm)', type: 'number' },
         { path: 'refNo', label: 'Bill no.' },
         { path: 'remarks', label: 'Remarks', type: 'textarea' },
       ], `/erp/tyres/${t.id}/retread-in`),
     repair: (t: Tyre) =>
       run(`Repair ${t.serial}`, [
-        { path: 'cost', label: 'Repair cost (₹)', type: 'number', required: true },
+        { path: 'cost', label: 'Repair cost (SAR)', type: 'number', required: true },
         { path: 'refNo', label: 'Bill no.' },
         { path: 'remarks', label: 'Work done', type: 'textarea' },
       ], `/erp/tyres/${t.id}/repair`),
     scrap: (t: Tyre) => run(`Scrap ${t.serial}`, [{ path: 'remarks', label: 'Reason', type: 'textarea', required: true }], `/erp/tyres/${t.id}/scrap`),
     sell: (t: Tyre) =>
       run(`Sell ${t.serial}`, [
-        { path: 'cost', label: 'Sale value (₹)', type: 'number', required: true },
+        { path: 'cost', label: 'Sale value (SAR)', type: 'number', required: true },
         { path: 'refNo', label: 'Invoice no.' },
         { path: 'remarks', label: 'Buyer / remarks', type: 'textarea' },
       ], `/erp/tyres/${t.id}/sell`),
@@ -213,7 +213,7 @@ export function TyreOverviewPage() {
           ['Average tread', o.avgNsd !== null ? `${o.avgNsd} mm` : '—', 'fitted tyres'],
           ['Need replacing', num(o.health.replace), `≤ ${WATCH_NSD} mm tread`],
           ['Low pressure', num(o.lowPressure), 'below 90% of target'],
-          ['Cost per km', o.costPerKm !== null ? `₹${o.costPerKm}` : '—', 'fitted tyres, purchase + upkeep'],
+          ['Cost per km', o.costPerKm !== null ? `SAR ${o.costPerKm}` : '—', 'fitted tyres, purchase + upkeep'],
         ] : []}
       />
       <Grid container spacing={2}>
@@ -278,7 +278,7 @@ export function TyreOverviewPage() {
               <BarChart data={o?.spend.map((s) => ({ ...s, label: dayjs(`${s.month}-01`).format('MMM YY') })) ?? []}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="label" fontSize={12} />
-                <YAxis fontSize={12} tickFormatter={(v) => `₹${Number(v) / 1000}k`} />
+                <YAxis fontSize={12} tickFormatter={(v) => `SAR ${Number(v) / 1000}k`} />
                 <Tooltip formatter={(v) => inr(Number(v))} />
                 <Legend />
                 <Bar dataKey="newTyres" name="New tyres" stackId="s" fill={COLORS[0]} />
@@ -531,7 +531,7 @@ function TyreList() {
       { label: 'Where', render: (t) => <Box><StatusChip status={t.status} />{t.vehicleNo && <Typography variant="caption" sx={{ display: 'block' }}>{t.vehicleNo} · {t.position}</Typography>}</Box>, csv: (t) => (t.vehicleNo ? `${t.vehicleNo} ${t.position}` : t.status) },
       { label: 'Tread', render: (t) => <Typography sx={{ color: nsdColor(t.lastNsd), fontWeight: 600 }}>{t.lastNsd ?? '—'} mm</Typography>, csv: (t) => t.lastNsd },
       { label: 'Km run', render: (t) => num(kmById.get(t.id)?.kmRun ?? t.closedKm), csv: (t) => kmById.get(t.id)?.kmRun ?? t.closedKm },
-      { label: 'Cost', render: (t) => <Box>{inr(t.purchaseCost + t.upkeepCost)}<Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>{t.retreadCount ? `${t.retreadCount} retreads · ` : ''}{kmById.get(t.id)?.costPerKm ? `₹${kmById.get(t.id)!.costPerKm}/km` : ''}</Typography></Box>, csv: (t) => t.purchaseCost + t.upkeepCost },
+      { label: 'Cost', render: (t) => <Box>{inr(t.purchaseCost + t.upkeepCost)}<Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>{t.retreadCount ? `${t.retreadCount} retreads · ` : ''}{kmById.get(t.id)?.costPerKm ? `SAR ${kmById.get(t.id)!.costPerKm}/km` : ''}</Typography></Box>, csv: (t) => t.purchaseCost + t.upkeepCost },
       { label: 'Vendor', render: (t) => n.party(t.vendorId), csv: (t) => n.party(t.vendorId) },
     ],
     fields: [
@@ -542,7 +542,7 @@ function TyreList() {
       { section: 'Tyre', path: 'tyreType', label: 'Type', type: 'select', options: [{ value: 'radial', label: 'Radial' }, { value: 'bias', label: 'Bias (nylon)' }] },
       { section: 'Tyre', path: 'originalNsd', label: 'New tread depth (mm)', type: 'number' },
       { section: 'Tyre', path: 'targetPressure', label: 'Target pressure (psi)', type: 'number' },
-      { section: 'Purchase', path: 'purchaseCost', label: 'Purchase cost (₹)', type: 'number' },
+      { section: 'Purchase', path: 'purchaseCost', label: 'Purchase cost (SAR)', type: 'number' },
       { section: 'Purchase', path: 'purchaseDate', label: 'Purchase date', type: 'date' },
       { section: 'Purchase', path: 'vendorId', label: 'Vendor', type: 'autocomplete', options: partyOptions('vendor'), optionsKey: 'vendor-options' },
       { section: 'Purchase', path: 'notes', label: 'Notes', type: 'textarea' },
@@ -746,8 +746,8 @@ export function TyreCostKmPage() {
       <Kpis items={[
         ['Vehicles', num(rows.length)],
         ['Tyre value fitted', inr(total)],
-        ['Fleet average', priced.length ? `₹${(priced.reduce((s, r) => s + r.costPerKm!, 0) / priced.length).toFixed(2)}/km` : '—'],
-        ['Highest', priced[0] ? `${priced[0].vehicleNo} · ₹${priced[0].costPerKm}/km` : '—'],
+        ['Fleet average', priced.length ? `SAR ${(priced.reduce((s, r) => s + r.costPerKm!, 0) / priced.length).toFixed(2)}/km` : '—'],
+        ['Highest', priced[0] ? `${priced[0].vehicleNo} · SAR ${priced[0].costPerKm}/km` : '—'],
       ]} />
       <Card>
         <CardContent>
@@ -756,8 +756,8 @@ export function TyreCostKmPage() {
               <BarChart data={priced.slice(0, 20)}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="vehicleNo" fontSize={11} />
-                <YAxis fontSize={12} tickFormatter={(v) => `₹${v}`} />
-                <Tooltip formatter={(v) => `₹${v}/km`} />
+                <YAxis fontSize={12} tickFormatter={(v) => `SAR ${v}`} />
+                <Tooltip formatter={(v) => `SAR ${v}/km`} />
                 <Bar dataKey="costPerKm" name="Cost per km" fill={COLORS[0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -773,7 +773,7 @@ export function TyreCostKmPage() {
               <TableRow key={r.vehicleNo} hover>
                 <TableCell>{r.vehicleNo}</TableCell><TableCell>{r.tyres}</TableCell><TableCell>{num(r.avgKm)}</TableCell>
                 <TableCell>{inr(r.newSpend)}</TableCell><TableCell>{inr(r.upkeep)}</TableCell><TableCell>{inr(r.total)}</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>{r.costPerKm !== null ? `₹${r.costPerKm}` : 'not run yet'}</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>{r.costPerKm !== null ? `SAR ${r.costPerKm}` : 'not run yet'}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -807,11 +807,11 @@ export function TyrePerformancePage() {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="group" fontSize={11} />
                 <YAxis yAxisId="km" fontSize={12} tickFormatter={(v) => `${Number(v) / 1000}k`} />
-                <YAxis yAxisId="cost" orientation="right" fontSize={12} tickFormatter={(v) => `₹${v}`} />
+                <YAxis yAxisId="cost" orientation="right" fontSize={12} tickFormatter={(v) => `SAR ${v}`} />
                 <Tooltip />
                 <Legend />
                 <Bar yAxisId="km" dataKey="avgLifeKm" name="Average life (km)" fill={COLORS[0]} />
-                <Bar yAxisId="cost" dataKey="costPerKm" name="Cost per km (₹)" fill={COLORS[1]} />
+                <Bar yAxisId="cost" dataKey="costPerKm" name="Cost per km (SAR)" fill={COLORS[1]} />
               </BarChart>
             </ResponsiveContainer>
           </Box>
@@ -826,7 +826,7 @@ export function TyrePerformancePage() {
                 <TableCell>{r.group}{i === 0 && r.costPerKm !== null && <Chip size="small" color="success" label="Best value" sx={{ ml: 1 }} />}</TableCell>
                 <TableCell>{r.tyres}</TableCell><TableCell>{r.closedLives}</TableCell><TableCell>{num(r.avgLifeKm)} km</TableCell>
                 <TableCell>{r.avgRemovalNsd !== null ? `${r.avgRemovalNsd} mm` : '—'}</TableCell><TableCell>{inr(r.avgCost)}</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>{r.costPerKm !== null ? `₹${r.costPerKm}` : '—'}</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>{r.costPerKm !== null ? `SAR ${r.costPerKm}` : '—'}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,49 +1,52 @@
 // Shared demo fleet data used by the Traccar seeder and the GPS simulator.
 
 export const CITIES = {
-  delhi: [28.6139, 77.209],
-  jaipur: [26.9124, 75.7873],
-  ahmedabad: [23.0225, 72.5714],
-  surat: [21.1702, 72.8311],
-  mumbai: [19.076, 72.8777],
-  pune: [18.5204, 73.8567],
-  nagpur: [21.1458, 79.0882],
-  indore: [22.7196, 75.8577],
-  bengaluru: [12.9716, 77.5946],
-  hyderabad: [17.385, 78.4867],
-  chennai: [13.0827, 80.2707],
-  kolkata: [22.5726, 88.3639],
-  lucknow: [26.8467, 80.9462],
-  jamshedpur: [22.8046, 86.2029],
+  riyadh: [24.7136, 46.6753],
+  jeddah: [21.4858, 39.1925],
+  makkah: [21.3891, 39.8579],
+  madinah: [24.5247, 39.5692],
+  dammam: [26.4207, 50.0888],
+  khobar: [26.2172, 50.1971],
+  jubail: [27.0046, 49.646],
+  hofuf: [25.38, 49.588],
+  buraidah: [26.326, 43.975],
+  hail: [27.5114, 41.7208],
+  tabuk: [28.3835, 36.5662],
+  yanbu: [24.089, 38.0618],
+  taif: [21.2703, 40.4158],
+  abha: [18.2164, 42.5053],
+  jazan: [16.8892, 42.5511],
 };
 
-// Freight corridors: list of city keys the truck drives through, back and forth.
+// Freight corridors along the main highways: list of city keys the truck drives through, back and forth.
 export const CORRIDORS = [
-  ['delhi', 'jaipur', 'ahmedabad'],
-  ['mumbai', 'pune'],
-  ['ahmedabad', 'surat', 'mumbai'],
-  ['nagpur', 'hyderabad', 'bengaluru'],
-  ['bengaluru', 'chennai'],
-  ['kolkata', 'jamshedpur'],
-  ['delhi', 'lucknow'],
-  ['indore', 'nagpur'],
-  ['pune', 'hyderabad'],
+  ['riyadh', 'dammam'],
+  ['riyadh', 'taif', 'makkah', 'jeddah'],
+  ['jeddah', 'madinah'],
+  ['dammam', 'jubail'],
+  ['riyadh', 'buraidah', 'hail'],
+  ['dammam', 'hofuf', 'riyadh'],
+  ['jeddah', 'yanbu'],
+  ['madinah', 'tabuk'],
+  ['taif', 'abha', 'jazan'],
+  ['dammam', 'khobar'],
 ];
 
 export const GROUPS = [
-  'North-West Heavy Express',
-  'Western Corridor Freightways',
-  'Reefer & ColdChain Express',
-  'Port & Container Logistics',
-  'Industrial Tankers & Bulk',
-  'Intra-City Distribution',
+  'Riyadh–Dammam Express',
+  'Western Region Freight',
+  'Cold Chain & Reefer',
+  'Port & Container (Jeddah / Dammam)',
+  'Tankers & Bulk',
+  'Riyadh City Distribution',
 ];
 
 const MODELS = [
-  'Tata Signa 4825.TK', 'Ashok Leyland 4220', 'BharatBenz 3523R', 'Eicher Pro 6028',
-  'Tata Prima 5530.S', 'Volvo FM 420', 'Tata 1512 LPT', 'Mahindra Blazo X 35',
+  'Mercedes-Benz Actros 1845', 'Volvo FH 460', 'MAN TGS 40.440', 'Scania R450',
+  'Isuzu FVR 34', 'Hino 700 SH', 'Mercedes-Benz Arocs 3345', 'Isuzu NPR 75',
 ];
-const STATES = ['DL', 'RJ', 'GJ', 'MH', 'KA', 'TN', 'WB', 'UP', 'MP', 'TS', 'HR'];
+// Letters used on Saudi plates (Latin side)
+const PLATE_LETTERS = 'ABDEGHJKLNRSTUVXZ';
 
 // Deterministic pseudo-random so every seed produces the same fleet.
 function rng(seed) {
@@ -53,11 +56,9 @@ function rng(seed) {
 
 export function demoVehicles(count = 25) {
   const r = rng(42);
+  const letter = () => PLATE_LETTERS[Math.floor(r() * PLATE_LETTERS.length)];
   return Array.from({ length: count }, (_, i) => {
-    const state = STATES[i % STATES.length];
-    const plate = `${state}-${String(1 + Math.floor(r() * 98)).padStart(2, '0')}-${
-      String.fromCharCode(65 + Math.floor(r() * 26))}${String.fromCharCode(65 + Math.floor(r() * 26))}-${
-      String(1000 + Math.floor(r() * 8999))}`;
+    const plate = `${String(1000 + Math.floor(r() * 8999))} ${letter()}${letter()}${letter()}`;
     return {
       name: plate,
       uniqueId: String(867010075167001 + i),
@@ -65,24 +66,34 @@ export function demoVehicles(count = 25) {
       category: i % 6 === 5 ? 'van' : 'truck',
       group: GROUPS[i % GROUPS.length],
       corridor: i % CORRIDORS.length,
-      phone: `+9198${String(10000000 + Math.floor(r() * 89999999))}`,
+      phone: `+9665${String(10000000 + Math.floor(r() * 89999999))}`,
     };
   });
 }
 
 export const DRIVERS = [
-  'Ramesh Kumar', 'Suresh Patil', 'Vikram Singh', 'Anil Deshmukh', 'Sunil Yadav',
-  'Balwinder Singh', 'Mukesh Yadav', 'Ganesh Patil', 'Jagdish Sharma', 'Manpreet Gill',
-  'Rajesh Verma', 'Ravinder Reddy', 'Karthik Sundaram', 'Basavaraj H.', 'Devendra Prasad',
+  'Abdullah Al-Harbi', 'Mohammed Al-Qahtani', 'Fahad Al-Otaibi', 'Khalid Al-Ghamdi', 'Saad Al-Dosari',
+  'Faisal Al-Shehri', 'Nasser Al-Mutairi', 'Sultan Al-Zahrani', 'Ahmed Hassan', 'Imran Khan',
+  'Rashid Ali', 'Tariq Mahmood', 'Omar Farouk', 'Yasir Ahmed', 'Bilal Hussain',
 ];
 
 export const GEOFENCES = [
-  ['Delhi Freight Terminal', 'delhi'],
-  ['Jaipur Metro Depot', 'jaipur'],
-  ['Ahmedabad GIDC Hub', 'ahmedabad'],
-  ['Mumbai Bhiwandi Warehousing', 'mumbai'],
-  ['Pune Chakan Plant', 'pune'],
-  ['Nagpur Central Depot', 'nagpur'],
-  ['Bengaluru Nelamangala Hub', 'bengaluru'],
-  ['Kolkata Dock Yard', 'kolkata'],
+  ['Riyadh Dry Port', 'riyadh'],
+  ['Dammam King Abdulaziz Port', 'dammam'],
+  ['Jeddah Islamic Port', 'jeddah'],
+  ['Jubail Industrial City', 'jubail'],
+  ['Makkah Distribution Centre', 'makkah'],
+  ['Madinah Logistics Hub', 'madinah'],
+  ['Khobar Warehouse', 'khobar'],
+  ['Hail Agricultural Depot', 'hail'],
+];
+
+// Demo groups and geofences from the earlier India dataset; the seeder removes them.
+export const LEGACY_GROUPS = [
+  'North-West Heavy Express', 'Western Corridor Freightways', 'Reefer & ColdChain Express',
+  'Port & Container Logistics', 'Industrial Tankers & Bulk', 'Intra-City Distribution',
+];
+export const LEGACY_GEOFENCES = [
+  'Delhi Freight Terminal', 'Jaipur Metro Depot', 'Ahmedabad GIDC Hub', 'Mumbai Bhiwandi Warehousing',
+  'Pune Chakan Plant', 'Nagpur Central Depot', 'Bengaluru Nelamangala Hub', 'Kolkata Dock Yard',
 ];

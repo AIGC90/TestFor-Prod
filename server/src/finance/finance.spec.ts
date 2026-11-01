@@ -131,6 +131,10 @@ describe('finance API', () => {
     await http.get('/erp/finance/analytics?from=2020-01-01&to=2026-01-01').set(admin).expect(400);
     traccar.data.delete('/reports/summary');
     traccar.data.delete('/reports/trips');
+    // with no GPS distance (tracker offline), the distance of completed trips is used instead
+    const gap = (await http.get(`/erp/finance/analytics?vehicleNo=${VEH}&from=${new Date(Date.now() - 7 * DAY).toISOString()}`).set(admin).expect(200)).body;
+    expect(gap.kpis).toMatchObject({ km: 400, revenuePerKm: 162.5 });
+    expect(gap.vehicles[0].utilisation).toBeGreaterThan(0);
   });
 
   it('imports devices as licences, renews and bills them with GST', async () => {
