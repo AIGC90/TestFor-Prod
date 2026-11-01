@@ -50,6 +50,13 @@
       "when": 1793514199264,
       "tag": "0006_operations",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793515984028,
+      "tag": "0007_workshop",
+      "breakpoints": true
     }
   ]
 }
