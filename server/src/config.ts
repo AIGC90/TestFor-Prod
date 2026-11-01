@@ -16,5 +16,12 @@ export const config = {
   fastagApiKey: process.env.FASTAG_API_KEY ?? '',
   // Video telematics media server (JT/T 1078 etc.). Stream URL template, e.g. https://media.example.com/live/{deviceId}/{channel}.m3u8
   dashcamStreamUrl: process.env.DASHCAM_STREAM_URL ?? '',
+  // AI: the Anthropic key comes from ANTHROPIC_API_KEY (an environment secret); without it AI features are off.
+  aiEnabled: !!(process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN),
+  aiModel: process.env.AI_MODEL ?? 'claude-opus-5-5',
+  // Daily AI briefing hour (IST, 0-23); needs a Traccar service login to read fleet data unattended.
+  aiBriefingHour: process.env.AI_BRIEFING_HOUR === undefined ? null : Number(process.env.AI_BRIEFING_HOUR),
+  traccarServiceEmail: process.env.TRACCAR_SERVICE_EMAIL ?? '',
+  traccarServicePassword: process.env.TRACCAR_SERVICE_PASSWORD ?? '',
   maxUploadBytes: Number(process.env.MAX_UPLOAD_BYTES ?? 8 * 1024 * 1024),
 };

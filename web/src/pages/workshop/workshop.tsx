@@ -8,6 +8,7 @@ import { http } from '../../api/http';
 import { traccar } from '../../api/traccar';
 import { EntityForm, EntityPage, type EntityConfig, errorMessage, type Field, type Option } from '../../components/EntityPage';
 import { useFormDialog } from '../../components/useFormDialog';
+import { AttachmentsDialog } from '../../components/Attachments';
 import { useAccess } from '../../lib/access';
 import { inr, itemOptions, num, partyOptions, StatusChip, storeOptions, useNames } from '../inventory/shared';
 
@@ -464,8 +465,10 @@ interface Bill {
 
 export function RepairBillsPage() {
   const n = useNames();
+  const qc = useQueryClient();
   const access = useAccess();
   const [dialog, ask] = useFormDialog();
+  const [files, setFiles] = useState<Bill | null>(null);
   const config: EntityConfig<Bill> = {
     title: 'Repair Bills',
     singular: 'repair bill',
@@ -497,24 +500,54 @@ export function RepairBillsPage() {
       { path: 'tdsRate', label: 'TDS u/s 194C', type: 'select', options: [{ value: 2, label: '2% (company / firm)' }, { value: 1, label: '1% (individual / HUF)' }, { value: 0, label: 'None' }] },
       { path: 'description', label: 'Parts replaced, labour and invoice details', type: 'textarea' },
     ],
-    rowActions: (b, run) =>
-      b.status === 'approved' && access.can('repair_bill', 'edit') ? (
-        <Button
-          size="small"
-          variant="contained"
-          onClick={async () => {
-            const v = await ask({ title: `Pay ${inr(b.netPayable)} to ${n.party(b.partyId)}`, fields: [{ path: 'paymentRef', label: 'Payment reference (UTR / cheque)' }] });
-            if (v) run(() => post(`/erp/workshop/repair-bills/${b.id}/pay`, v));
-          }}
-        >
-          Pay
-        </Button>
-      ) : null,
+    rowActions: (b, run) => (
+      <>
+        <Button size="small" onClick={() => setFiles(b)}>Files</Button>
+        {b.status === 'approved' && access.can('repair_bill', 'edit') && (
+          <Button
+            size="small"
+            variant="contained"
+            onClick={async () => {
+              const v = await ask({ title: `Pay ${inr(b.netPayable)} to ${n.party(b.partyId)}`, fields: [{ path: 'paymentRef', label: 'Payment reference (UTR / cheque)' }] });
+              if (v) run(() => post(`/erp/workshop/repair-bills/${b.id}/pay`, v));
+            }}
+          >
+            Pay
+          </Button>
+        )}
+      </>
+    ),
   };
+  const editable = files && ['pending_approval', 'rejected'].includes(files.status) && access.can('repair_bill', 'edit');
   return (
     <>
       <EntityPage config={config} />
       {dialog}
+      {files && (
+        <AttachmentsDialog
+          title={`Files · ${files.rbNo}`}
+          docType="repair_bill"
+          docId={files.id}
+          note={editable ? 'Attach the garage invoice, then use “Read with AI” to fill the amounts.' : undefined}
+          onClose={() => setFiles(null)}
+          ai={{
+            kind: 'repair_bill',
+            applyLabel: editable ? 'Fill bill details' : undefined,
+            onApply: editable
+              ? async (f) => {
+                  const body: Record<string, unknown> = {};
+                  if (typeof f.invoiceNo === 'string') body.vendorBillNo = f.invoiceNo;
+                  if (typeof f.billDate === 'string') body.billDate = f.billDate;
+                  if (typeof f.taxable === 'number') body.taxable = f.taxable;
+                  if (typeof f.gstRate === 'number' && [0, 5, 12, 18, 28].includes(f.gstRate)) body.gstRate = f.gstRate;
+                  if (typeof f.igst === 'number') body.interState = f.igst > 0 ? 1 : 0;
+                  await http(`/erp/workshop/repair-bills/${files.id}`, { method: 'PUT', body: JSON.stringify(body) });
+                  void qc.invalidateQueries({ queryKey: ['repair-bills'] });
+                }
+              : undefined,
+          }}
+        />
+      )}
     </>
   );
 }

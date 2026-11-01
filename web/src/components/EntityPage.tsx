@@ -48,7 +48,8 @@ export interface Field {
   /** Dotted path into the record, e.g. `name` or `attributes.operator`. */
   path: string;
   label: string;
-  type?: 'text' | 'number' | 'password' | 'textarea' | 'select' | 'autocomplete' | 'multiselect' | 'switch' | 'date' | 'datetime' | 'list' | 'lines';
+  /** `date` stores a timestamp (local midnight); `day` stores a plain YYYY-MM-DD for date-only columns. */
+  type?: 'text' | 'number' | 'password' | 'textarea' | 'select' | 'autocomplete' | 'multiselect' | 'switch' | 'date' | 'day' | 'datetime' | 'list' | 'lines';
   required?: boolean;
   helper?: string;
   section?: string;
@@ -142,6 +143,7 @@ function toInput(field: Field, stored: unknown): unknown {
   if (field.type === 'multiselect' && field.joined) return String(stored).split(',').filter(Boolean);
   if (field.type === 'number' && field.scale) return Number(stored) / field.scale;
   if (field.type === 'date') return dayjs(String(stored)).format('YYYY-MM-DD');
+  if (field.type === 'day') return String(stored).slice(0, 10);
   if (field.type === 'datetime') return dayjs(String(stored)).format('YYYY-MM-DDTHH:mm');
   return stored;
 }
@@ -161,6 +163,7 @@ function toStored(field: Field, input: unknown): unknown {
     if (input === '' || input === null || input === undefined) return field.required ? 0 : null;
     return Number(input) * (field.scale ?? 1);
   }
+  if (field.type === 'day') return input ? String(input).slice(0, 10) : null;
   if (field.type === 'date' || field.type === 'datetime') return input ? dayjs(String(input)).toISOString() : null;
   if ((field.type === 'select' || field.type === 'autocomplete') && input === '') return null;
   return input;
@@ -275,11 +278,12 @@ function FieldInput({ field, value, onChange, disabled }: { field: Field; value:
     case 'textarea':
       return <TextField {...common} multiline minRows={3} value={value ?? ''} onChange={(e) => onChange(e.target.value)} />;
     case 'date':
+    case 'day':
     case 'datetime':
       return (
         <TextField
           {...common}
-          type={field.type === 'date' ? 'date' : 'datetime-local'}
+          type={field.type === 'datetime' ? 'datetime-local' : 'date'}
           value={value ?? ''}
           onChange={(e) => onChange(e.target.value)}
           slotProps={{ inputLabel: { shrink: true } }}

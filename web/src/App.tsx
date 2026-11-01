@@ -47,6 +47,15 @@ import {
   TripsReport,
 } from './pages/reports/reports';
 import { Placeholder } from './pages/Placeholder';
+import { CompliancePage } from './pages/people/compliance';
+import { SafetyPage, SosPage } from './pages/people/safety';
+import { DriverManagementPage } from './pages/people/drivers';
+import { FieldStaffPage } from './pages/people/field';
+import { FleetAnalyticsPage, RevenuePage } from './pages/finance/revenue';
+import { FastagPage } from './pages/finance/fastag';
+import { SubscriptionsPage } from './pages/finance/subscriptions';
+import { DashcamPage } from './pages/finance/dashcam';
+import { AiOpsPage } from './pages/ai/AiOpsPage';
 import { DriverChargesPage, GatePassesPage, JobCardsPage, PmSchedulesPage, RepairBillsPage, ToolChecklistsPage, WorkshopHubPage } from './pages/workshop/workshop';
 import { NsdAlertsPage, TyreCostKmPage, TyreInterchangesPage, TyreMapPage, TyreOverviewPage, TyrePerformancePage, TyreRegisterPage } from './pages/tyres/tyres';
 
@@ -89,6 +98,17 @@ const IMPLEMENTED: Record<string, React.ComponentType> = {
   '/nsd-alerts': NsdAlertsPage,
   '/tyre-cost-km': TyreCostKmPage,
   '/tyre-performance': TyrePerformancePage,
+  '/compliance': CompliancePage,
+  '/safety': SafetyPage,
+  '/sos': SosPage,
+  '/driver-management': DriverManagementPage,
+  '/field-staff': FieldStaffPage,
+  '/revenue': RevenuePage,
+  '/fleet-analytics': FleetAnalyticsPage,
+  '/fastag': FastagPage,
+  '/subscriptions': SubscriptionsPage,
+  '/dashcam': DashcamPage,
+  '/ai-ops': AiOpsPage,
   '/document-permissions': DocumentPermissionsPage,
   '/field-masks': FieldMasksPage,
   '/settings/integrations': IntegrationsPage,

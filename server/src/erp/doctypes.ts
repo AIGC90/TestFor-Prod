@@ -43,6 +43,9 @@ export const DOC_TYPES = {
   sos: { label: 'SOS incidents', module: 'compliance' },
   field_staff: { label: 'Field staff & tasks', module: 'people' },
   expense_claim: { label: 'Field expense claims', module: 'people' },
+  // AI
+  ai_ops: { label: 'AI Ops: alert triage & briefings', module: 'ai' },
+  ai_action: { label: 'AI-proposed actions', module: 'ai' },
   payroll: { label: 'Driver payroll & attendance', module: 'people' },
 } as const;
 export type DocType = keyof typeof DOC_TYPES;
@@ -66,10 +69,13 @@ export const DEFAULT_PERMISSIONS: Record<Exclude<Role, 'admin'>, Partial<Record<
     ...grant(['order', 'trip', 'lr', 'freight_memo', 'incoming_vehicle', 'material_return', 'compliance_doc', 'incident', 'sos', 'payroll', 'field_staff', 'fastag'], FULL),
     expense_claim: { ...FULL, approve: true },
     fuel_indent: { ...FULL, approve: true },
+    ai_ops: FULL,
+    ai_action: { ...WRITE, approve: true },
   },
   workshop_manager: {
     ...viewAll,
     ...grant(['pm_schedule', 'tool_checklist', 'driver_charge', 'tyre'], FULL),
+    ai_action: { ...WRITE, approve: true },
     job_card: { ...FULL, approve: true },
     gate_pass: { ...FULL, approve: true },
     repair_bill: WRITE,

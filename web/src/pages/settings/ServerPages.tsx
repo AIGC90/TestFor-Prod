@@ -208,7 +208,7 @@ export function AnnouncementPage() {
               onChange={(e) => setTo(e.target.value as unknown as number[])}
               slotProps={{ select: { multiple: true } }}
             >
-              {users.data?.map((u) => (
+              {(users.data ?? []).map((u) => (
                 <MenuItem key={u.id} value={u.id}>{`${u.name} <${u.email}>`}</MenuItem>
               ))}
             </TextField>

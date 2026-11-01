@@ -6,7 +6,7 @@ import type { Option } from '../../components/EntityPage';
 import type { Item } from '../masters/ItemMasterPage';
 import type { Party, Store } from '../masters/masters';
 
-export const inr = (n: number | null | undefined) => (n === null || n === undefined ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
+export const inr = (n: number | null | undefined) => (n === null || n === undefined ? '—' : `${n < 0 ? '−' : ''}₹${Math.abs(n).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`);
 export const num = (n: number | null | undefined) => (n === null || n === undefined ? '—' : n.toLocaleString('en-IN', { maximumFractionDigits: 3 }));
 
 export const itemOptions = async (): Promise<Option[]> =>
@@ -41,6 +41,8 @@ const STATUS_COLOR: Record<string, 'default' | 'primary' | 'success' | 'warning'
   invoiced: 'primary', dispatched: 'secondary', paid: 'success', active: 'warning', returned: 'success', overdue: 'error',
   completed: 'success', in_transit: 'warning', in_stock: 'success', damaged: 'warning', issued: 'info', written_off: 'default', sold: 'default',
   fitted: 'primary', in_store: 'success', at_retreader: 'warning', scrapped: 'default', out: 'warning', recovered: 'success', waived: 'default',
+  assigned: 'info', in_progress: 'warning', done: 'success', responding: 'warning', resolved: 'success', investigating: 'warning', closed: 'default',
+  filed: 'info', survey: 'warning', settled: 'success', partly_paid: 'warning', executed: 'success', failed: 'error', valid: 'success', expiring: 'warning', expired: 'error',
 };
 
 export const statusLabel = (s: string) => s.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());

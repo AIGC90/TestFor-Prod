@@ -36,15 +36,15 @@ export const STAFF: TraccarUser = {
   id: 3, name: 'Staff User', email: 'staff@test', administrator: false, readonly: false, disabled: false,
 };
 
-export async function createTestApp(): Promise<{ app: INestApplication; traccar: FakeTraccar }> {
+/** `overrides` replaces providers, e.g. the Anthropic client with a fake. */
+export async function createTestApp(overrides: [unknown, unknown][] = []): Promise<{ app: INestApplication; traccar: FakeTraccar }> {
   const traccar = new FakeTraccar();
   traccar.sessions.set('admin-session', ADMIN);
   traccar.sessions.set('user-session', USER);
   traccar.sessions.set('staff-session', STAFF);
-  const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
-    .overrideProvider(TraccarService)
-    .useValue(traccar)
-    .compile();
+  let builder = Test.createTestingModule({ imports: [AppModule] }).overrideProvider(TraccarService).useValue(traccar);
+  for (const [token, value] of overrides) builder = builder.overrideProvider(token as never).useValue(value);
+  const moduleRef = await builder.compile();
   const app = moduleRef.createNestApplication({ logger: false });
   setupApp(app);
   await app.init();

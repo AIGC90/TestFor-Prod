@@ -1,4 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,6 +25,7 @@ import {
   MenuItem,
   TextField,
   Toolbar,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from '@mui/material';
@@ -36,6 +38,7 @@ import { eventTitle, useNotifications } from '../lib/notifications';
 import { useServer } from '../pages/settings/ServerPages';
 import { APP_NAME, APP_TAGLINE } from '../config';
 import { NAV } from '../nav';
+import { Copilot } from '../components/Copilot';
 
 const DRAWER_WIDTH = 272;
 
@@ -105,6 +108,12 @@ export function AppShell() {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [copilotOpen, setCopilotOpen] = useState(false);
+  useEffect(() => {
+    const open = () => setCopilotOpen(true);
+    window.addEventListener('open-copilot', open);
+    return () => window.removeEventListener('open-copilot', open);
+  }, []);
   const [menuEl, setMenuEl] = useState<HTMLElement | null>(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -161,6 +170,11 @@ export function AppShell() {
                 Add Device
               </Button>
             )}
+            <Tooltip title="Fleet Copilot (AI)">
+              <IconButton aria-label="open copilot" color="primary" onClick={() => setCopilotOpen(true)}>
+                <AutoAwesome />
+              </IconButton>
+            </Tooltip>
             <IconButton aria-label="notifications" onClick={() => navigate('/notifications')}>
               <Badge color="error" badgeContent={unreadCount} max={99}>
                 <NotificationsOutlined />
@@ -195,6 +209,7 @@ export function AppShell() {
         <Box component="main" sx={{ p: { xs: 2, md: 3 }, flexGrow: 1 }}>
           <Outlet />
         </Box>
+        <Copilot open={copilotOpen} onClose={() => setCopilotOpen(false)} />
         <Snackbar open={Boolean(toast)} autoHideDuration={5000} onClose={() => setToast(null)} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
           <Alert severity="warning" variant="filled" onClose={() => setToast(null)} onClick={() => navigate('/notifications')} sx={{ cursor: 'pointer' }}>
             {toast}

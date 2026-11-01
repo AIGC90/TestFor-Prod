@@ -6,3 +6,4 @@ export * from './workshop';
 export * from './tyres';
 export * from './people';
 export * from './finance';
+export * from './ai';

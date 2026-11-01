@@ -418,7 +418,7 @@ export function TyreMapPage() {
       <Header title="Tyre Map & Fitment" subtitle="Click an empty position to fit a tyre, or a fitted tyre to inspect, repair or remove it." />
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
         <TextField select size="small" label="Vehicle" value={vehicle} onChange={(e) => setParams({ vehicle: e.target.value })} sx={{ minWidth: 240 }}>
-          {vehicles.data?.map((v) => <MenuItem key={String(v.value)} value={String(v.value)}>{v.label}</MenuItem>)}
+          {(vehicles.data ?? []).map((v) => <MenuItem key={String(v.value)} value={String(v.value)}>{v.label}</MenuItem>)}
         </TextField>
         {m && (
           <TextField select size="small" label="Wheel layout" value={m.layout} disabled={!edit} onChange={(e) => setLayout.mutate(e.target.value)} sx={{ minWidth: 280 }}>
